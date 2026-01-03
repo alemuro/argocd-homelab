@@ -9,7 +9,7 @@ spec:
   - list:
       elements:
       - folder: applications/platform
-      - folder: applications/homelab
+      - folder: applications/homeflix
   template:
     metadata:
       finalizers: []
