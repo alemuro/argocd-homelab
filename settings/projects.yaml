@@ -28,16 +28,40 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: Project for homelab applications
+  description: Project for platform infrastructure and system-wide resources
+  sourceRepos:
+    - '*'
+  sourceNamespaces:
+    - '*'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Project for ArgoCD configurations and management
   sourceRepos:
     - '*'
   sourceNamespaces:
     - argocd
   destinations:
-    - namespace: default
-      server: https://kubernetes.default.svc
-    - namespace: homelab
+    - namespace: argocd
       server: https://kubernetes.default.svc
   namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  clusterResourceWhitelist:
   - group: '*'
     kind: '*'

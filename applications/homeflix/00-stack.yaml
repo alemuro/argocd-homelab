@@ -125,7 +125,7 @@ spec:
         namespace: homeflix
       syncPolicy:
         automated:
-          prune: true
+          prune: false
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
