@@ -30,3 +30,5 @@ spec:
         automated:
           prune: false
           selfHeal: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true
