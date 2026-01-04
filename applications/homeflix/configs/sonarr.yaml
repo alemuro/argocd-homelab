@@ -1,6 +1,6 @@
 name: sonarr
 image: lscr.io/linuxserver/sonarr
-tag: 4.0.16.2944
+tag: 4.0.16
 port: 8989
 domains:
   - sonarr.immaleix.casa
