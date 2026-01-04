@@ -1,0 +1,24 @@
+name: radarr
+image: lscr.io/linuxserver/radarr
+tag: latest
+port: 7878
+domains:
+  - radarr.immaleix.casa
+mount:
+  /mnt/local/configs/radarr: /config
+  /mnt/nfs/homeflix-v2: /media
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+allow_from:
+  - prowlarr
+  - overseerr
+  - bazarr
+  - maintainerr
+  - radarr-exporter
+  - sizeondisk-exporter
+  - discovarr

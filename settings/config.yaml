@@ -15,7 +15,7 @@ spec:
       finalizers: []
       name: 'argocd-{{ .folder | replace "/" "-" }}'
     spec:
-      project: default
+      project: argocd
       syncPolicy:
         automated:
           prune: false

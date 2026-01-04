@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: homeflix-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+  - git:
+      repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+      revision: HEAD
+      files:
+      - path: "applications/homeflix/configs/*.yaml"
+  template:
+    metadata:
+      name: 'homeflix-{{.name}}'
+    spec:
+      project: homeflix
+      source:
+        path: helm/homelab-application
+        repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+        targetRevision: HEAD
+        helm:
+          values: |
+            {{- toYaml . | nindent 12 }}
+      destination:
+        name: homelab
+        namespace: homeflix
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
