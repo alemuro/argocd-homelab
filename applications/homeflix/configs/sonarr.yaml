@@ -1,11 +1,11 @@
-name: radarr
-image: lscr.io/linuxserver/radarr
-tag: 6.0.4.10291
-port: 7878
+name: sonarr
+image: lscr.io/linuxserver/sonarr
+tag: 4.0.16.2944
+port: 8989
 domains:
-  - radarr.immaleix.casa
+  - sonarr.immaleix.casa
 mount:
-  /mnt/local/configs/radarr: /config
+  /mnt/local/configs/sonarr: /config
   /mnt/nfs/homeflix-v2: /media
 resources:
   requests:
@@ -19,6 +19,6 @@ allow_from:
   - overseerr
   - bazarr
   - maintainerr
-  - radarr-exporter
+  - sonarr-exporter
   - sizeondisk-exporter
   - discovarr
