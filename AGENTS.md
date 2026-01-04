@@ -1,28 +1,27 @@
 # AGENTS.md
 
-## Build/Lint/Test Commands
+Guidelines for AI Agents and developers working on this repository.
 
-- Build: `make build`
-- Lint: `make lint`
-- Test: `make test`
-- Run a single test: `make test TEST_NAME=test_name`
+## 🛠 Technical Stack
+- **Argo CD**: GitOps controller.
+- **Helm**: Local charts for standardizing deployments.
+- **Kubernetes**: Target orchestration.
 
-## Code Style Guidelines
+## 📜 Development Rules
 
-- Imports: Grouped by standard library, third-party, and local imports
-- Formatting: Use `gofmt`
-- Types: Be explicit with types
-- Naming: Use camelCase for variables and PascalCase for types
-- Error Handling: Use `errors.New` for errors
+### 1. Project Organization
+- **Don't hardcode standard resources**: Use the `helm/homelab-application` chart for generic deployments instead of writing raw Kubernetes manifests.
+- **Use the Config Pattern**: For the `homeflix` stack, always add new applications as value files in `applications/homeflix/configs/`.
 
-## Cursor Rules
+### 2. YAML Conventions
+- Use 2-space indentation.
+- Ensure `apiVersion` and `kind` are at the top.
+- For Argo CD `Application` resources, ensure `syncPolicy` has `prune: false` (to prevent accidental deletions) and `selfHeal: true`.
 
-- Follow the existing code style
-- Use the existing imports
-- Be explicit with types
+### 3. Helm Chart: `homelab-application`
+- This chart is the source of truth for deployments. If a new feature (like a specific annotation) is needed for all apps, add it to the chart templates rather than individual config files.
 
-## Copilot Rules
-
-- Follow the existing code style
-- Use the existing imports
-- Be explicit with types
+## 🤖 AI Instructions
+- When adding a new app, check if it fits the `homelab-application` schema.
+- Always prefer `ApplicationSet` generators for scaling similar deployments.
+- If modifying `AppProjects`, ensure `destinations` and `namespaceResourceWhitelist` are correctly scoped to maintain security boundaries.
