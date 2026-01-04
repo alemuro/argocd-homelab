@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+    k8s-app: {{ .Values.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+      k8s-app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+        k8s-app: {{ .Values.name }}
+    spec:
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      containers:
+        - name: {{ .Values.name }}
+          image: "{{ .Values.image }}:{{ .Values.tag }}"
+          ports:
+            - containerPort: {{ .Values.port }}
+              name: http
+              protocol: TCP
+          env:
+            {{- range $key, $val := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $val | quote }}
+            {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            {{- range $hostPath, $mountPath := .Values.mount }}
+            - name: {{ $mountPath | replace "/" "" | lower | trunc 63 | trimSuffix "-" }}
+              mountPath: {{ $mountPath }}
+            {{- end }}
+      volumes:
+        {{- range $hostPath, $mountPath := .Values.mount }}
+        - name: {{ $mountPath | replace "/" "" | lower | trunc 63 | trimSuffix "-" }}
+          hostPath:
+            path: {{ $hostPath }}
+        {{- end }}

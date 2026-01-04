@@ -1,0 +1,19 @@
+{{- if .Values.allow_from }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Values.name }}
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ .Values.name }}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+      {{- range .Values.allow_from }}
+      - podSelector:
+          matchLabels:
+            k8s-app: {{ . }}
+      {{- end }}
+{{- end }}
