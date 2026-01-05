@@ -22,10 +22,12 @@ spec:
       containers:
         - name: {{ .Values.name }}
           image: "{{ .Values.image }}:{{ .Values.tag }}"
+          {{- if .Values.port }}
           ports:
             - containerPort: {{ .Values.port }}
               name: http
               protocol: TCP
+          {{- end }}
           env:
             {{- range $key, $val := .Values.env }}
             - name: {{ $key }}

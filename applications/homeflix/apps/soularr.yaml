@@ -1,0 +1,4 @@
+name: soularr
+image: mrusse08/soularr
+tag: latest
+resources: {}
