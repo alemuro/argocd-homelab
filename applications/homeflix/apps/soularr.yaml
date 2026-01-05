@@ -1,4 +1,7 @@
 name: soularr
 image: mrusse08/soularr
 tag: latest
+mount:
+  /mnt/local/configs/soularr: /data
+  /mnt/nfs/homeflix-v2: /media
 resources: {}
