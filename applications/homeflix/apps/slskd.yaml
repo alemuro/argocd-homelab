@@ -6,7 +6,7 @@ domains:
   - slskd.immaleix.casa
 mount:
   /mnt/local/configs/slskd: /app
-  /mnt/nfs/homeflix-v2/music: /data
+  /mnt/nfs/homeflix-v2: /media
 env:
   SLSKD_REMOTE_CONFIGURATION: "true"
 resources:
