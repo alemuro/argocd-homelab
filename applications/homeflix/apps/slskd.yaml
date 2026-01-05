@@ -7,6 +7,8 @@ domains:
 mount:
   /mnt/local/configs/slskd: /app
   /mnt/nfs/homeflix-v2/music: /data
+env:
+  SLSKD_REMOTE_CONFIGURATION: "true"
 resources:
   requests:
     cpu: 100m
