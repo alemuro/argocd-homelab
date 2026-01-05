@@ -10,7 +10,7 @@ spec:
       repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
       revision: HEAD
       files:
-      - path: "applications/homeflix/configs/*.yaml"
+      - path: "applications/homeflix/apps/*.yaml"
   template:
     metadata:
       name: 'homeflix-{{.name}}'

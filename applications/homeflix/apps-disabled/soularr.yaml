@@ -1,0 +1,26 @@
+# name: soularr
+# image: mrusse08/soularr
+# tag: latest
+# port: 8000
+# domains:
+#   - soularr.immaleix.casa
+# env:
+#   LIDARR_URL: "http://lidarr:80"
+#   SLSK_URL: "http://slskd:80"
+# secretEnv:
+#   LIDARR_API_KEY:
+#     secretName: homeflix
+#     key: lidarr_api_key
+#   SLSK_USER:
+#     secretName: homeflix
+#     key: slskd_user
+#   SLSK_PASS:
+#     secretName: homeflix
+#     key: slskd_pass
+# resources:
+#   requests:
+#     cpu: 50m
+#     memory: 128Mi
+#   limits:
+#     cpu: 200m
+#     memory: 256Mi

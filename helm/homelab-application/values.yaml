@@ -5,17 +5,15 @@ port: 80
 domains: []
 # Mounts in format: hostPath: mountPath
 mount: {}
-resources:
-  requests:
-    cpu: 100m
-    memory: 128Mi
-  limits:
-    cpu: 500m
-    memory: 512Mi
+resources: {}
 allow_from: []
 env:
   PUID: "1000"
   PGID: "1000"
   TZ: "Europe/Madrid"
+# secretEnv in format: ENV_NAME: { secretName: "...", key: "..." }
+secretEnv: {}
+args: []
+serviceAnnotations: {}
 nodeSelector:
   kubernetes.io/hostname: worker-0

@@ -1,0 +1,21 @@
+name: lidarr
+image: lscr.io/linuxserver/lidarr
+tag: latest
+port: 8686
+domains:
+  - lidarr.immaleix.casa
+mount:
+  /mnt/local/configs/lidarr: /config
+  /mnt/nfs/homeflix-v2: /media
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+allow_from:
+  - prowlarr
+  - overseerr
+  - bazarr
+  - soularr
