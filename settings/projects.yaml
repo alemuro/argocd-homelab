@@ -55,7 +55,7 @@ spec:
   sourceRepos:
     - "*"
   sourceNamespaces:
-    - argocd
+    - "*"
   destinations:
     - namespace: argocd
       server: https://kubernetes.default.svc
