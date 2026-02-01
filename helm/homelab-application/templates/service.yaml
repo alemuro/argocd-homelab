@@ -1,4 +1,4 @@
-{{- if .Values.port -}}
+{{- if or .Values.port .Values.pod_additional_ports -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -11,10 +11,18 @@ metadata:
   {{- end }}
 spec:
   ports:
+  {{- if .Values.port }}
     - port: 80
       targetPort: {{ .Values.port }}
       protocol: TCP
       name: http
+  {{- end }}
+  {{- range .Values.pod_additional_ports }}
+    - name: {{ .name }}
+      port: {{ .container_port }}
+      targetPort: {{ .container_port }}
+      protocol: {{ .protocol | default "TCP" }}
+  {{- end }}
   selector:
     app: {{ .Values.name }}
 {{- end }}

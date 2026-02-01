@@ -1,32 +1,31 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: homeflix-apps
+  name: homelab-apps
   namespace: argocd
 spec:
   goTemplate: true
   generators:
-  - git:
-      repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
-      revision: HEAD
-      files:
-      - path: "applications/homeflix/apps/*.yaml"
+    - git:
+        repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+        revision: HEAD
+        files:
+          - path: "applications/homelab/apps/*.yaml"
   template:
     metadata:
-      name: 'homeflix-{{.name}}'
+      name: "homelab-{{.name}}"
     spec:
-      project: homeflix
+      project: homelab
       source:
         path: helm/homelab-application
         repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
         targetRevision: HEAD
         helm:
           values: |
-            {{- $common_values := dict "nodeSelector" (dict "kubernetes.io/hostname" "worker-0") -}}
-            {{- toYaml (merge $common_values .) | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
       destination:
         name: homelab
-        namespace: homeflix
+        namespace: homelab
       syncPolicy:
         automated:
           prune: false

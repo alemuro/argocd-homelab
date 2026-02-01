@@ -17,3 +17,4 @@ args: []
 serviceAnnotations: {}
 nodeSelector:
   kubernetes.io/hostname: worker-0
+node_selector: {}

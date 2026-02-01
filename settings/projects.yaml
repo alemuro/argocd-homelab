@@ -8,17 +8,17 @@ metadata:
 spec:
   description: Project for homelab applications
   sourceRepos:
-    - '*'
+    - "*"
   sourceNamespaces:
-    - '*'
+    - "*"
   destinations:
     - namespace: default
       server: https://kubernetes.default.svc
     - namespace: homelab
       server: https://kubernetes.default.svc
   namespaceResourceWhitelist:
-  - group: '*'
-    kind: '*'
+    - group: "*"
+      kind: "*"
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -30,18 +30,18 @@ metadata:
 spec:
   description: Project for platform infrastructure and system-wide resources
   sourceRepos:
-    - '*'
+    - "*"
   sourceNamespaces:
-    - '*'
+    - "*"
   destinations:
-    - namespace: '*'
-      server: '*'
+    - namespace: "*"
+      server: "*"
   namespaceResourceWhitelist:
-  - group: '*'
-    kind: '*'
+    - group: "*"
+      kind: "*"
   clusterResourceWhitelist:
-  - group: '*'
-    kind: '*'
+    - group: "*"
+      kind: "*"
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -53,18 +53,18 @@ metadata:
 spec:
   description: Project for ArgoCD configurations and management
   sourceRepos:
-    - '*'
+    - "*"
   sourceNamespaces:
     - argocd
   destinations:
     - namespace: argocd
       server: https://kubernetes.default.svc
   namespaceResourceWhitelist:
-  - group: '*'
-    kind: '*'
+    - group: "*"
+      kind: "*"
   clusterResourceWhitelist:
-  - group: '*'
-    kind: '*'
+    - group: "*"
+      kind: "*"
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -76,13 +76,34 @@ metadata:
 spec:
   description: Project for homeflix applications
   sourceRepos:
-    - '*'
+    - "*"
   sourceNamespaces:
-    - '*'
+    - "*"
   destinations:
-    - namespace: 'homeflix'
-      server: '*'
+    - namespace: "homeflix"
+      server: "*"
   namespaceResourceWhitelist:
-  - group: '*'
-    kind: '*'
+    - group: "*"
+      kind: "*"
 ---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: homelab
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Project for homelab applications
+  sourceRepos:
+    - "*"
+  sourceNamespaces:
+    - "*"
+  destinations:
+    - namespace: "homelab"
+      server: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
+

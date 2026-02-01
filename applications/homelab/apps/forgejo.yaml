@@ -1,0 +1,19 @@
+name: forgejo
+image: codeberg.org/forgejo/forgejo
+tag: "11"
+port: 3000
+domains:
+  - git.aleix.cloud
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/forgejo: /data
+env:
+  USER_UID: "1200"
+  USER_GID: "1200"
+  TZ: Europe/Madrid
+pod_additional_ports:
+  - name: "ssh"
+    container_port: 22
+    host_port: 2222
+    protocol: "TCP"
