@@ -126,4 +126,24 @@ spec:
     - group: "*"
       kind: "*"
 ---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: ingress
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Project for ingress applications
+  sourceRepos:
+    - "*"
+  sourceNamespaces:
+    - "*"
+  destinations:
+    - namespace: "ingress"
+      server: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
 

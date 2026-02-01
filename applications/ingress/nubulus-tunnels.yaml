@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nubulus-tunnels
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - git:
+        repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+        revision: HEAD
+        files:
+          - path: "applications/ingress/tunnels/*.yaml"
+  template:
+    metadata:
+      name: "ingress-{{ .name | replace "_" "-" | replace "." "-" | lower }}"
+    spec:
+      project: ingress
+      source:
+        path: helm/nubulus-tunnel
+        repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+        targetRevision: HEAD
+        helm:
+          values: |
+            name: {{.name}}
+            secret: {{.secret}}
+      destination:
+        name: homelab
+        namespace: homelab
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true
