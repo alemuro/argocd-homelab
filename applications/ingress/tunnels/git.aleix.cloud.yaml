@@ -3,7 +3,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   creationTimestamp: null
-  name: git.aleix.cloud-tunnel
+  name: git-aleix-cloud-tunnel
   namespace: tunnels
 spec:
   encryptedData:
@@ -13,5 +13,5 @@ spec:
   template:
     metadata:
       creationTimestamp: null
-      name: git.aleix.cloud-tunnel
+      name: git-aleix-cloud-tunnel
       namespace: tunnels

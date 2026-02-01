@@ -22,11 +22,11 @@ spec:
         targetRevision: HEAD
         helm:
           values: |
-            name: {{.name}}
-            secret: {{.secret}}
+            name: {{ .name | replace "_" "-" | replace "." "-" | lower }}
+            secret: {{ .name | replace "_" "-" | replace "." "-" | lower }}-tunnel
       destination:
         name: homelab
-        namespace: homelab
+        namespace: ingress
       syncPolicy:
         automated:
           prune: false
