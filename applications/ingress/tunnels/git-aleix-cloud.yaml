@@ -1,3 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "git-aleix-cloud"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "git-aleix-cloud"
+  template:
+    metadata:
+      labels:
+        app: "git-aleix-cloud"
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: worker3
+      containers:
+        - name: tunnel
+          image: code.as210469.net/nubulusnetworkopensource/tunnel:latest
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: "git-aleix-cloud-tunnel"
+                  key: TOKEN
+          ports:
+            - containerPort: 8080
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+                - SYS_MODULE
+            privileged: true
+          volumeMounts:
+            - name: lib-modules
+              mountPath: /lib/modules
+              readOnly: true
+      volumes:
+        - name: lib-modules
+          hostPath:
+            path: /lib/modules
+            type: Directory
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
