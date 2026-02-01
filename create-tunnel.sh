@@ -19,13 +19,15 @@ fi
 # Create applications/ingress/tunnels directory if it does not exist
 mkdir -p applications/ingress/tunnels
 
+filename_domain=$(echo "${public_domain}" | tr '.' '-')
+
 # Create a Kubernetes secret and pipe it to kubeseal
-kubectl create secret generic "${public_domain}-tunnel" \
+kubectl create secret generic "${filename_domain}-tunnel" \
   --namespace "${NAMESPACE}" \
   --from-literal=PUBLIC_DOMAIN="${public_domain}" \
   --from-literal=TUNNEL_CNAME="${tunnel_cname}" \
   --from-literal=TOKEN="${token}" \
   --dry-run=client -o yaml | \
-  kubeseal --controller-name sealed-secrets --controller-namespace sealed-secrets --format yaml > "applications/ingress/tunnels/${public_domain}.yaml"
+  kubeseal --controller-name sealed-secrets --controller-namespace sealed-secrets --format yaml > "applications/ingress/tunnels/${filename_domain}.yaml"
 
-echo "Sealed secret created at applications/ingress/tunnels/${public_domain}.yaml"
+echo "Sealed secret created at applications/ingress/tunnels/${filename_domain}.yaml"
