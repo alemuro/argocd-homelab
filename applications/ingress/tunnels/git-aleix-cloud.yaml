@@ -14,7 +14,7 @@ spec:
         app: "git-aleix-cloud"
     spec:
       nodeSelector:
-        kubernetes.io/hostname: worker3
+        kubernetes.io/hostname: worker-1
       containers:
         - name: tunnel
           image: code.as210469.net/nubulusnetworkopensource/tunnel:latest
