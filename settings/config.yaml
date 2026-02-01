@@ -12,6 +12,7 @@ spec:
           - folder: applications/platform
           - folder: applications/homeflix
           - folder: applications/homelab
+          - folder: applications/ingress
   template:
     metadata:
       finalizers: []
