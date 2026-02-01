@@ -1,4 +1,4 @@
-{{- if .Values.allow_from }}
+{{- if or .Values.allow_from .Values.allow_from_cidrs .Values.allow_from_namespaces }}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -15,5 +15,14 @@ spec:
       - podSelector:
           matchLabels:
             k8s-app: {{ . }}
+      {{- end }}
+      {{- range .Values.allow_from_cidrs }}
+      - ipBlock:
+          cidr: {{ . }}
+      {{- end }}
+      {{- range .Values.allow_from_namespaces }}
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: {{ . }}
       {{- end }}
 {{- end }}

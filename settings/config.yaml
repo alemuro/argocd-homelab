@@ -8,6 +8,7 @@ spec:
   generators:
     - list:
         elements:
+          - folder: applications/devops
           - folder: applications/platform
           - folder: applications/homeflix
           - folder: applications/homelab

@@ -106,4 +106,24 @@ spec:
     - group: "*"
       kind: "*"
 ---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: devops
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Project for devops applications
+  sourceRepos:
+    - "*"
+  sourceNamespaces:
+    - "*"
+  destinations:
+    - namespace: "devops"
+      server: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
 

@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: devops-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - git:
+        repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+        revision: HEAD
+        files:
+          - path: "applications/devops/apps/*.yaml"
+  template:
+    metadata:
+      name: "devops-{{.name}}"
+    spec:
+      project: devops
+      source:
+        path: helm/homelab-application
+        repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+        targetRevision: HEAD
+        helm:
+          values: |
+            {{- toYaml . | nindent 12 }}
+      destination:
+        name: homelab
+        namespace: devops
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true
