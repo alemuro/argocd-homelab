@@ -4,7 +4,7 @@ kind: SealedSecret
 metadata:
   creationTimestamp: null
   name: git-aleix-cloud-tunnel
-  namespace: tunnels
+  namespace: ingress
 spec:
   encryptedData:
     PUBLIC_DOMAIN: AgCbrG3CFChQ/sABGUvHn7D1cV+NXoLxsdg2hgDSe6+oj2oVDwFBtNxs8QVNr4UynmyvtjgeYJ4hUH/CI4TqwXLeoiaMfzQY1s+vuodBJ1obXa9U2sPTYB0M7Y4UFZYz1MGuSCuf34bEuFPM5aaqpKbRKTYA+byV3neH3UFldL7C3dRypjHrjcFKa1y4PuI95jV8MM3/4qKP4LNFIFlRtuH/lTm1H5xLXWJyv2Loh2fxfind5w/aXzG2E/n5JOWgmo4QDrUBJBg+RJCcqPttVyKpv0QZ8vWj6mbHMgy+VqRIZgR5CNmj/IzgL7Vr7aE2AreyEAymcXcOIyHC7flYLHMMxc3uMkReQVAeMp4MLs8wo2Umi389mloG1drwuoGHCJrdhoE/hT69ganWfr20wz88yXV+KlXbbj6eO1iQ8U1rBLNVj4TxBWa3MrEFOymTRDoEQq+xGDaCXHygPcguQ+QDOyVKvakkXHV8iDKK201TYl5fjesM41NERMN6sM+7nK48lva9KojDGJQoe8PKdh63BYqjaS4ei9ZBDxKknUB8hBZr8c4hS3me0na3sYV+7wMzyWycRlI6EY6Niyiv9gEMH2x1WG9KmyDi4jUriM7WY1LX4h69TYTSJoJSEyZeGdrxUKPmKq7LPp7kaPcvvFcJVjEgRpiOKRwkxqsijR43zq1WIlpkaQ2s19N8MP+8OoOQmH1yQlsAjAd+z1imEg8=
@@ -14,4 +14,4 @@ spec:
     metadata:
       creationTimestamp: null
       name: git-aleix-cloud-tunnel
-      namespace: tunnels
+      namespace: ingress
