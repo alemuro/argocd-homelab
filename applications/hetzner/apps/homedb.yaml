@@ -2,8 +2,7 @@ name: homedb
 image: mariadb
 tag: "10.5"
 port: 3306
-# node_selector:
-#   kubernetes.io/hostname: worker-0
+servicePort: 3306
 node_selector:
   kubernetes.io/hostname: ubuntu-4gb-nbg1-1
 mount:

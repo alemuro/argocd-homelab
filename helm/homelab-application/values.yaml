@@ -2,6 +2,7 @@ name: ""
 image: ""
 tag: "latest"
 port: null
+servicePort: 80
 domains: []
 # Mounts in format: hostPath: mountPath
 mount: {}
