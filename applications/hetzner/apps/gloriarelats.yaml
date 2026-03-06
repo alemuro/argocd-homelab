@@ -3,7 +3,7 @@ image: wordpress
 tag: 6.7.2
 port: 80
 domains:
-  - hetzner.gloriarelats.cat
+  - gloriarelats.cat
 node_selector:
   kubernetes.io/hostname: ubuntu-4gb-nbg1-1
 mount:
