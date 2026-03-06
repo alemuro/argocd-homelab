@@ -4,6 +4,7 @@ tag: "10.5"
 port: 3306
 # node_selector:
 #   kubernetes.io/hostname: worker-0
+node_selector: {}
 mount:
   /mnt/local/configs/localdb: /var/lib/mysql
 env:
