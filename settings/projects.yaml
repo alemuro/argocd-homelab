@@ -39,6 +39,9 @@ spec:
   namespaceResourceWhitelist:
     - group: "*"
       kind: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -111,26 +114,6 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: homelab
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  description: Project for homelab applications
-  sourceRepos:
-    - "*"
-  sourceNamespaces:
-    - "*"
-  destinations:
-    - namespace: "homelab"
-      server: "*"
-  namespaceResourceWhitelist:
-    - group: "*"
-      kind: "*"
----
-apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
   name: devops
   namespace: argocd
   finalizers:
@@ -167,5 +150,6 @@ spec:
   namespaceResourceWhitelist:
     - group: "*"
       kind: "*"
----
-
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
