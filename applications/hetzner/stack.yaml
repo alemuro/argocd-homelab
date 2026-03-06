@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: hetzner-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+  - git:
+      repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+      revision: HEAD
+      files:
+      - path: "applications/hetzner/apps/*.yaml"
+  template:
+    metadata:
+      name: 'hetzner-{{.name}}'
+    spec:
+      project: hetzner
+      source:
+        path: helm/homelab-application
+        repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+        targetRevision: HEAD
+      destination:
+        name: hetzner
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true

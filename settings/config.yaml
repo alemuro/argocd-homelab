@@ -10,6 +10,7 @@ spec:
         elements:
           - folder: applications/devops
           - folder: applications/platform
+          - folder: applications/hetzner
           - folder: applications/homeflix
           - folder: applications/homelab
           - folder: applications/ingress

@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hetzner-traefik
+  namespace: argocd
+spec:
+  project: ingress
+  source:
+    chart: traefik
+    repoURL: https://traefik.github.io/charts
+    targetRevision: 34.0.0
+    helm:
+      releaseName: traefik
+      values: |
+        deployment:
+          kind: Deployment
+          replicas: 1
+        ingressClass:
+          enabled: true
+          isDefaultClass: true
+          name: traefik
+        ingressRoute:
+          dashboard:
+            enabled: false
+        ports:
+          web:
+            exposedPort: 80
+          websecure:
+            exposedPort: 443
+            tls:
+              enabled: true
+              certResolver: default
+        service:
+          type: LoadBalancer
+        additionalArguments:
+          - "--certificatesresolvers.default.acme.tlschallenge=true"
+          - "--certificatesresolvers.default.acme.email=alemurbcn@gmail.com"
+          - "--certificatesresolvers.default.acme.storage=/data/acme.json"
+        persistence:
+          enabled: true
+          path: /data
+          size: 128Mi
+        logLevel: warn
+        logs:
+          access:
+            enabled: true
+            filters:
+              statuscodes: "400-499,500-599"
+        providers:
+          kubernetesIngress:
+            publishedService:
+              enabled: true
+  destination:
+    name: hetzner
+    namespace: ingress
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true

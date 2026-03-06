@@ -1,0 +1,28 @@
+name: gloriarelats
+image: wordpress
+tag: 6.7.2
+port: 80
+domains:
+  - hetzner.gloriarelats.cat
+# node_selector:
+#   kubernetes.io/hostname: worker-0
+mount:
+  /mnt/local/configs/gloriarelats: /var/www/html
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+  WORDPRESS_DB_HOST: "homedb"
+  WORDPRESS_DB_USER: "gloriarelats"
+  WORDPRESS_DB_NAME: "gloriarelats"
+# secretEnv:
+#   WORDPRESS_DB_PASSWORD:
+#     secretName: "gloriarelats-db"
+#     key: "password"
+resources:
+  requests:
+    cpu: 50m
+    memory: 600Mi
+  limits:
+    cpu: 500m
+    memory: 1Gi
