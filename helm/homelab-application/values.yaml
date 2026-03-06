@@ -15,6 +15,5 @@ env:
 secretEnv: {}
 args: []
 serviceAnnotations: {}
-nodeSelector:
-  kubernetes.io/hostname: worker-0
+nodeSelector: {}
 node_selector: {}

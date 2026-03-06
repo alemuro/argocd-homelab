@@ -5,7 +5,7 @@ port: 3306
 # node_selector:
 #   kubernetes.io/hostname: worker-0
 node_selector:
-  k3s.io/hostname: ubuntu-4gb-nbg1-1
+  kubernetes.io/hostname: ubuntu-4gb-nbg1-1
 mount:
   /mnt/local/configs/localdb: /var/lib/mysql
 env:
