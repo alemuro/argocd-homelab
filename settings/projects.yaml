@@ -34,7 +34,7 @@ spec:
   sourceNamespaces:
     - "*"
   destinations:
-    - namespace: default
+    - namespace: '*'
       server: hetzner
   namespaceResourceWhitelist:
     - group: "*"
