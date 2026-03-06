@@ -4,7 +4,7 @@ metadata:
   name: hetzner-traefik
   namespace: argocd
 spec:
-  project: ingress
+  project: hetzner
   source:
     chart: traefik
     repoURL: https://traefik.github.io/charts
