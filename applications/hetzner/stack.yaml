@@ -20,6 +20,9 @@ spec:
         path: helm/homelab-application
         repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
         targetRevision: HEAD
+        helm:
+          values: |
+            {{- toYaml . | nindent 12 }}
       destination:
         name: hetzner
         namespace: default
