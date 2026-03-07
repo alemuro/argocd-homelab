@@ -1,6 +1,6 @@
 name: herbes
 image: wordpress
-tag: 6.7.2
+tag: 6-php8.4
 port: 80
 domains:
   - hetzner.herbes.cat
