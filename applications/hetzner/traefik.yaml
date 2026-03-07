@@ -32,10 +32,13 @@ spec:
               certResolver: default
         service:
           type: LoadBalancer
+          externalTrafficPolicy: Local
         additionalArguments:
           - "--certificatesresolvers.default.acme.tlschallenge=true"
           - "--certificatesresolvers.default.acme.email=alemurbcn@gmail.com"
           - "--certificatesresolvers.default.acme.storage=/data/acme.json"
+          - "--entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,10.0.0.0/8"
+          - "--entryPoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,10.0.0.0/8"
         persistence:
           enabled: true
           path: /data
