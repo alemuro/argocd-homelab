@@ -1,0 +1,28 @@
+name: gloriarelats
+image: wordpress
+tag: 6.7.2
+port: 80
+domains:
+  - hetzner.herbes.cat
+node_selector:
+  kubernetes.io/hostname: ubuntu-4gb-nbg1-1
+mount:
+  /mnt/local/configs/herbes: /var/www/html
+env:
+  PUID: "1001"
+  PGID: "1001"
+  TZ: "Europe/Madrid"
+  WORDPRESS_DB_HOST: "homedb"
+  WORDPRESS_DB_USER: "wordpress"
+  WORDPRESS_DB_NAME: "wordpress"
+# secretEnv:
+#   WORDPRESS_DB_PASSWORD:
+#     secretName: "gloriarelats-db"
+#     key: "password"
+resources:
+  requests:
+    cpu: 50m
+    memory: 600Mi
+  limits:
+    cpu: 500m
+    memory: 1Gi
