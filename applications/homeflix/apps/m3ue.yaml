@@ -1,0 +1,12 @@
+name: m3ue
+image: sparkison/m3u-editor:latest
+tag: latest
+port: 36400
+domains:
+  - m3ue.immaleix.casa
+mount:
+  /mnt/local/configs/m3ue: /var/www/config
+env:
+  TZ: Europe/Madrid
+  APP_URL: https://m3ue.immaleix.casa
+  M3U_PROXY_ENABLED: "true"
