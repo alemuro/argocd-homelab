@@ -1,5 +1,5 @@
 name: m3ue
-image: sparkison/m3u-editor:latest
+image: sparkison/m3u-editor
 tag: latest
 port: 36400
 domains:
