@@ -1,0 +1,33 @@
+name: sonobarr
+image: ghcr.io/dodelidoo-labs/sonobarr
+tag: latest
+port: 5000
+domains:
+  - sonobarr.immaleix.casa
+mount:
+  /mnt/local/configs/sonobarr: /sonobarr/config
+  /mnt/nfs/homeflix-v2/music: /data/media/music
+env:
+  secret_key: admin
+  # Container user mapping (UID/GID)
+  PUID: 1000
+  PGID: 1000
+  # Lidarr configuration
+  lidarr_address: http://lidarr
+  lidarr_api_key: 4113f99ff4874bfba2aa90bf0244fa41
+  root_folder_path: /data/media/music/
+  quality_profile_id: 1
+  metadata_profile_id: 1
+  lidarr_api_timeout: 120
+  fallback_to_top_result: false
+  search_for_missing_albums: false
+  dry_run_adding_to_lidarr: false
+  # Discovery tuning
+  similar_artist_batch_size: 10
+  auto_start: false
+  auto_start_delay: 60
+  # Super-admin bootstrap (used on first launch)
+  sonobarr_superadmin_username: admin
+  sonobarr_superadmin_password: change-me
+  sonobarr_superadmin_display_name: Super Admin
+  sonobarr_superadmin_reset: false
