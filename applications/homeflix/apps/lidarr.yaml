@@ -19,3 +19,4 @@ allow_from:
   - overseerr
   - bazarr
   - soularr
+  - sonobarr
