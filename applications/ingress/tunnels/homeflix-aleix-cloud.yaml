@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "homeflix-aleix-cloud"
+  namespace: ingress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "homeflix-aleix-cloud"
+  template:
+    metadata:
+      labels:
+        app: "homeflix-aleix-cloud"
+    spec:
+      nodeSelector:
+        # kubernetes.io/hostname: worker-1
+        kubernetes.io/arch: amd64
+      containers:
+        - name: tunnel
+          image: code.as210469.net/nubulusnetworkopensource/tunnel:dev
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: "git-aleix-cloud-tunnel"
+                  key: TOKEN
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: homeflix-aleix-cloud
+  namespace: ingress
+spec:
+  encryptedData:
+    TUNNEL_TOKEN: AgAvzi6X8d9LOu6esgjIOWsR+uuaCAr04pTkJZB70WpjisfmIpcVI8osUzik8SI8SCSeL1sLfigKkRkffcb/REFMPzFwn30PhpYyn3ZbOHFpFLoYiGC/KHQqii8fSZvkAYXBwlHgdOoqgGej697HO9V4nc+I6PiROHPB/Du+b5Zcp7FzWf5cHrxMGBu5zok9yysTCExpY+XskZmRQRpAVGWppueXMYTUVJcnHNBbOovT/6Dzb72WgBLpd37etIscDekS4ajz8RKKeWOx66SGPPKhubb6n2yC4V6sVc2y9ekRop37LXY1tf/Gvips3QScaUnNeFZ8L75xxvHvho3ogh4gXaMkapkjSu3F7pxcHJEj5bzNtKpAO0orTXOYlFPyYQnHj5mnhvH+yRnf9VSwScNKBwGZc79dCwuZliYTchFsCYHgaNeUcBLFKHKz7yj+1EcFdYD1UvmHX4pls0QTcZ7gAVe9AWL4Apmy/GDwiruZVVkucBAzrZBgOvxlfGPePUjbN35wzJYXfEGBdoWIZzn6P/6i3h+I0y1JmUbrps8rseo4pEnX1EY7bTFN4LgUlm2l1yJJ2vtsEwvzBs86DBoSd0IgaWlTyvsd1+BAsxSNvduLDhH/9e2BuKHSJjkXunQvuZy78MgKFirgD+nl6FSoTwxX2Ccn1kJO8Yv2+5HfV94jc6dvrtS7aQD+xChf1Athi7Ct7X/GUXGcRtCWhB9aG00NeEt9zZFGmBXUdXdir/+ka6uYBBhnGZGceSjT9fs=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: homeflix-aleix-cloud
+      namespace: ingress
