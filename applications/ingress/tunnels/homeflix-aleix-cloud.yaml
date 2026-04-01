@@ -23,14 +23,14 @@ spec:
             - name: TUNNEL_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: "git-aleix-cloud-tunnel"
-                  key: TOKEN
+                  name: homeflix-aleix-cloud-tunnel
+                  key: TUNNEL_TOKEN
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   creationTimestamp: null
-  name: homeflix-aleix-cloud
+  name: homeflix-aleix-cloud-tunnel
   namespace: ingress
 spec:
   encryptedData:
@@ -38,5 +38,5 @@ spec:
   template:
     metadata:
       creationTimestamp: null
-      name: homeflix-aleix-cloud
+      name: homeflix-aleix-cloud-tunnel
       namespace: ingress
