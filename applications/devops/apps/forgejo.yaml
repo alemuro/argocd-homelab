@@ -6,8 +6,8 @@ domains:
   - git.immaleix.casa
   - git.aleix.cloud
   # - git.aleix.cloud
-cloudflare_domains:
-  - git.aleix.cloud
+# cloudflare_domains:
+#   - git.aleix.cloud
 node_selector:
   kubernetes.io/hostname: worker-1
 mount:
