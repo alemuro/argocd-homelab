@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "homeflix-aleix-cloud"
+  name: nubulus-tunnel
   namespace: ingress
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "homeflix-aleix-cloud"
+      app: nubulus-tunnel
   template:
     metadata:
       labels:
-        app: "homeflix-aleix-cloud"
+        app: nubulus-tunnel
     spec:
       nodeSelector:
         kubernetes.io/arch: amd64
@@ -29,7 +29,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   creationTimestamp: null
-  name: homeflix-aleix-cloud-tunnel
+  name: nubulus-tunnel
   namespace: ingress
 spec:
   encryptedData:
@@ -37,5 +37,5 @@ spec:
   template:
     metadata:
       creationTimestamp: null
-      name: homeflix-aleix-cloud-tunnel
+      name: nubulus-tunnel
       namespace: ingress
