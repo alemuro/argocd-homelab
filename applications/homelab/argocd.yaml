@@ -19,6 +19,11 @@ spec:
         configs:
           params:
             server.insecure: "true"
+          ssh:
+            knownHosts: |
+              [git-ssh.aleix.cloud]:2222 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDNlrDSFjb0BobE3OAg0EGMpvxPvXkpZMlOKM+Sqy2xzY8stUL/6PFid+mZReuTeGbE/BnB764444B6+5sXuCGK+Bs9nk0o401TXW17WO3XL+q8eQPY1JLp6pCHolXYFrAMOKzjLhhf9YY25M8QYrDqLwGzUz00fLRt/M7SBLTFThIo2SfyYR1bWTqodQM5DQ3r4Hpg/PtoBFfS1TDTZAxJ1sAqKSBfKGgeWTVRR/k4zQYeeJCAwC4RU8PjNhMM+qunev1UNVXaEw9UjJspakH2uCIKeh8Na1D/afVvXEVKTFDsxz4dhIqVEkUPlhXhCZYgAjPXILVUlrDfSzU/T1CyMkiwSyCM1du7nVsL04LKq4IXywqVWwmIFg7BSaQDvqe/vszupkQ6n2fetVS++8R05Me3kRnLFSdEmiaeRMS0perRr80rQ3amDK43g1ap38FCKzA3m0Rq9vHFVgoxeK5kLuoiaqkQtZ7Pxp0JHvVu64/ml61Qfn21T0V1s2toA4s=
+              [git-ssh.aleix.cloud]:2222 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNpaVcj/6GorDGuxdPFcrXBbdb1SLwJUmMD0uBFK10hz0S56ZPUutDIwm7GhPBLDm7/J36g2fGdCUAIr1djIo74=
+              [git-ssh.aleix.cloud]:2222 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN1bvTxVeN5GLvLb4KAzcFvC54wSQIMNfjVAZy1or4h0
         redis:
           enabled: true
         dex:
