@@ -1,0 +1,22 @@
+name: dns-ha-sync
+image: lscr.io/linuxserver/adguardhome-sync
+tag: latest
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/adguard-ha-sync/config: /config
+env:
+  USER_UID: "1000"
+  USER_GID: "1000"
+  TZ: Europe/Madrid
+  ORIGIN_URL: "https://dns1.immaleix.casa"
+  REPLICA1_URL: "https://local.immaleix.casa:3010"
+  CRON: "*/10 * * * *"
+  LOG_LEVEL: "info"
+secretEnv:
+  ORIGIN_USERNAME:
+    secretName: dns1-creds
+    key: USERNAME
+  ORIGIN_PASSWORD:
+    secretName: dns1-creds
+    key: PASSWORD

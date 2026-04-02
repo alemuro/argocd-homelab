@@ -1,0 +1,20 @@
+name: dns-exporter
+image: ghcr.io/henrywhitaker3/adguard-exporter
+tag: latest
+node_selector:
+  kubernetes.io/hostname: worker-1
+env:
+  ADGUARD_SERVERS: http://dns1,http://dns2
+secretEnv:
+  ADGUARD_USERNAMES:
+    secretName: dns-exporter-creds
+    key: USERNAME
+  ADGUARD_PASSWORDS:
+    secretName: dns-exporter-creds
+    key: PASSWORD
+serviceAnnotations:
+  k8s.grafana.com/scrape: true
+  k8s.grafana.com/metrics.portName: http
+  k8s.grafana.com/metrics.scheme: http
+  k8s.grafana.com/metrics.path: /metrics
+  k8s.grafana.com/metrics.scrapeInterval: 5m

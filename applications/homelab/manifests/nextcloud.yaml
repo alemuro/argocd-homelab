@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: nextcloud-db
+  namespace: homelab
+spec:
+  encryptedData:
+    MYSQL_PASSWORD: AgA9lEFmkevhJA3NfOHAjiNDm9v6L2zGEqbVT7oZvaZp46XBiiJjFKxkj/8FWpuRmIxrLUvKrBOkGVScNnhKPsHG4LjQiT35RKvTGtbvZnX5W+eSyFwp1kXpSxAP+4bo7JXouM3drqGXLiLldZpS6Hm4bzLUvhG9Y/pIliYW0Zh9VUyjkH1emLAzCG4rhlRZqKc9BzwS3G6HLACyjoWphPlsbgF6demUTfW9liRjR+4cbtLZA/tqGfUd9FnH9oq9lYoHln/Ta80D1vtbJXwu4Ql3xHVgl3vQm0M3/qnmfBzr36yCybh9FsXa3b0Q9dT1q3gOFPw68jr8mUKvQLcLsaLBQ6k48UeRyKkKO7ofZ2HVRpU3H/4Lf73ZoAObIj6oyIEBgtO7SW2IRJVFTtN3OthESmPpq8vr+hgwYs3y0xATuKM1fbYOJ4JVcvpM2LY3WPde4sdyYogjsmg4Awy2Iy7f/pSH40yxl62l3Wbdle4LYEqSJwFrxsnsAiT0ZCq/d1S7PZJekCv//J4rxuBCYcS1+5hBbBma2LIafXfjRW+Rqff8WDdickMVP2mSrgA6IibmKWaRLsbnzC98KVEAgk+dQFjBDD0p0Ta/8TbJZGxeaRE69jb7WzI8aKb5A+gtqL41vTSMCku4xn2Hn3l6TELj+vfqkb2Ea7mf1HbwO4fBRSJnxwCtIUrO1ffSGYMrVC96/hRyh/S+o1UYhqKchBjc
+  template:
+    metadata:
+      creationTimestamp: null
+      name: nextcloud-db
+      namespace: homelab

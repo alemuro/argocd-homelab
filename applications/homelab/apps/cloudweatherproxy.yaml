@@ -1,0 +1,44 @@
+name: cloudweatherproxy
+image: caddy
+tag: "2"
+port: 8080
+domains:
+  - rtupdate.wunderground.com
+  - api.weathercloud.net
+node_selector:
+  kubernetes.io/hostname: worker-1
+
+secretEnv:
+  HA_ACCESS_TOKEN:
+    secretName: cloudweatherproxy
+    key: HA_ACCESS_TOKEN
+
+configmaps:
+  /etc/caddy/Caddyfile: |
+    {
+      http_port 8080
+      https_port 8443
+      auto_https off
+    }
+
+    http://rtupdate.wunderground.com {
+      @weatherstation {
+        path /weatherstation/updateweatherstation.php*
+      }
+      reverse_proxy @weatherstation {
+        rewrite /wunderground{uri}
+        header_up "Authorization" "Bearer {env.HA_ACCESS_TOKEN}"
+        to https://local.immaleix.casa
+      }
+    }
+
+    http://api.weathercloud.net {
+      @weatherstation {
+        path /v01/set/*
+      }
+      reverse_proxy @weatherstation {
+        rewrite /weathercloud{uri}
+        header_up "Authorization" "Bearer {env.HA_ACCESS_TOKEN}"
+        to https://local.immaleix.casa
+      }
+    }

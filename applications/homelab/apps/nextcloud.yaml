@@ -1,0 +1,31 @@
+name: nextcloud
+image: nextcloud
+tag: "32"
+port: 80
+domains:
+  - nextcloud.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/nextcloud: /var/www/html
+  /mnt/nfs/personal/nextcloud-data: /var/www/html/data
+env:
+  USER_UID: "1000"
+  USER_GID: "1000"
+  TZ: Europe/Madrid
+  NEXTCLOUD_ADMIN_USER: admin
+  NEXTCLOUD_ADMIN_PASSWORD: admin
+  NEXTCLOUD_TRUSTED_DOMAINS: nextcloud.immaleix.casa
+  MYSQL_HOST: homedb
+  MYSQL_DATABASE: nextcloud
+  MYSQL_USER: nextcloud
+
+secretEnv:
+  MYSQL_PASSWORD:
+    secretName: nextcloud-db
+    key: MYSQL_PASSWORD
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
