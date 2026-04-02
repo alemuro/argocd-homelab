@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: sonarr-apikey
+  namespace: homeflix
+spec:
+  encryptedData:
+    SONARR_APIKEY: AgCC1Bfha/jELK4p4ooKJN/CfPdqOEoVaO/sWUeWzf9MoXU8/E4NyxcJ+GEySX7DJM4NTcmXqB9alrGyAKzTWXPRov5Qfan5+3RxVeLLoBVO8APYmev/17vc55Lk/GNDwy6uuni2T4fmvQgjj1DXrfk3mZjm7DHT80nuCxDgGTjF2bBDRmDmAd4ENJdSd8jsPSk1cQjaSe3mKGtTU9YDDR/+E0K9NoMvh+rQ3QUnZTpsnx7aosVC0qILgrpfuo+ponf/4G2yquhlUthEFyStQSfvUE/H4Rg4X5Umb8xAGM9qLg1pYkdG8j5t9vT6ToOjIG0CflZo6VgEpsxA46TiDPS4h/Ru366DFdavScpqNwH7pkqLNfXrIKHZyqZj9bK7eh8TNAjmnFbJw7W+j/rmffZYnNzMPDm6Ibe/oInLE4LMjvn7X2vbyaf5wqk2C1oO371eNbBZ22D3v5ScRlAKP0o1u9qxRoevXHBPuI5PwAwxRbYMcJzLn/Q8KcDvUhxxBPgePUStC0PukePAyKzqCk6sta1NjV8Fr+7TIV33YlY1xdCleLa5qyw9nu+MCCFs2WkeWFRc6LV9RBu0Fh4WgJAEgUyLMBs45gKcEuwPNqEcWVXgSMEEk4sw/07g6x03W/cSaUuAQ9XIA0lztYLTbzyi7ZRUyGAuErQq0SSmT2wUWPa4iV/LI7o/i69Sp54Z4s0uvV7xpwbqc8XQVFytoE8VYkH7MdRmBuTYPX104oCt9w==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: sonarr-apikey
+      namespace: homeflix

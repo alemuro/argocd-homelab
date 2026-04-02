@@ -6,11 +6,11 @@ metadata:
 spec:
   goTemplate: true
   generators:
-  - git:
-      repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
-      revision: HEAD
-      files:
-      - path: "applications/homeflix/apps/*.yaml"
+    - git:
+        repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+        revision: HEAD
+        files:
+          - path: "applications/homeflix/apps/*.yaml"
   template:
     metadata:
       name: 'homeflix-{{.name}}'
@@ -22,8 +22,7 @@ spec:
         targetRevision: HEAD
         helm:
           values: |
-            {{- $common_values := dict "nodeSelector" (dict "kubernetes.io/hostname" "worker-0") -}}
-            {{- toYaml (merge $common_values .) | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
       destination:
         name: homelab
         namespace: homeflix

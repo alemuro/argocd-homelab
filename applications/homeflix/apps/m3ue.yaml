@@ -2,6 +2,8 @@ name: m3ue
 image: sparkison/m3u-editor
 tag: latest
 port: 36400
+node_selector:
+  kubernetes.io/hostname: worker-0
 domains:
   - m3ue.immaleix.casa
 mount:

@@ -2,6 +2,8 @@ name: lidarr
 image: lscr.io/linuxserver/lidarr
 tag: latest
 port: 8686
+node_selector:
+  kubernetes.io/hostname: worker-0
 domains:
   - lidarr.immaleix.casa
 mount:

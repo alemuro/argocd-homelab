@@ -2,6 +2,8 @@ name: radarr
 image: lscr.io/linuxserver/radarr
 tag: 6.0.4
 port: 7878
+node_selector:
+  kubernetes.io/hostname: worker-0
 domains:
   - radarr.immaleix.casa
 mount:

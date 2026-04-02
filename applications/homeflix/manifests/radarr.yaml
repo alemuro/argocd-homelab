@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: radarr-apikey
+  namespace: homeflix
+spec:
+  encryptedData:
+    RADARR_APIKEY: AgArv6fBQujAF8MiOYgGvwMDa6cBkBXBxW+22mvSXi7moNepA2WAs6xrXIsBvDzVv9EGFESlV7oqAJxpGFT+CBTgQiKiBoNih8uaF90CaWZhY93Jh0dYXRXAURRb/S7DTKBQQsoIQ8hb3wgoDVrHlZSEpeBsB+B1KvGZWj6PQ/ocLRWBNUy1nJaBITNcxy1alowB5oNM/1QK0MJstK4o4lCvSEQuM6zk4W0H6Ew8Alu3gFsjjlNYaUse88yXcMws0QFScLO6Gm5bjpmd3YD11cRDwoysGn5uWIRYE4Jg5iEHte1CBwrIh4+2lgu85XNncAMHe6p1XomQK7ATgsgPtBiXxfSoPC4Ow9Bhksx9HJo2IhCwspbIT/H+v8SfAwsyOTLNwXtqy6yaxLk2LpTsDZKt13b8Pvl+/rC24qOSH0wHzg1tIFvA6EHOfogmv7QWbCqjeAIyH9PI3smAeSehEpCpZj/4Z6P6Cacg7xHLfdBT0gG3TsuJHNH8qdTenGjf+iT39qkAifkwmNUWu6zQEtQxbizBhceixRF1zEL28Y0SwNm0G5p4l9dzkNSMdut5ixp1L9LD+kaK8G1I9zphBTRKTG1NnFDOjwpIoGmZTR7FfqqAwqKVV3ZPqOiiens4hsrWg6f6c3BbL5V0y/vffEQn+uTSPl9R6uf3VHg0iCiGcswK356wbKWHhavPaVqYuGZXvH3pA0gh9LpuxxgdNvTcsjajeuDIASbTZ6s+TsMoAg==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: radarr-apikey
+      namespace: homeflix

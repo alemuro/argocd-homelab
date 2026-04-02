@@ -2,6 +2,8 @@ name: sonarr
 image: lscr.io/linuxserver/sonarr
 tag: 4.0.16
 port: 8989
+node_selector:
+  kubernetes.io/hostname: worker-0
 domains:
   - sonarr.immaleix.casa
 mount:

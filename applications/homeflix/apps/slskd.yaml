@@ -2,6 +2,8 @@ name: slskd
 image: ghcr.io/slskd/slskd
 tag: 0.24.1
 port: 5030
+node_selector:
+  kubernetes.io/hostname: worker-0
 domains:
   - slskd.immaleix.casa
 mount:

@@ -1,6 +1,8 @@
 name: soularr
 image: mrusse08/soularr
 tag: latest
+node_selector:
+  kubernetes.io/hostname: worker-0
 mount:
   /mnt/local/configs/soularr: /data
   /mnt/nfs/homeflix-v2: /media
