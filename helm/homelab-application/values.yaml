@@ -6,6 +6,8 @@ servicePort: 80
 domains: []
 # Mounts in format: hostPath: mountPath
 mount: {}
+# configmaps in format: mountPath: content
+configmaps: {}
 resources: {}
 allow_from: []
 env:

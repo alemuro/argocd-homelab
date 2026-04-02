@@ -67,9 +67,19 @@ spec:
             - name: {{ $mountPath | replace "/" "" | lower | trunc 63 | trimSuffix "-" }}
               mountPath: {{ $mountPath }}
             {{- end }}
+            {{- range $path, $content := .Values.configmaps }}
+            - name: config-volume
+              mountPath: {{ $path }}
+              subPath: {{ $path | replace "/" "_" | trimPrefix "_" }}
+            {{- end }}
       volumes:
         {{- range $hostPath, $mountPath := .Values.mount }}
         - name: {{ $mountPath | replace "/" "" | lower | trunc 63 | trimSuffix "-" }}
           hostPath:
             path: {{ $hostPath }}
+        {{- end }}
+        {{- if .Values.configmaps }}
+        - name: config-volume
+          configMap:
+            name: {{ .Values.name }}-configs
         {{- end }}

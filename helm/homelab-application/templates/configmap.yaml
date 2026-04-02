@@ -1,0 +1,11 @@
+{{- if .Values.configmaps }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-configs
+data:
+  {{- range $path, $content := .Values.configmaps }}
+  {{ $path | replace "/" "_" | trimPrefix "_" }}: |
+    {{- $content | nindent 4 }}
+  {{- end }}
+{{- end }}

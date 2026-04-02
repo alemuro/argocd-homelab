@@ -1,0 +1,28 @@
+name: openbao
+image: ghcr.io/openbao/openbao
+tag: latest
+port: 8200
+domains:
+  - openbao.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/openbao: /openbao/data
+configmaps:
+  /openbao/config.hcl: |
+    ui                  = true
+    cluster_addr        = "https://0.0.0.0:8201"
+    api_addr            = "https://0.0.0.0:8200"
+    disable_clustering  = true
+
+    storage "file" {
+      path = "/openbao/data/openbao.db"
+    }
+
+    listener "tcp" {
+      tls_disable = true
+      address     = "0.0.0.0:8200"
+    }
+args:
+  - server
+  - -config=/openbao/config.hcl
