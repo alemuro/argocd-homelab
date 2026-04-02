@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  project: argocd
+  source:
+    chart: argo-cd
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: '*'
+    helm:
+      releaseName: argocd
+      values: |
+        global:
+          domain: argocd.immaleix.casa
+          nodeSelector:
+            kubernetes.io/hostname: summer
+        configs:
+          params:
+            server.insecure: "true"
+        redis:
+          enabled: true
+        dex:
+          enabled: false
+        controller:
+          replicas: 1
+        applicationSet:
+          replicas: 1
+        server:
+          replicas: 1
+          ingress:
+            enabled: true
+            ingressClassName: traefik
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+              traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+              traefik.ingress.kubernetes.io/router.tls: true
+              traefik.ingress.kubernetes.io/router.tls.certresolver: default
+            extraTls:
+              - hosts:
+                  - argocd.immaleix.casa
+                secretName: argocd-tls
+  destination:
+    name: homelab
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
