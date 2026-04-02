@@ -1,0 +1,15 @@
+name: immich-db
+image: tensorchord/pgvecto-rs
+tag: pg14-v0.2.0
+port: 5432
+servicePort: 5432
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/immich/db: /var/lib/postgresql/data
+env:
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_DB: immich
+allow_from:
+  - immich-app

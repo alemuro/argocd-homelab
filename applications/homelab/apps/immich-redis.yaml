@@ -1,0 +1,11 @@
+name: immich-redis
+image: redis
+tag: latest
+port: 6379
+servicePort: 6379
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/immich/redis: /data
+allow_from:
+  - immich-app

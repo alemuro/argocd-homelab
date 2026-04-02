@@ -1,0 +1,28 @@
+name: immich-app
+image: ghcr.io/imagegenius/immich
+tag: 1.139.4
+port: 8080
+domains:
+  - immich.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/immich/appdata: /config
+  /mnt/local/configs/immich/imports: /import
+  /mnt/nfs/personal/immich-photos: /photos
+env:
+  USER_UID: "1000"
+  USER_GID: "1000"
+  TZ: Europe/Madrid
+  DB_HOSTNAME: immich-db
+  DB_USERNAME: postgres
+  DB_PASSWORD: postgres
+  DB_DATABASE_NAME: immich
+  REDIS_HOSTNAME: immich-redis
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: 4000m
+    memory: 4Gi
