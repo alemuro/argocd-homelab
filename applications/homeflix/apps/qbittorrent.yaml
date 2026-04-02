@@ -1,0 +1,31 @@
+name: qbittorrent
+image: lscr.io/linuxserver/qbittorrent
+tag: latest
+port: 8080
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - qbittorrent.immaleix.casa
+  - torrents.immaleix.casa
+pod_additional_ports:
+  - name: torrent
+    container_port: 6881
+    host_port: 6881
+    protocol: TCP
+  - name: torrent-udp
+    container_port: 6881
+    host_port: 6881
+    protocol: UDP
+mount:
+  /mnt/local/configs/qbittorrent/config: /config
+  /mnt/nfs/homeflix-v2/downloads: /downloads
+env:
+  WEBUI_PORT: "8080"
+  TORRENTING_PORT: "6881"
+allow_from:
+  - radarr
+  - sonarr
+  - lidarr
+  - readarr
+  - 0.0.0.0/0
+  - qbittorrent-exporter

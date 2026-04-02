@@ -1,0 +1,22 @@
+name: seerr
+image: ghcr.io/seerr-team/seerr
+tag: latest
+port: 5055
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - overseerr.immaleix.casa
+mount:
+  /mnt/local/configs/jellyseerr: /app/config
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+resources:
+  requests:
+    cpu: 50m
+    memory: 256Mi
+  limits: {}
+allow_from:
+  - maintainerr
+  - discovarr

@@ -1,0 +1,15 @@
+name: pinchflat
+image: ghcr.io/kieraneglin/pinchflat
+tag: latest
+port: 8945
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - pinchflat.immaleix.casa
+mount:
+  /mnt/local/configs/pinchflat: /config
+  /mnt/nfs/homeflix-v2/pinchflat-media: /downloads
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"

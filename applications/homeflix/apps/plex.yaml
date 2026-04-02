@@ -1,0 +1,43 @@
+name: plex
+image: lscr.io/linuxserver/plex
+tag: latest
+port: 32400
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - plex.immaleix.casa
+pod_additional_ports:
+  - name: plex
+    container_port: 32400
+    # Cilium does not allow using ports set by NodePort (3000 - 3300 aprox)
+    host_port: 29400
+    protocol: TCP
+mount:
+  /mnt/local/configs/plex: /config
+  /mnt/nfs/homeflix-v2/pinchflat-media: /pinchflat-media
+  /mnt/nfs/homeflix-v2/movies: /movies
+  /mnt/nfs/homeflix-v2/tv: /tv
+  /mnt/nfs/homeflix-v2/photos: /photos
+  /mnt/nfs/homeflix-v2/music: /music
+  /mnt/nfs/homeflix-v2/anime: /anime
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    gpu.intel.com/i915: 1
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+allow_from:
+  - tautulli
+  - overseerr
+  - maintainerr
+  - kometa
+  - plex-exporter
+  - plex-auto-languages
+  - tunarr
+  - discovarr
+allow_from_cidr:
+  - 0.0.0.0/0
