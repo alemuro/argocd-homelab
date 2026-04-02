@@ -12,7 +12,7 @@ secretEnv:
     secretName: radarr-creds
     key: RADARR_APIKEY
 serviceAnnotations:
-  k8s.grafana.com/scrape: true
+  k8s.grafana.com/scrape: "true"
   k8s.grafana.com/metrics.portName: http
   k8s.grafana.com/metrics.scheme: http
   k8s.grafana.com/metrics.path: /metrics
