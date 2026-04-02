@@ -1,0 +1,11 @@
+name: localdb
+image: mariadb
+tag: 10.5
+port: 3306
+servicePort: 3306
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /opt/localdb: /var/lib/mysql
+env:
+  MYSQL_ALLOW_EMPTY_PASSWORD: "true"
