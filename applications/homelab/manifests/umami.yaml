@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: umami-db
+  namespace: homelab
+spec:
+  encryptedData:
+    MYSQL_URI: AgC/hc2ihReUHzJIqcwWA//gkXbFEYxyo1YV5S9/ezYFr7EmVrTiPUbGifaX2i6w4OMkYTVZj7VwHWCUvnIyllfOtOVcUXDg9Xcs7PUKWY4CRd7gk3iW5McPuCdyoZHsyIzKaUrDDtAQ/foI0imXmDIeyEGHm8SNDnF6kb5Jqxbqg+VBKH3MlpUuAGMO9DY+NBIQWyg7XcVQk7/amMBs0LgXL991jiun9/gpX6k1stzw6nzIDeJVit4cM5D/ed7eh1yIsLZ+8YYnfuuKovJmomI6Ws1maR0eMaat2T1uYDiOG6Z9VhehxwplQPYACsCWYh6K+ET86l2s0qBc9Xlp3iivWlcuQhyg+ncMz15sFIabzhZqeJPZ0YVr1OTzx68WG3Kk59h2O9QXe43OKdp4N+OF4dMzv2Tt8+KRnqiWjoCZToM6/Dwwm3DHvw17jwpM+6n4v5SE+MZNOBvWGvqQ39uFuf7FdovPep6qDliXsYikLF0nuw+OHgqWrqjxqjDnlg/jaXX+v/T/d/OABYyrWWUrpgHH6MUUdNkapyjZV8lWb0fPIEeDNk/L7IrX1BUoi6BBBkjitTT8eMpHq7i/38TQmPkgmun/PUNhT6Wq/1A5cykEv0qrAYmEHeXXO8nRIXg/ttEBOTW+e4zUQU6NhpSNeT2RTVFA0TAyw3i03lse8Oey2VpsR9NmoYeZaeN7PU9zfNdUDeqfwQP3GSNuwaGOUl/epHGdHc7d0rPuQCrW/XCNi4r7NafUXwyg5OCmr0M=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: umami-db
+      namespace: homelab

@@ -1,0 +1,16 @@
+name: umami
+image: ghcr.io/umami-software/umami
+tag: "mysql-v2.8.0"
+port: 3000
+domains:
+  - umami.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+env:
+  USER_UID: "1000"
+  USER_GID: "1000"
+  TZ: Europe/Madrid
+secretEnv:
+  DATABASE_URL:
+    secretName: umami-db
+    key: MYSQL_URI
