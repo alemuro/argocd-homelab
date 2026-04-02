@@ -1,0 +1,14 @@
+name: tautulli
+image: lscr.io/linuxserver/tautulli
+tag: latest
+port: 8181
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - tautulli.immaleix.casa
+mount:
+  /mnt/local/configs/tautulli: /config
+allow_from:
+  - wrapperr
+  - overseerr
+  - oracularr

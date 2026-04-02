@@ -1,0 +1,20 @@
+name: jellyfin
+image: jellyfin/jellyfin
+tag: latest
+port: 8096
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - jellyfin.immaleix.casa
+  - media.aleix.cloud
+mount:
+  /mnt/local/configs/jellyfin/config: /config
+  /mnt/local/configs/jellyfin/cache: /cache
+  /mnt/nfs/homeflix-v2/movies: /movies
+  /mnt/nfs/homeflix-v2/tv: /tv
+resources:
+  requests:
+    cpu: 200m
+    memory: 128Mi
+allow_from:
+  - 0.0.0.0/0

@@ -1,0 +1,15 @@
+name: jackett
+image: lscr.io/linuxserver/jackett
+tag: latest
+port: 9117
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - jackett.immaleix.casa
+mount:
+  /mnt/local/configs/jackett: /config
+allow_from:
+  - radarr
+  - sonarr
+  - lidarr
+  - readarr

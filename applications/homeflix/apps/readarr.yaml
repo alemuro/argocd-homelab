@@ -1,0 +1,13 @@
+name: readarr
+image: linuxserver/readarr
+tag: develop
+port: 8787
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - readarr.immaleix.casa
+  - llibres.immaleix.casa
+mount:
+  /mnt/local/configs/readarr: /config
+  /mnt/nfs/homeflix-v2/books: /books
+  /mnt/torrent-cache: /downloads

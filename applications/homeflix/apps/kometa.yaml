@@ -1,0 +1,17 @@
+name: kometa
+image: lscr.io/linuxserver/kometa
+tag: latest
+node_selector:
+  kubernetes.io/hostname: worker-0
+mount:
+  /mnt/local/configs/kometa: /config
+  /mnt/nfs/homeflix-v2/movies: /movies
+  /mnt/nfs/homeflix-v2/tv: /tv
+  /mnt/nfs/homeflix-v2/music: /music
+  /mnt/nfs/homeflix-v2/anime: /anime
+env:
+  KOMETA_CONFIG: /config/config.yml
+  KOMETA_TIME: "03:00"
+  KOMETA_RUN: "False"
+  KOMETA_TEST: "False"
+  KOMETA_NO_MISSING: "False"

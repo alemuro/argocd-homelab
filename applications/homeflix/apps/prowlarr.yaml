@@ -1,0 +1,15 @@
+name: prowlarr
+image: lscr.io/linuxserver/prowlarr
+tag: latest
+port: 9696
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - prowlarr.immaleix.casa
+mount:
+  /mnt/local/configs/prowlarr: /config
+allow_from:
+  - radarr
+  - sonarr
+  - lidarr
+  - readarr
