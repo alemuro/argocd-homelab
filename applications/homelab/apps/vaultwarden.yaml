@@ -1,0 +1,10 @@
+name: vaultwarden
+image: vaultwarden/server
+tag: latest
+port: 80
+domains:
+  - vaultwarden.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/vaultwarden: /data

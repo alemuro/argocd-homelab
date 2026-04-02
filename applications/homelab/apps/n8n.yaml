@@ -1,0 +1,14 @@
+name: n8n
+image: n8nio/n8n
+tag: latest
+port: 5678
+domains:
+  - n8n.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/n8n/data: /home/node/.n8n
+env:
+    DB_TYPE: sqlite
+    WEBHOOK_URL: https://n8n.aleix.cloud/
+    N8N_AI_ASSISTANT_BASE_URL: https://ai-assistant.n8n.io

@@ -1,0 +1,10 @@
+name: openwebui
+image: ghcr.io/open-webui/open-webui
+tag: latest
+port: 8080
+domains:
+  - openwebui.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/openwebui: /app/backend/data

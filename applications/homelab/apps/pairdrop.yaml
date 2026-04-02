@@ -1,0 +1,12 @@
+name: pairdrop
+image: lscr.io/linuxserver/pairdrop
+tag: latest
+port: 3000
+domains:
+  - airdrop.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+env:
+  PUID: 1000
+  GUID: 1000
+  TZ: "Europe/Madrid"
