@@ -9,7 +9,7 @@ env:
   URL: http://sonarr:80
 secretEnv:
   APIKEY:
-    secretName: sonarr-creds
+    secretName: sonarr-apikey
     key: SONARR_APIKEY
 serviceAnnotations:
   k8s.grafana.com/scrape: "true"

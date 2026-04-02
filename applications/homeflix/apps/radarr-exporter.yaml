@@ -9,7 +9,7 @@ env:
   URL: http://radarr:80
 secretEnv:
   APIKEY:
-    secretName: radarr-creds
+    secretName: radarr-apikey
     key: RADARR_APIKEY
 serviceAnnotations:
   k8s.grafana.com/scrape: "true"

@@ -9,10 +9,10 @@ env:
   SONARR_HOST: http://sonarr:80
 secretEnv:
   RADARR_APIKEY:
-    secretName: radarr-creds
+    secretName: radarr-apikey
     key: RADARR_APIKEY
   SONARR_APIKEY:
-    secretName: sonarr-creds
+    secretName: sonarr-apikey
     key: SONARR_APIKEY
 serviceAnnotations:
   k8s.grafana.com/scrape: "true"
