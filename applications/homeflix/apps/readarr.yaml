@@ -11,3 +11,7 @@ mount:
   /mnt/local/configs/readarr: /config
   /mnt/nfs/homeflix-v2/books: /books
   /mnt/torrent-cache: /downloads
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"

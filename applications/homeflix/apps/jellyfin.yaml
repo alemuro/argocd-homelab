@@ -16,5 +16,9 @@ resources:
   requests:
     cpu: 200m
     memory: 128Mi
-allow_from:
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+allow_from_cidr:
   - 0.0.0.0/0

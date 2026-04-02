@@ -8,6 +8,10 @@ domains:
   - prowlarr.immaleix.casa
 mount:
   /mnt/local/configs/prowlarr: /config
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
 allow_from:
   - radarr
   - sonarr

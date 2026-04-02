@@ -8,6 +8,10 @@ domains:
   - tautulli.immaleix.casa
 mount:
   /mnt/local/configs/tautulli: /config
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
 allow_from:
   - wrapperr
   - overseerr

@@ -8,6 +8,10 @@ domains:
   - jackett.immaleix.casa
 mount:
   /mnt/local/configs/jackett: /config
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
 allow_from:
   - radarr
   - sonarr

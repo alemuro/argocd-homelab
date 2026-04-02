@@ -10,6 +10,9 @@ mount:
   /mnt/nfs/homeflix-v2/music: /music
   /mnt/nfs/homeflix-v2/anime: /anime
 env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
   KOMETA_CONFIG: /config/config.yml
   KOMETA_TIME: "03:00"
   KOMETA_RUN: "False"
