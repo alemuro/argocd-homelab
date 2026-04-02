@@ -1,0 +1,14 @@
+name: uptime
+image: louislam/uptime-kuma
+tag: 1.21.3
+port: 3001
+domains:
+  - uptime.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/uptime: /app/data
+env:
+  USER_UID: "1000"
+  USER_GID: "1000"
+  TZ: Europe/Madrid

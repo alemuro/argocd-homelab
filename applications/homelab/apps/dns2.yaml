@@ -1,0 +1,30 @@
+name: dns2
+image: adguard/adguardhome
+tag: latest
+port: 3000
+domains:
+  - dns2.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/adguard/conf: /opt/adguardhome/conf
+  /mnt/local/configs/adguard/work: /opt/adguardhome/work
+pod_additional_ports:
+  - name: "dns"
+    container_port: 53
+    host_port: 53
+    protocol: "UDP"
+env:
+  USER_UID: "1000"
+  USER_GID: "1000"
+  TZ: Europe/Madrid
+resources:
+  requests:
+    cpu: 200m
+    memory: 128Mi
+  limits:
+    memory: 128Mi
+allow_from:
+  - dns2-sync
+  - dns-exporter
+  - 0.0.0.0/0
