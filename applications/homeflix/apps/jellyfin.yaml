@@ -20,5 +20,5 @@ env:
   PUID: "1000"
   PGID: "1000"
   TZ: "Europe/Madrid"
-allow_from_cidr:
+allow_from_cidrs:
   - 0.0.0.0/0
