@@ -27,5 +27,6 @@ allow_from:
   - sonarr
   - lidarr
   - readarr
-  - 0.0.0.0/0
   - qbittorrent-exporter
+allow_from_cidrs:
+  - 0.0.0.0/0
