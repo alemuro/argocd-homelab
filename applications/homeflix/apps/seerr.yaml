@@ -5,7 +5,7 @@ port: 5055
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:
-  - overseerr.immaleix.casa
+  - seerr.immaleix.casa
 mount:
   /mnt/local/configs/jellyseerr: /app/config
 env:

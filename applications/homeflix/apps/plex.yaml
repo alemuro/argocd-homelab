@@ -32,7 +32,7 @@ env:
   TZ: "Europe/Madrid"
 allow_from:
   - tautulli
-  - overseerr
+  - seerr
   - maintainerr
   - kometa
   - plex-exporter
