@@ -27,4 +27,5 @@ resources:
 allow_from:
   - dns2-sync
   - dns-exporter
+allow_from_cidrs:
   - 0.0.0.0/0
