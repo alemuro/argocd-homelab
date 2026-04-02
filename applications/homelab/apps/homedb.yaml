@@ -1,0 +1,23 @@
+name: homedb
+image: mariadb
+tag: "10.5"
+port: 3306
+servicePort: 3306
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/homedb: /var/lib/mysql
+env:
+  PUID: 1000
+  GUID: 1000
+  TZ: Europe/Madrid
+  MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+resources:
+  requests:
+    cpu: 50m
+    memory: 256Mi
+  limits: {}
+allow_from:
+  - umami
+  - nextcloud
+  - n8n
