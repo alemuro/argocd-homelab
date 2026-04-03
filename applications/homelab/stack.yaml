@@ -14,9 +14,9 @@ spec:
   template:
     metadata:
       name: "homelab-{{.name}}"
-      {{- if .image_updater }}
-      {{- if .image_updater.enabled }}
       annotations:
+        managed-by: argocd-image-updater
+        {{- if and .image_updater .image_updater.enabled }}
         argocd-image-updater.argoproj.io/image-list: "app-image={{ .image }}"
         argocd-image-updater.argoproj.io/app-image.update-strategy: "{{ .image_updater.strategy | default "semver" }}"
         {{- if .image_updater.allow_tags }}
@@ -24,8 +24,7 @@ spec:
         {{- end }}
         argocd-image-updater.argoproj.io/write-back-method: "git"
         argocd-image-updater.argoproj.io/write-back-repository: "ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git"
-      {{- end }}
-      {{- end }}
+        {{- end }}
     spec:
       project: homelab
       source:

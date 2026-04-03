@@ -15,9 +15,10 @@ spec:
         config:
           registries:
             - name: Docker Hub
-              prefix: docker.io
+              api_url: https://registry-1.docker.io
             - name: GitHub Container Registry
               prefix: ghcr.io
+              api_url: https://gcr.io
           # Activem el log per veure què passa si falla el write-back
           argocd:
             serverAddr: argocd-server.argocd.svc.cluster.local
