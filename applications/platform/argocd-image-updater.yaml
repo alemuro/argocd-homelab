@@ -23,12 +23,13 @@ spec:
           argocd:
             serverAddr: argocd-server.argocd.svc.cluster.local
         auth:
-          # Això és important: permet que l'Image Updater llegeixi els secrets de l'Argo CD
           git:
             enabled: true
         serviceAccount:
           create: true
           name: argocd-image-updater
+        rbac:
+          enabled: true
   destination:
     name: homelab
     namespace: argocd

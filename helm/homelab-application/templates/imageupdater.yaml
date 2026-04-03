@@ -1,0 +1,23 @@
+{{- if and .Values.image_updater .Values.image_updater.enabled -}}
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: {{ .Release.Name }}-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - name: {{ .Release.Name }}
+  images:
+    - alias: app-image
+      imageName: {{ .Values.image | quote }}
+      updateStrategy: {{ .Values.image_updater.strategy | default "semver" }}
+      allowTags: {{ .Values.image_updater.allow_tags | default "v*" | quote }}
+      manifestTargets:
+        - helm:
+            tag: tag
+  writeBackConfig:
+    method: git
+    git:
+      repository: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+      branch: main
+{{- end }}
