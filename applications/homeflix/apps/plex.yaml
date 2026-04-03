@@ -26,6 +26,10 @@ resources:
     memory: 256Mi
   limits:
     gpu.intel.com/i915: 1
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "v*"
 env:
   PUID: "1000"
   PGID: "1000"

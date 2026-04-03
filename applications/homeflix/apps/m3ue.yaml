@@ -8,6 +8,10 @@ domains:
   - m3ue.immaleix.casa
 mount:
   /mnt/local/configs/m3ue: /var/www/config
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "v*"
 env:
   TZ: Europe/Madrid
   APP_URL: https://m3ue.immaleix.casa

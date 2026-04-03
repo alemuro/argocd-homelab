@@ -9,6 +9,10 @@ mount:
   /mnt/nfs/homeflix-v2/tv: /tv
   /mnt/nfs/homeflix-v2/music: /music
   /mnt/nfs/homeflix-v2/anime: /anime
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "v*"
 env:
   PUID: "1000"
   PGID: "1000"

@@ -9,6 +9,10 @@ domains:
 mount:
   /mnt/local/configs/slskd: /app
   /mnt/nfs/homeflix-v2: /media
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "v*"
 env:
   SLSKD_REMOTE_CONFIGURATION: "true"
 resources:

@@ -10,6 +10,10 @@ env:
   USER_UID: "1000"
   USER_GID: "1000"
   TZ: Europe/Madrid
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "mysql-v*"
 secretEnv:
   DATABASE_URL:
     secretName: umami-db

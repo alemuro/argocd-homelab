@@ -8,6 +8,10 @@ domains:
   - seerr.immaleix.casa
 mount:
   /mnt/local/configs/jellyseerr: /app/config
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "v*"
 env:
   PUID: "1000"
   PGID: "1000"

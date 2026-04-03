@@ -25,3 +25,7 @@ allow_from:
   - sizeondisk-exporter
   - discovarr
   - oracularr
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "v*"

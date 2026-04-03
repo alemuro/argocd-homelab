@@ -4,6 +4,10 @@ tag: latest
 port: 9101
 node_selector:
   kubernetes.io/hostname: worker-0
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "v*"
 env:
   RADARR_HOST: http://radarr:80
   SONARR_HOST: http://sonarr:80

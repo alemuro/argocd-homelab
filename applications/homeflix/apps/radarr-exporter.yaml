@@ -4,6 +4,10 @@ tag: latest
 port: 9707
 node_selector:
   kubernetes.io/hostname: worker-0
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "v*"
 env:
   PORT: 9707
   URL: http://radarr:80

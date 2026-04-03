@@ -7,3 +7,7 @@ mount:
   /mnt/local/configs/soularr: /data
   /mnt/nfs/homeflix-v2: /media
 resources: {}
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "v*"
