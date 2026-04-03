@@ -7,7 +7,7 @@ spec:
   applicationRefs:
     - namePattern: {{ .Release.Name }}
       images:
-      - alias: {{ .Values.image | quote }}
+      - alias: {{ .Release.Name }}
         imageName: {{ .Values.image | quote }}
         commonUpdateSettings:
           updateStrategy: {{ .Values.image_updater.strategy | default "semver" }}
