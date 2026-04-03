@@ -13,9 +13,9 @@ spec:
           updateStrategy: {{ .Values.image_updater.strategy | default "semver" }}
           allowTags: {{ .Values.image_updater.allow_tags | default "v*" | quote }}
         manifestTargets:
-          - helm:
-              name: image
-              tag: tag
+          helm:
+            name: image
+            tag: tag
   writeBackConfig:
     method: git
     gitConfig:
