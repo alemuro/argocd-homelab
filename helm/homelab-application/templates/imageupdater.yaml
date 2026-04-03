@@ -5,7 +5,7 @@ metadata:
   name: {{ .Release.Name }}-updater
 spec:
   applicationRefs:
-    - name: {{ .Release.Name }}
+    - namePattern: {{ .Release.Name }}
   images:
     - alias: app-image
       imageName: {{ .Values.image | quote }}
