@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: homeflix-apps
-  namespace: argocd
+  namespace: homeflix
 spec:
   goTemplate: true
   generators:
