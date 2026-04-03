@@ -6,17 +6,19 @@ metadata:
 spec:
   applicationRefs:
     - namePattern: {{ .Release.Name }}
-  images:
-    - alias: app-image
-      imageName: {{ .Values.image | quote }}
-      updateStrategy: {{ .Values.image_updater.strategy | default "semver" }}
-      allowTags: {{ .Values.image_updater.allow_tags | default "v*" | quote }}
-      manifestTargets:
-        - helm:
-            tag: tag
+      images:
+      - alias: {{ .Values.image | quote }}
+        imageName: {{ .Values.image | quote }}
+        commonUpdateSettings:
+          updateStrategy: {{ .Values.image_updater.strategy | default "semver" }}
+          allowTags: {{ .Values.image_updater.allow_tags | default "v*" | quote }}
+        manifestTargets:
+          - helm:
+              name: image
+              tag: tag
   writeBackConfig:
     method: git
-    git:
+    gitConfig:
       repository: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
       branch: main
 {{- end }}
