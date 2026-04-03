@@ -13,7 +13,21 @@ spec:
       releaseName: argocd-image-updater
       values: |
         config:
-          registries: []
+          registries:
+            - name: Docker Hub
+              prefix: docker.io
+            - name: GitHub Container Registry
+              prefix: ghcr.io
+          # Activem el log per veure què passa si falla el write-back
+          argocd:
+            serverAddr: argocd-server.argocd.svc.cluster.local
+        auth:
+          # Això és important: permet que l'Image Updater llegeixi els secrets de l'Argo CD
+          git:
+            enabled: true
+        serviceAccount:
+          create: true
+          name: argocd-image-updater
   destination:
     name: homelab
     namespace: argocd
