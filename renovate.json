@@ -18,11 +18,10 @@
       "description": "Replace 'latest' tags with actual latest versions",
       "matchManagers": ["custom.regex"],
       "matchCurrentValue": "latest",
-      "versioning": "docker",
       "pinDigests": false,
-      "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
+      "versioning": "docker",
+      "separateMajorMinor": false,
+      "groupName": "pin-latest-versions"
     },
     {
       "description": "Auto-merge minor/patch updates for container images",
