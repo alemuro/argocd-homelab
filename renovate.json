@@ -36,7 +36,7 @@
     {
       "description": "Auto-merge minor/patch updates for container images",
       "matchManagers": ["custom.regex"],
-      "matchPackageNames": ["^(ghcr\\.io|cr\\.docker\\.com|quay\\.io|gcr\\.io|docker\\.io|lscr\\.io)"],
+      "matchPackageNamePattern": "^(ghcr\\.io|cr\\.docker\\.com|quay\\.io|gcr\\.io|docker\\.io|lscr\\.io)",
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "automerge": true,
       "automergeType": "pr",
