@@ -52,6 +52,7 @@
   ],
   "customManagers": [
     {
+      "customType": "regex",
       "description": "Update container images in app YAML files",
       "managerFilePatterns": ["^applications/[^/]+/apps/.+\\.yaml$"],
       "matchStrings": [
