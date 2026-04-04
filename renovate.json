@@ -18,7 +18,8 @@
       "description": "Pin 'latest' tags to specific versions",
       "matchManagers": ["custom.regex"],
       "matchCurrentValue": "latest",
-      "rangeStrategy": "pin"
+      "rangeStrategy": "pin",
+      "pinDigests": true
     },
     {
       "description": "Auto-merge minor/patch updates for container images",
