@@ -1,6 +1,6 @@
 name: consul
 image: hashicorp/consul
-tag: "1.20"
+tag: "1.22"
 port: 8500
 domains:
   - consul.immaleix.casa
