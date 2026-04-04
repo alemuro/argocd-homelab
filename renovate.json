@@ -16,7 +16,7 @@
     },
     {
       "description": "Replace 'latest' tags with actual latest versions",
-      "matchManagers": ["custom.app-images"],
+      "matchManagers": ["custom.regex"],
       "matchCurrentVersion": "/^latest$/",
       "versioning": "docker",
       "automerge": true,
@@ -25,7 +25,7 @@
     },
     {
       "description": "Auto-merge minor/patch updates for container images",
-      "matchManagers": ["custom.app-images"],
+      "matchManagers": ["custom.regex"],
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "automerge": true,
       "automergeType": "pr",
@@ -33,13 +33,12 @@
     },
     {
       "description": "Group container image updates by application",
-      "matchManagers": ["custom.app-images"],
+      "matchManagers": ["custom.regex"],
       "groupName": "container-images"
     }
   ],
   "customManagers": [
     {
-      "name": "app-images",
       "customType": "regex",
       "description": "Update container images in app YAML files",
       "managerFilePatterns": ["^applications/[^/]+/apps/.+\\.yaml$"],
