@@ -15,13 +15,10 @@
       "groupName": "helm-charts"
     },
     {
-      "description": "Replace 'latest' tags with actual latest versions",
+      "description": "Pin 'latest' tags to specific versions",
       "matchManagers": ["custom.regex"],
       "matchCurrentValue": "latest",
-      "pinDigests": false,
-      "versioning": "docker",
-      "separateMajorMinor": false,
-      "groupName": "pin-latest-versions"
+      "rangeStrategy": "pin"
     },
     {
       "description": "Auto-merge minor/patch updates for container images",
