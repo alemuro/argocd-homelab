@@ -27,7 +27,7 @@ spec:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true
       source:
-        repoURL: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+        repoURL: ssh://git@github.com/alemuro/argocd-homelab.git
         targetRevision: HEAD
         path: "{{ .folder }}"
         directory:

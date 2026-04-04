@@ -20,6 +20,6 @@ spec:
   writeBackConfig:
     method: git
     gitConfig:
-      repository: ssh://git@git-ssh.aleix.cloud:2222/alemuro/argocd-homelab.git
+      repository: ssh://git@github.com/alemuro/argocd-homelab.git
       branch: main
 {{- end }}
