@@ -14,10 +14,11 @@
       "groupName": "helm-charts"
     },
     {
-      "description": "Pin 'latest' tags to specific versions",
+      "description": "Replace 'latest' tags with actual latest versions",
       "matchManagers": ["custom.regex"],
-      "matchCurrentVersion": "latest",
-      "updateTypes": ["pin"],
+      "matchCurrentVersion": "^latest$",
+      "versioning": "semver",
+      "updateTypes": ["minor", "patch", "major"],
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
