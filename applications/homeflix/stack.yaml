@@ -7,7 +7,7 @@ spec:
   goTemplate: true
   generators:
     - git:
-        repoURL: ssh://git@github.com:alemuro/argocd-homelab.git
+        repoURL: ssh://git@github.com/alemuro/argocd-homelab.git
         revision: HEAD
         files:
           - path: "applications/homeflix/apps/*.yaml"
@@ -18,7 +18,7 @@ spec:
       project: homeflix
       source:
         path: helm/homelab-application
-        repoURL: ssh://git@github.com:alemuro/argocd-homelab.git
+        repoURL: ssh://git@github.com/alemuro/argocd-homelab.git
         targetRevision: HEAD
         helm:
           values: |
