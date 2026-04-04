@@ -1,6 +1,6 @@
 name: immich-app
 image: ghcr.io/imagegenius/immich
-tag: 1.139.4
+tag: 2.6.3
 port: 8080
 domains:
   - immich.immaleix.casa

@@ -1,6 +1,6 @@
 name: nextcloud
 image: nextcloud
-tag: "32"
+tag: "33"
 port: 80
 domains:
   - nextcloud.immaleix.casa
