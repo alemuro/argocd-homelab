@@ -41,7 +41,7 @@
     {
       "customType": "regex",
       "description": "Update container images in app YAML files",
-      "managerFilePatterns": ["^applications/[^/]+/apps/.+\\.yaml$"],
+      "fileMatch": ["^applications/[^/]+/apps/.+\\.yaml$"],
       "matchStrings": [
         "image:\\s*(?<depName>[^\\s:]+)[\\s\\S]*?tag:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?"
       ],
