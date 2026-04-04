@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Renovate configuration for argocd-homelab GitOps repository",
+  "extends": ["config:recommended"],
+  "labels": ["dependencies", "renovate"],
+  "assignees": ["@alemuro"],
+  "reviewers": ["@alemuro"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 3,
+  "packageRules": [
+    {
+      "description": "Group all helm chart updates into a single PR",
+      "matchManagers": ["helm-values", "helmfile", "helmv3"],
+      "groupName": "helm-charts"
+    },
+    {
+      "description": "Auto-merge minor/patch updates for container images",
+      "matchManagers": ["custom.regex"],
+      "matchPackageNames": ["^(ghcr\\.io|cr\\.docker\\.com|quay\\.io|gcr\\.io|docker\\.io)"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      "description": "Group container image updates by application",
+      "matchManagers": ["custom.regex"],
+      "groupName": "container-images"
+    }
+  ],
+  "customManagers": [
+    {
+      "description": "Update container images in app YAML files",
+      "fileMatch": ["^applications/[^/]+/apps/.+\\.yaml$"],
+      "matchStrings": [
+        "image:\\s*['\"]?(?<depName>[^'\"\\s:]+)['\"]?\\s*\\n\\s*tag:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
+    }
+  ]
+}
