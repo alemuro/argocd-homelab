@@ -7,11 +7,6 @@
   "reviewers": ["@alemuro"],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 3,
-  "docker": {
-    "registryAliases": {
-      "lscr.io": "https://lscr.io"
-    }
-  },
   "hostRules": [
     {
       "matchHost": "lscr.io",
@@ -19,6 +14,13 @@
     }
   ],
   "packageRules": [
+    {
+      "description": "Registry aliases for Docker images",
+      "matchCategories": ["docker"],
+      "registryAliases": {
+        "lscr.io": "https://lscr.io"
+      }
+    },
     {
       "description": "Group all helm chart updates into a single PR",
       "matchManagers": ["helm-values", "helmfile", "helmv3"],
@@ -36,7 +38,6 @@
     {
       "description": "Auto-merge minor/patch updates for container images",
       "matchManagers": ["custom.regex"],
-      "matchPackageNamePattern": "^(ghcr\\.io|cr\\.docker\\.com|quay\\.io|gcr\\.io|docker\\.io|lscr\\.io)",
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "automerge": true,
       "automergeType": "pr",
@@ -51,7 +52,7 @@
   "customManagers": [
     {
       "description": "Update container images in app YAML files",
-      "fileMatch": ["^applications/[^/]+/apps/.+\\.yaml$"],
+      "managerFilePatterns": ["^applications/[^/]+/apps/.+\\.yaml$"],
       "matchStrings": [
         "image:\\s*['\"]?(?<depName>[^'\"\\s:]+)['\"]?\\s*\\n\\s*tag:\\s*['\"]?(?<currentValue>[^'\"\\s]+)['\"]?"
       ],
