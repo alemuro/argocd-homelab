@@ -17,7 +17,7 @@
       "description": "Pin 'latest' tags to specific versions",
       "matchManagers": ["custom.regex"],
       "matchCurrentVersion": "latest",
-      "updateType": "pin",
+      "updateTypes": ["pin"],
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
