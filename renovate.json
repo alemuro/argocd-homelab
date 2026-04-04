@@ -17,8 +17,9 @@
     {
       "description": "Replace 'latest' tags with actual latest versions",
       "matchManagers": ["custom.regex"],
-      "matchCurrentVersion": "/^latest$/",
+      "matchCurrentValue": "latest",
       "versioning": "docker",
+      "pinDigests": false,
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
