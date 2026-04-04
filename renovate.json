@@ -18,7 +18,6 @@
       "matchManagers": ["custom.regex"],
       "matchCurrentVersion": "^latest$",
       "versioning": "semver",
-      "updateTypes": ["minor", "patch", "major"],
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
