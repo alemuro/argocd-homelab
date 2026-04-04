@@ -12,11 +12,12 @@
       "lscr.io": "https://lscr.io"
     }
   },
-  "customDatasources": {
-    "lscr.io": {
-      "registryUrls": ["https://lscr.io"]
+  "hostRules": [
+    {
+      "matchHost": "lscr.io",
+      "token": "empty"
     }
-  },
+  ],
   "packageRules": [
     {
       "description": "Group all helm chart updates into a single PR",
