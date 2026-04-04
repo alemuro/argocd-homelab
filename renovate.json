@@ -7,6 +7,7 @@
   "reviewers": ["@alemuro"],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 3,
+  "gitAuthor": "Aleix Murtra <alemurbcn+renovate@gmail.com>",
   "hostRules": [
     {
       "matchHost": "lscr.io",
