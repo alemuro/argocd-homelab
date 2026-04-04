@@ -8,20 +8,7 @@
   "prConcurrentLimit": 5,
   "prHourlyLimit": 3,
   "gitAuthor": "Aleix Murtra <alemurbcn+renovate@gmail.com>",
-  "hostRules": [
-    {
-      "matchHost": "lscr.io",
-      "token": "empty"
-    }
-  ],
   "packageRules": [
-    {
-      "description": "Registry aliases for Docker images",
-      "matchCategories": ["docker"],
-      "registryAliases": {
-        "lscr.io": "https://lscr.io"
-      }
-    },
     {
       "description": "Group all helm chart updates into a single PR",
       "matchManagers": ["helm-values", "helmfile", "helmv3"],
@@ -29,16 +16,16 @@
     },
     {
       "description": "Replace 'latest' tags with actual latest versions",
-      "matchManagers": ["custom.regex"],
-      "matchCurrentVersion": "^latest$",
-      "versioning": "semver",
+      "matchManagers": ["custom.app-images"],
+      "matchCurrentVersion": "/^latest$/",
+      "versioning": "docker",
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
       "description": "Auto-merge minor/patch updates for container images",
-      "matchManagers": ["custom.regex"],
+      "matchManagers": ["custom.app-images"],
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "automerge": true,
       "automergeType": "pr",
@@ -46,12 +33,13 @@
     },
     {
       "description": "Group container image updates by application",
-      "matchManagers": ["custom.regex"],
+      "matchManagers": ["custom.app-images"],
       "groupName": "container-images"
     }
   ],
   "customManagers": [
     {
+      "name": "app-images",
       "customType": "regex",
       "description": "Update container images in app YAML files",
       "managerFilePatterns": ["^applications/[^/]+/apps/.+\\.yaml$"],
