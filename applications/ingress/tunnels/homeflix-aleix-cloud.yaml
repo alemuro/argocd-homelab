@@ -18,11 +18,12 @@ spec:
       containers:
         - name: tunnel
           image: code.as210469.net/nubulusnetworkopensource/tunnel:v2.0.0
+          imagePullPolicy: Always
           env:
             - name: TUNNEL_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: homeflix-aleix-cloud-tunnel
+                  name: nubulus-tunnel
                   key: TUNNEL_TOKEN
 ---
 apiVersion: bitnami.com/v1alpha1
