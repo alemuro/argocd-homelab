@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nubulus-tunnel-murtra
+  namespace: ingress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nubulus-tunnel-murtra
+  template:
+    metadata:
+      labels:
+        app: nubulus-tunnel-murtra
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      containers:
+        - name: tunnel
+          image: code.as210469.net/nubulusnetworkopensource/tunnel:v2.1.0
+          imagePullPolicy: Always
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: nubulus-tunnel-murtra
+                  key: TUNNEL_TOKEN
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: nubulus-tunnel-murtra
+  namespace: ingress
+spec:
+  encryptedData:
+    TUNNEL_TOKEN: AgAts/9yRQwdhuDoSfJD3qPeLfJQ4T+9Ln+I+yhaHgOp3fFEuBeCrwk5WkWRJW3d/zjU5wmdypXltR74ztvjdBMEjjgSXB2HT66il0PL+ON1+YL6A5WS0qdiCop3/EDPnayhbLd+/8PCfYUaMSj2je9M0Uln4jwh3Qz8KpzQWBOlHxEhpIcaiDDFZzrdWQ9+Ooj4nmS6iYdZts6Q813Qa46WVmtl6Yic6gfqq62c1dPciKPfoJ4tfA+jcaEiMQgzn6im+gZyxSRjLiPXw4AOVW6G7ydapodwlBrR3p/BtDHjoq1thlYHkbFtEIvkk1hkoLVFCMqEh4mzSVwKxtHc4LmNOzjxFJ+vCcHYGhuqBn4MpqNsbE/ZabJDDUEc7ZpAO9P//vgdUVeQq4pcf1vPYAo1Rdg1AEQrNhAQrT2sMco0GH8zzGeTpW/4OfUtIEwAvu5lR/W4F8N1Pl8KK7LVO30f54HPjNos/TvgjCesMTjQVLLTPINVjm/jjVpGpaG/2/lnJUNEDHpXU338A4y3yW51gp3FojexzFaqakBO3Ue8eTx9+LUxGrJcbTdQSzL0NRhs94sheeTRxBXB+kWcRWLI+CvgtheOSEmqBn/NsO8MlQTGALVwDo2Q6kPUp1+tWizKG5+XUgXEeVAoZfDkFPUmdCJ2JTcclmPG+v7ba7VL7T84kLOu1Q115VOZnNyOcwYElyUN4v5QLNotNm+F/YF7w/lNletZ9vpaTO2+oDPaAH7u0U4vu0pLIATBqwBPw8U=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: nubulus-tunnel-murtra
+      namespace: ingress
