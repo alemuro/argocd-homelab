@@ -20,3 +20,4 @@ args: []
 serviceAnnotations: {}
 nodeSelector: {}
 node_selector: {}
+imagePullSecrets: []
