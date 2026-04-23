@@ -1,6 +1,6 @@
 name: localdb
 image: mariadb
-tag: "10.5"
+tag: "12.2"
 port: 3306
 servicePort: 3306
 node_selector:
