@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-github-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - list:
+        elements:
+          - repo: comarcle-api
+            folder: k8s/
+  template:
+    metadata:
+      finalizers: []
+      name: 'argocd-github-app-{{ .repo | replace "/" "-" }}'
+    spec:
+      project: argocd
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
+      source:
+        repoURL: ssh://git@github.com/alemuro/{{ .repo }}.git
+        targetRevision: HEAD
+        path: "{{ .folder }}"
+        directory:
+          recurse: true
+      destination:
+        name: homelab
+        namespace: argocd
