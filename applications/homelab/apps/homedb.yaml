@@ -22,3 +22,4 @@ allow_from:
   - nextcloud
   - n8n
   - comarcle-api
+  - phpmyadmin
