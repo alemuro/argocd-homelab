@@ -1,0 +1,9 @@
+name: phpmyadmin
+image: phpmyadmin
+tag: "latest"
+port: 80
+domains:
+  - phpmyadmin.immaleix.casa
+env:
+  PMA_HOST: homedb
+  PMA_PORT: "3306"
