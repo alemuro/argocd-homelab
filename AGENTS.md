@@ -9,6 +9,9 @@ Guidelines for AI Agents and developers working on this repository.
 
 ## 📜 Development Rules
 
+### 0. Synchronization
+- **Always run `git pull` before making any changes** to ensure the local repository is synchronized with the remote.
+
 ### 1. Project Organization
 - **Don't hardcode standard resources**: Use the `helm/homelab-application` chart for generic deployments instead of writing raw Kubernetes manifests.
 - **Use the Config Pattern**: For the `homeflix` stack, always add new applications as value files in `applications/homeflix/configs/`.
