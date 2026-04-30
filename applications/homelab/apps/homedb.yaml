@@ -21,3 +21,4 @@ allow_from:
   - umami
   - nextcloud
   - n8n
+  - comarcle-api
