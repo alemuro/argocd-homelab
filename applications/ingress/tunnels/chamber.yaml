@@ -1,0 +1,52 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chamber
+  namespace: ingress
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: chamber
+  namespace: ingress
+subsets:
+  - addresses:
+      - ip: 192.168.1.27
+    ports:
+      - port: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: chamber
+  namespace: ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: default
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/name: chamber
+    gethomepage.dev/icon: chamber
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: chamber.immaleix.casa
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: chamber
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - chamber.immaleix.casa
+      secretName: chamber-tls
