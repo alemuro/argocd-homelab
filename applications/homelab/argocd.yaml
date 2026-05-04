@@ -17,6 +17,12 @@ spec:
           nodeSelector:
             kubernetes.io/hostname: summer
         configs:
+          cm:
+            resource.exclusions: |
+              - apiGroups:
+                - ""
+                kinds:
+                - Event
           params:
             server.insecure: "true"
           ssh:
