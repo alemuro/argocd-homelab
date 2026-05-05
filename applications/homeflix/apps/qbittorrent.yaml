@@ -32,5 +32,6 @@ allow_from:
   - lidarr
   - readarr
   - qbittorrent-exporter
+  - qbit-voter
 allow_from_cidrs:
   - 0.0.0.0/0
