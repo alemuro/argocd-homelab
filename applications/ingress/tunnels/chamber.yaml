@@ -1,4 +1,19 @@
 ---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: chamber-headers
+  namespace: ingress
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: "https"
+      X-Forwarded-Host: "chamber.immaleix.casa"
+      X-Forwarded-Port: "443"
+    customResponseHeaders:
+      Access-Control-Allow-Origin: "https://chamber.immaleix.casa"
+      Access-Control-Allow-Credentials: "true"
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -30,6 +45,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.tls.certresolver: default
+    traefik.ingress.kubernetes.io/router.middlewares: ingress-chamber-headers@kubernetescrd
     gethomepage.dev/enabled: "true"
     gethomepage.dev/name: chamber
     gethomepage.dev/icon: chamber
@@ -40,7 +56,7 @@ spec:
       http:
         paths:
           - path: /
-            pathType: ImplementationSpecific
+            pathType: Prefix
             backend:
               service:
                 name: chamber
