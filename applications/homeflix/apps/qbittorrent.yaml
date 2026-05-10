@@ -1,6 +1,6 @@
 name: qbittorrent
 image: lscr.io/linuxserver/qbittorrent
-tag: latest
+tag: 5.2.0_v2.0.12-ls454
 port: 8080
 node_selector:
   kubernetes.io/hostname: worker-0
