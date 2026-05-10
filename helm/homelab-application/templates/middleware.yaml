@@ -1,0 +1,10 @@
+{{- if and .Values.port (or .Values.domains .Values.cloudflare_domains) -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ .Values.name }}-redirect
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+{{- end }}
