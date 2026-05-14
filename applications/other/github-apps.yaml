@@ -8,8 +8,8 @@ spec:
   generators:
     - list:
         elements:
-          - repo: comarcle-api
-            folder: k8s/
+          - repo: georeptes
+            folder: api/k8s/
   template:
     metadata:
       finalizers: []
