@@ -17,14 +17,36 @@ spec:
         kubernetes.io/arch: amd64
       containers:
         - name: tunnel
-          image: code.as210469.net/nubulusnetworkopensource/tunnel:v2.1.0
+          image: code.as210469.net/nubulusnetworkopensource/tunnel:v3.0.0
           imagePullPolicy: Always
+          ports:
+            - name: metrics
+              containerPort: 9990
           env:
             - name: TUNNEL_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: nubulus-tunnel
                   key: TUNNEL_TOKEN
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nubulus-tunnel
+  namespace: ingress
+  annotations:
+    k8s.grafana.com/scrape: "true"
+    k8s.grafana.com/metrics.portName: metrics
+    k8s.grafana.com/metrics.path: /metrics
+    k8s.grafana.com/metrics.scheme: http
+    k8s.grafana.com/metrics.scrapeInterval: 5m
+spec:
+  selector:
+    app: nubulus-tunnel
+  ports:
+    - name: metrics
+      port: 9990
+      targetPort: metrics
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
