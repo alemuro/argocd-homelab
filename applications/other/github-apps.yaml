@@ -9,7 +9,7 @@ spec:
     - list:
         elements:
           - repo: georeptes
-            folder: api/k8s/
+            folder: k8s/
   template:
     metadata:
       finalizers: []
