@@ -2,6 +2,7 @@ name: cloudweatherproxy
 image: caddy
 tag: "2"
 port: 8080
+disableHttpRedirect: true
 domains:
   - rtupdate.wunderground.com
   - api.weathercloud.net

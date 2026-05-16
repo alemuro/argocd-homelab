@@ -6,7 +6,9 @@ metadata:
   name: {{ .Values.name }}-http
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
+    {{- if not .Values.disableHttpRedirect }}
     traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-{{ .Values.name }}-redirect@kubernetescrd
+    {{- end }}
 spec:
   ingressClassName: traefik
   rules:

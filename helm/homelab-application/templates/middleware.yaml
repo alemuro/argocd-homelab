@@ -1,4 +1,4 @@
-{{- if and .Values.port (or .Values.domains .Values.cloudflare_domains) -}}
+{{- if and .Values.port (or .Values.domains .Values.cloudflare_domains) (not .Values.disableHttpRedirect) -}}
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
