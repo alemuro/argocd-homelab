@@ -7,6 +7,11 @@ node_selector:
   kubernetes.io/hostname: worker-1
 mount:
   /mnt/local/configs/homedb: /var/lib/mysql
+pod_additional_ports:
+  - name: mysql
+    container_port: 3306
+    host_port: 3306
+    protocol: TCP
 env:
   PUID: 1000
   GUID: 1000
@@ -23,3 +28,5 @@ allow_from:
   - n8n
   - georeptes-api
   - phpmyadmin
+allow_from_cidrs:
+  - 0.0.0.0/0
