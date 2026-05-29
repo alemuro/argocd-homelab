@@ -1,0 +1,10 @@
+name: obsidian
+image: lscr.io/linuxserver/obsidian
+tag: latest
+port: 3000
+domains:
+  - obsidian.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/obsidian: /config
