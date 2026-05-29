@@ -15,6 +15,7 @@ Guidelines for AI Agents and developers working on this repository.
 ### 1. Project Organization
 - **Don't hardcode standard resources**: Use the `helm/homelab-application` chart for generic deployments instead of writing raw Kubernetes manifests.
 - **Use the Config Pattern**: For the `homeflix` stack, always add new applications as value files in `applications/homeflix/configs/`.
+- **Decommissioning apps**: Move app config files to `applications/<stack>/apps-disabled/` instead of deleting them. Remove associated manifests and clean up references from other configs (e.g., `allow_from` in `homedb.yaml`).
 
 ### 2. YAML Conventions
 - Use 2-space indentation.
