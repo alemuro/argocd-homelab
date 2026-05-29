@@ -28,3 +28,4 @@ Guidelines for AI Agents and developers working on this repository.
 - When adding a new app, check if it fits the `homelab-application` schema.
 - Always prefer `ApplicationSet` generators for scaling similar deployments.
 - If modifying `AppProjects`, ensure `destinations` and `namespaceResourceWhitelist` are correctly scoped to maintain security boundaries.
+- **Never push to git without asking first.** Always ask the user for confirmation before committing and/or pushing any changes.
