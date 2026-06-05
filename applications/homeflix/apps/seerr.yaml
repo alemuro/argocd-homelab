@@ -19,7 +19,7 @@ env:
 resources:
   requests:
     cpu: 50m
-    memory: 256Mi
+    memory: 384Mi
   limits: {}
 allow_from:
   - maintainerr

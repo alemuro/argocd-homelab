@@ -23,7 +23,7 @@ mount:
 resources:
   requests:
     cpu: 200m
-    memory: 256Mi
+    memory: 768Mi
   limits:
     gpu.intel.com/i915: 1
 # image_updater:
