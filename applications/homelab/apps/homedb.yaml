@@ -27,5 +27,6 @@ allow_from:
   - n8n
   - georeptes-api
   - phpmyadmin
+  - nextcloud
 allow_from_cidrs:
   - 0.0.0.0/0
