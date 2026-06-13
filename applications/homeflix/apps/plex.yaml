@@ -17,8 +17,10 @@ mount:
   /mnt/nfs/homeflix-v2/pinchflat-media: /pinchflat-media
   /mnt/nfs/homeflix-v2/movies: /movies
   /mnt/nfs/homeflix-v2/tv: /tv
+  /mnt/gdrive/tv: /tv-gdrive
   /mnt/nfs/homeflix-v2/photos: /photos
   /mnt/nfs/homeflix-v2/music: /music
+  /mnt/gdrive/anime: /anime-gdrive
   /mnt/nfs/homeflix-v2/anime: /anime
 resources:
   requests:

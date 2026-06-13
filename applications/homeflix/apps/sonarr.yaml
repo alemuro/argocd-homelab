@@ -9,6 +9,7 @@ domains:
 mount:
   /mnt/local/configs/sonarr: /config
   /mnt/nfs/homeflix-v2: /media
+  /mnt/gdrive/tv: /media/gdrive-tv
 resources:
   requests:
     cpu: 100m
