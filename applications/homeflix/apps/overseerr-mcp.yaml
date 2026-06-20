@@ -1,0 +1,22 @@
+name: overseerr-mcp
+image: ghcr.io/jhomen368/overseerr-mcp
+tag: latest
+port: 8085
+domains:
+  - seerr-mcp.immaleix.casa
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+  SEERR_URL: http://seerr:5055
+  HTTP_MODE: "true"
+  PORT: "8085"
+secretEnv:
+  SEERR_API_KEY:
+    secretName: overseerr-mcp-secrets
+    key: SEERR_API_KEY
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits: {}
