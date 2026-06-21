@@ -15,8 +15,8 @@ env:
   MCP_TRANSPORT: http
   HOST: "0.0.0.0"
   PORT: "3000"
-  SONARR_URL: http://sonarr:8989
-  RADARR_URL: http://radarr:7878
+  SONARR_URL: http://sonarr:80
+  RADARR_URL: http://radarr:80
 secretEnv:
   SONARR_API_KEY:
     secretName: sonarr-apikey
