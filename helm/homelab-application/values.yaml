@@ -16,6 +16,7 @@ env:
   TZ: "Europe/Madrid"
 # secretEnv in format: ENV_NAME: { secretName: "...", key: "..." }
 secretEnv: {}
+command: []
 args: []
 serviceAnnotations: {}
 nodeSelector: {}

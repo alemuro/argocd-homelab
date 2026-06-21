@@ -1,0 +1,31 @@
+name: mcp-arr
+image: node
+tag: 20-alpine
+command:
+  - npx
+  - "-y"
+  - mcp-arr-server
+port: 3000
+domains:
+  - mcp-arr.immaleix.casa
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+  MCP_TRANSPORT: http
+  HOST: "0.0.0.0"
+  PORT: "3000"
+  SONARR_URL: http://sonarr:8989
+  RADARR_URL: http://radarr:7878
+secretEnv:
+  SONARR_API_KEY:
+    secretName: sonarr-apikey
+    key: SONARR_APIKEY
+  RADARR_API_KEY:
+    secretName: radarr-apikey
+    key: RADARR_APIKEY
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits: {}
