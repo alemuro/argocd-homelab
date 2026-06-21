@@ -24,3 +24,4 @@ resources:
 allow_from:
   - maintainerr
   - discovarr
+  - overseerr-mcp
