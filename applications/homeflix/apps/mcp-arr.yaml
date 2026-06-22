@@ -1,6 +1,6 @@
 name: mcp-arr
 image: node
-tag: 20-alpine
+tag: 24-alpine
 command:
   - npx
   - "-y"
