@@ -9,6 +9,21 @@ mount: {}
 # configmaps in format: mountPath: content
 configmaps: {}
 resources: {}
+# Kubernetes probes (liveness, readiness, startup). Pass the full K8s probe spec.
+# If port is set and no readiness probe is configured, a default TCP readiness
+# probe on that port is added automatically (initialDelaySeconds: 10, periodSeconds: 10).
+# Example:
+#   probes:
+#     liveness:
+#       httpGet:
+#         path: /health
+#         port: 8080
+#       periodSeconds: 30
+#     startup:
+#       tcpSocket:
+#         port: 8080
+#       failureThreshold: 30
+probes: {}
 allow_from: []
 env:
   PUID: "1000"
