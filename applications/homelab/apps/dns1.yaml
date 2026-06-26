@@ -24,6 +24,24 @@ resources:
     memory: 128Mi
   limits:
     memory: 128Mi
+probes:
+  startup:
+    httpGet:
+      path: /
+      port: 3000
+    failureThreshold: 30
+    periodSeconds: 10
+  liveness:
+    httpGet:
+      path: /
+      port: 3000
+    periodSeconds: 30
+  readiness:
+    httpGet:
+      path: /
+      port: 3000
+    initialDelaySeconds: 10
+    periodSeconds: 10
 allow_from:
   - dns1-sync
   - dns-exporter
