@@ -3,6 +3,9 @@ image: ""
 tag: "latest"
 port: null
 servicePort: 80
+# pod_additional_ports in format: [{ name, container_port, host_port?, protocol }]
+# When any entry has host_port, a StatefulSet is deployed instead of a Deployment
+pod_additional_ports: []
 domains: []
 # Mounts in format: hostPath: mountPath
 mount: {}
