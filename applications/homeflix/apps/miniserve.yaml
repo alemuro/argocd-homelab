@@ -12,8 +12,7 @@ mount:
   /mnt/nfs/homeflix-v2/movies: /media/movies
   /mnt/nfs/homeflix-v2/tv: /media/tv
 args:
-  - /media/movies
-  - /media/tv
+  - /media
 env:
   MINISERVE_PORT: "8080"
   MINISERVE_AUTH: "jesusgil:sha256:5ea7708a1f9c91a56cf162be876020b2784a456a7aeb633d38dc542d798107ad"
