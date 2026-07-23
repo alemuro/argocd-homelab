@@ -12,3 +12,4 @@ env:
     DB_TYPE: sqlite
     WEBHOOK_URL: https://n8n.aleix.cloud/
     N8N_AI_ASSISTANT_BASE_URL: https://ai-assistant.n8n.io
+    N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
