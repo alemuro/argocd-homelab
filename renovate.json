@@ -16,7 +16,6 @@
     },
     {
       "description": "Ignore updates for images using 'latest' tag",
-      "matchManagers": ["custom.regex"],
       "matchCurrentValue": "latest",
       "enabled": false
     },
@@ -27,10 +26,10 @@
     },
     {
       "description": "Auto-push minor and patch container image updates directly to main",
-      "matchManagers": ["custom.regex"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
-      "automergeType": "branch-push"
+      "automergeType": "branch-push",
+      "ignoreTests": true
     }
   ],
   "customManagers": [
