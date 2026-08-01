@@ -2,16 +2,16 @@ name: qbit-voter
 image: ghcr.io/gerardag/qbit-voter
 tag: v0.0.5
 port: 3000
-node_selector:
-  kubernetes.io/hostname: worker-0
+# node_selector:
+  # kubernetes.io/hostname: worker-0
 domains:
   - qbit-voter.immaleix.casa
-mount:
-  /mnt/local/configs/qbit-voter: /app/data
+# mount:
+  # /mnt/local/configs/qbit-voter: /app/data
 env:
-  # QBIT_URL: http://qbittorrent:80
+  QBIT_URL: http://qbittorrent:80
   PORT: "3000"
-  CONFIG_PATH: /app/data/config.json
-  # VOTED_TAG: "liked"
-  # QBIT_USER: admin
-  # QBIT_PASS: adminadmin
+  # CONFIG_PATH: /app/data/config.json
+  VOTED_TAG: "liked"
+  QBIT_USER: admin
+  QBIT_PASS: adminadmin
