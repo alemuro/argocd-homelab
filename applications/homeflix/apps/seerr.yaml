@@ -1,6 +1,6 @@
 name: seerr
 image: ghcr.io/seerr-team/seerr
-tag: latest
+tag: 0.0.0
 port: 5055
 node_selector:
   kubernetes.io/hostname: worker-0

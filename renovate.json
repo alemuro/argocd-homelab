@@ -5,8 +5,8 @@
   "labels": ["dependencies", "renovate"],
   "assignees": ["@alemuro"],
   "reviewers": ["@alemuro"],
-  "prConcurrentLimit": 5,
-  "prHourlyLimit": 3,
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
   "gitAuthor": "Aleix Murtra <alemurbcn+renovate@gmail.com>",
   "packageRules": [
     {
@@ -25,8 +25,9 @@
       "enabled": false
     },
     {
-      "description": "Auto-push minor and patch container image updates directly to main",
+      "description": "Auto-push minor and patch container image updates directly to main in a single commit",
       "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "minor-and-patch-updates",
       "automerge": true,
       "automergeType": "branch-push",
       "ignoreTests": true
