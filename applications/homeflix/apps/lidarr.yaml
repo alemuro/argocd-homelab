@@ -1,6 +1,6 @@
 name: lidarr
 image: lscr.io/linuxserver/lidarr
-tag: latest
+tag: 8.1.2135
 port: 8686
 node_selector:
   kubernetes.io/hostname: worker-0

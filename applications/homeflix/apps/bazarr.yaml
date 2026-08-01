@@ -1,6 +1,6 @@
 name: bazarr
 image: lscr.io/linuxserver/bazarr
-tag: latest
+tag: 1.6.0
 port: 6767
 node_selector:
   kubernetes.io/hostname: worker-0

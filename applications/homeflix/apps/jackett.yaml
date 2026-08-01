@@ -1,6 +1,6 @@
 name: jackett
 image: lscr.io/linuxserver/jackett
-tag: latest
+tag: 0.21.696
 port: 9117
 node_selector:
   kubernetes.io/hostname: worker-0

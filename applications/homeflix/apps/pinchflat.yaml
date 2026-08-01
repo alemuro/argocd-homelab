@@ -1,6 +1,6 @@
 name: pinchflat
 image: ghcr.io/kieraneglin/pinchflat
-tag: latest
+tag: v2025.6.6
 port: 8945
 node_selector:
   kubernetes.io/hostname: worker-0

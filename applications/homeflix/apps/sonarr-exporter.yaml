@@ -1,6 +1,6 @@
 name: sonarr-exporter
 image: ghcr.io/onedr0p/exportarr
-tag: latest
+tag: v2.3.0
 port: 9707
 node_selector:
   kubernetes.io/hostname: worker-0

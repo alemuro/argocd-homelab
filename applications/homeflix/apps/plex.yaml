@@ -1,6 +1,6 @@
 name: plex
 image: lscr.io/linuxserver/plex
-tag: latest
+tag: 1.43.3
 port: 32400
 node_selector:
   kubernetes.io/hostname: worker-0

@@ -1,6 +1,6 @@
 name: soularr
 image: mrusse08/soularr
-tag: latest
+tag: v1.2.2
 node_selector:
   kubernetes.io/hostname: worker-0
 mount:
