@@ -15,24 +15,22 @@
       "groupName": "helm-charts"
     },
     {
-      "description": "Pin 'latest' tags to specific versions",
+      "description": "Ignore updates for images using 'latest' tag",
       "matchManagers": ["custom.regex"],
       "matchCurrentValue": "latest",
-      "rangeStrategy": "pin",
-      "pinDigests": true
+      "enabled": false
     },
     {
-      "description": "Auto-merge minor/patch updates for container images",
+      "description": "Ignore updates for qbit-voter",
+      "matchPackageNames": ["ghcr.io/gerardag/qbit-voter"],
+      "enabled": false
+    },
+    {
+      "description": "Auto-push minor and patch container image updates directly to main",
       "matchManagers": ["custom.regex"],
-      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
-    },
-    {
-      "description": "Group container image updates by application",
-      "matchManagers": ["custom.regex"],
-      "groupName": "container-images"
+      "automergeType": "branch-push"
     }
   ],
   "customManagers": [
