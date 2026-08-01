@@ -1,26 +1,13 @@
-# name: soularr
-# image: mrusse08/soularr
-# tag: latest
-# port: 8000
-# domains:
-#   - soularr.immaleix.casa
-# env:
-#   LIDARR_URL: "http://lidarr:80"
-#   SLSK_URL: "http://slskd:80"
-# secretEnv:
-#   LIDARR_API_KEY:
-#     secretName: homeflix
-#     key: lidarr_api_key
-#   SLSK_USER:
-#     secretName: homeflix
-#     key: slskd_user
-#   SLSK_PASS:
-#     secretName: homeflix
-#     key: slskd_pass
-# resources:
-#   requests:
-#     cpu: 50m
-#     memory: 128Mi
-#   limits:
-#     cpu: 200m
-#     memory: 256Mi
+name: soularr
+image: mrusse08/soularr
+tag: v1.2.2
+node_selector:
+  kubernetes.io/hostname: worker-0
+mount:
+  /mnt/local/configs/soularr: /data
+  /mnt/nfs/homeflix-v2: /media
+resources: {}
+image_updater:
+  enabled: true
+  strategy: semver
+  allow_tags: "v*"

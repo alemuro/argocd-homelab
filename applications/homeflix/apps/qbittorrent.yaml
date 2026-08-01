@@ -29,7 +29,6 @@ env:
 allow_from:
   - radarr
   - sonarr
-  - lidarr
   - readarr
   - qbittorrent-exporter
   - qbit-voter
