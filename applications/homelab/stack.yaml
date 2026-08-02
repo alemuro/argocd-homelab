@@ -28,7 +28,7 @@ spec:
         namespace: homelab
       syncPolicy:
         automated:
-          prune: false
+          prune: true
           selfHeal: true
         syncOptions:
           - ApplyOutOfSyncOnly=true

@@ -1,4 +1,5 @@
 name: nextcloud
+kind: StatefulSet
 image: nextcloud
 tag: 34.0.2
 port: 80

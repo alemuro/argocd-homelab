@@ -1,4 +1,4 @@
-{{- if ne (include "homelab-application.hasHostPort" .) "true" }}
+{{- if ne (include "homelab-application.isStatefulSet" .) "true" }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
