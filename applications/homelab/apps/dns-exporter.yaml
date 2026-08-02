@@ -1,6 +1,6 @@
 name: dns-exporter
 image: ghcr.io/henrywhitaker3/adguard-exporter
-tag: latest
+tag: v1.2.1
 node_selector:
   kubernetes.io/hostname: worker-1
 env:

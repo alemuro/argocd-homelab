@@ -1,6 +1,6 @@
 name: phpmyadmin
 image: phpmyadmin
-tag: "latest"
+tag: 5.2.3
 port: 80
 domains:
   - phpmyadmin.immaleix.casa

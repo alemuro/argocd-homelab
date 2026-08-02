@@ -1,6 +1,6 @@
 name: vaultwarden
 image: vaultwarden/server
-tag: latest
+tag: 1.37.1
 port: 80
 domains:
   - vaultwarden.immaleix.casa

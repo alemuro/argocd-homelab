@@ -1,6 +1,6 @@
 name: openbao
 image: ghcr.io/openbao/openbao
-tag: latest
+tag: 2.6.1
 port: 8200
 domains:
   - openbao.immaleix.casa

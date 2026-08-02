@@ -1,6 +1,6 @@
 name: n8n
 image: n8nio/n8n
-tag: latest
+tag: 2.33.3
 port: 5678
 domains:
   - n8n.immaleix.casa

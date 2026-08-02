@@ -1,6 +1,6 @@
 name: dns2-sync
 image: lscr.io/linuxserver/adguardhome-sync
-tag: latest
+tag: 0.9.2
 node_selector:
   kubernetes.io/hostname: worker-1
 mount:
