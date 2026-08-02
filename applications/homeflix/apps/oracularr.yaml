@@ -1,0 +1,34 @@
+name: oracularr
+image: ghcr.io/just-another-group/oracularr
+tag: latest
+port: 4321
+domains:
+  - oracularr.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-0
+imagePullSecrets:
+  - name: github-credentials
+env:
+  RADARR_SERVER: "http://radarr"
+  SONARR_SERVER: "http://sonarr"
+  QBITTORRENT_SERVER: "http://qbittorrent"
+  TAUTULLI_SERVER: "http://tautulli"
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+secretEnv:
+  RADARR_TOKEN:
+    secretName: oracularr-secrets
+    key: RADARR_TOKEN
+  SONARR_TOKEN:
+    secretName: oracularr-secrets
+    key: SONARR_TOKEN
+  QBITTORRENT_USERNAME:
+    secretName: oracularr-secrets
+    key: QBITTORRENT_USERNAME
+  QBITTORRENT_PASSWORD:
+    secretName: oracularr-secrets
+    key: QBITTORRENT_PASSWORD
+  TAUTULLI_TOKEN:
+    secretName: oracularr-secrets
+    key: TAUTULLI_TOKEN

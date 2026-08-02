@@ -34,6 +34,16 @@ spec:
       containers:
         - name: {{ .Values.name }}
           image: "{{ .Values.image }}:{{ .Values.tag }}"
+          {{- if or .Values.capabilities .Values.securityContext }}
+          securityContext:
+            {{- if .Values.capabilities }}
+            capabilities:
+              add:
+                {{- toYaml .Values.capabilities | nindent 16 }}
+            {{- else if .Values.securityContext }}
+            {{- toYaml .Values.securityContext | nindent 12 }}
+            {{- end }}
+          {{- end }}
           {{- if or .Values.port .Values.pod_additional_ports }}
           ports:
             {{- if .Values.port }}

@@ -1,0 +1,29 @@
+name: plex-auto-languages
+image: remirigal/plex-auto-languages
+tag: latest
+node_selector:
+  kubernetes.io/hostname: worker-0
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+configmaps:
+  /config/config.yaml: |
+    plexautolanguages:
+      update_level: "show"
+      update_strategy: "all"
+      trigger_on_play: true
+      trigger_on_scan: true
+      trigger_on_activity: false
+      refresh_library_on_scan: true
+      ignore_labels:
+        - PAL_IGNORE
+      plex:
+        url: "http://plex"
+        token: "dJ1mAyyrSzFcTJLjntAv"
+      scheduler:
+        enable: true
+        schedule_time: "04:30"
+      notifications:
+        enable: false
+      debug: false

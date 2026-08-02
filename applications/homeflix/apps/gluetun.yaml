@@ -1,0 +1,61 @@
+name: gluetun
+image: qmcgaw/gluetun
+tag: v3.36
+port: 5555
+pod_additional_ports:
+  - name: http-proxy
+    container_port: 5555
+    host_port: 5555
+    protocol: TCP
+  - name: shadowsocks-tcp
+    container_port: 8388
+    host_port: 8388
+    protocol: TCP
+  - name: shadowsocks-udp
+    container_port: 8388
+    host_port: 8388
+    protocol: UDP
+node_selector:
+  kubernetes.io/hostname: worker-0
+capabilities:
+  - NET_ADMIN
+mount:
+  /opt/gluetun: /gluetun
+resources:
+  requests:
+    ephemeral-storage: 2Gi
+  limits:
+    ephemeral-storage: 2Gi
+env:
+  VPN_SERVICE_PROVIDER: "surfshark"
+  VPN_TYPE: "wireguard"
+  SERVER_COUNTRIES: "Netherlands"
+  SERVER_CITIES: "Amsterdam"
+  OPENVPN_PROTOCOL: "udp"
+  WIREGUARD_ADDRESSES: "10.14.0.2/16"
+  DNS_ADDRESS: "1.1.1.1"
+  HTTPPROXY: "on"
+  HTTPPROXY_LISTENING_ADDRESS: "0.0.0.0:5555"
+  FIREWALL: "off"
+  FIREWALL_OUTBOUND_SUBNETS: "192.168.1.0/24,10.42.1.0/24,10.0.0.0/16"
+  FIREWALL_DEBUG: "on"
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+secretEnv:
+  OPENVPN_USER:
+    secretName: global
+    key: gluetun_openvpn_user
+  OPENVPN_PASSWORD:
+    secretName: global
+    key: gluetun_openvpn_password
+  WIREGUARD_PRIVATE_KEY:
+    secretName: global
+    key: gluetun_wireguard_private_key
+allow_from:
+  - prowlarr
+  - radarr
+  - sonarr
+  - jackett
+allow_from_cidrs:
+  - 0.0.0.0/0

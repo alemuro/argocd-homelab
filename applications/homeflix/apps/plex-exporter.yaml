@@ -1,0 +1,21 @@
+name: plex-exporter
+image: ghcr.io/axsuul/plex-media-server-exporter
+tag: latest
+port: 9594
+node_selector:
+  kubernetes.io/hostname: worker-0
+env:
+  PLEX_ADDR: "http://plex:80"
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+secretEnv:
+  PLEX_TOKEN:
+    secretName: global
+    key: plex_token
+serviceAnnotations:
+  k8s.grafana.com/scrape: "true"
+  k8s.grafana.com/metrics.portName: "http"
+  k8s.grafana.com/metrics.scheme: "http"
+  k8s.grafana.com/metrics.path: "/metrics"
+  k8s.grafana.com/metrics.scrapeInterval: "5m"

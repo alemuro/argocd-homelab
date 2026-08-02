@@ -41,3 +41,6 @@ serviceAnnotations: {}
 nodeSelector: {}
 node_selector: {}
 imagePullSecrets: []
+capabilities: []
+securityContext: {}
+
