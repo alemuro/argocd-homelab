@@ -35,7 +35,6 @@ argocd-homelab/
 │   └── other/              # Miscellaneous
 ├── helm/                   # Local Helm charts
 │   ├── homelab-application/  # Generic wrapper chart (Deployment, Service, Ingress, etc.)
-│   └── nubulus-tunnel/       # Tunnel chart
 ├── settings/               # Global Argo CD config
 │   ├── config.yaml         # Bootstrap ApplicationSet (scans all stack dirs)
 │   ├── projects.yaml       # AppProject definitions
