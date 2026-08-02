@@ -32,7 +32,6 @@ argocd-homelab/
 │   ├── platform/           # System components (sealed-secrets, image-updater)
 │   ├── ingress/            # Cloudflare tunnels
 │   │   └── tunnels/
-│   ├── hetzner/            # Apps on Hetzner infra
 │   └── other/              # Miscellaneous
 ├── helm/                   # Local Helm charts
 │   ├── homelab-application/  # Generic wrapper chart (Deployment, Service, Ingress, etc.)
@@ -54,7 +53,6 @@ argocd-homelab/
 | `applications/platform/` | `platform` | varies (sealed-secrets, etc.) | Raw Application manifests |
 | `applications/ingress/` | `ingress` | `ingress` | Raw manifests in `tunnels/` |
 | `applications/other/` | `argocd` | varies | Raw manifests |
-| `applications/hetzner/` | (varies) | (varies) | Raw manifests |
 
 ### How ApplicationSets work
 
