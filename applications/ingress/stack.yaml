@@ -14,6 +14,8 @@ spec:
   template:
     metadata:
       name: "ingress-{{.name}}"
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
     spec:
       project: ingress
       source:
@@ -28,7 +30,7 @@ spec:
         namespace: ingress
       syncPolicy:
         automated:
-          prune: false
+          prune: true
           selfHeal: true
         syncOptions:
           - ApplyOutOfSyncOnly=true

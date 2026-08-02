@@ -14,6 +14,8 @@ spec:
   template:
     metadata:
       name: 'homeflix-{{.name}}'
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
     spec:
       project: homeflix
       source:

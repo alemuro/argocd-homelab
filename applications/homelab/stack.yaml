@@ -14,6 +14,8 @@ spec:
   template:
     metadata:
       name: "homelab-{{.name}}"
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
     spec:
       project: homelab
       source:
