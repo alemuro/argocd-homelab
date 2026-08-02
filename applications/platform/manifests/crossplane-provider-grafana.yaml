@@ -4,6 +4,7 @@ metadata:
   name: provider-grafana
   annotations:
     argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
 spec:
   package: xpkg.upbound.io/grafana/provider-grafana:v0.5.0
 ---
