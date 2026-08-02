@@ -1,6 +1,6 @@
 name: gluetun
 image: qmcgaw/gluetun
-tag: v3.36
+tag: v3.41
 port: 5555
 pod_additional_ports:
   - name: http-proxy
