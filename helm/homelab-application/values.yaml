@@ -1,5 +1,5 @@
 name: ""
-kind: Deployment
+type: Deployment
 image: ""
 tag: "latest"
 port: null

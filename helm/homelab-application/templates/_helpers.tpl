@@ -13,11 +13,11 @@ Usage: {{ if eq (include "homelab-application.hasHostPort" .) "true" }}...Statef
 {{- end -}}
 
 {{/*
-Returns "true" if kind is explicitly StatefulSet or if any pod_additional_ports entry has host_port set.
+Returns "true" if type is explicitly StatefulSet or if any pod_additional_ports entry has host_port set.
 Used to decide whether to deploy a StatefulSet vs a Deployment.
 */}}
 {{- define "homelab-application.isStatefulSet" -}}
-{{- if or (eq .Values.kind "StatefulSet") (eq (include "homelab-application.hasHostPort" .) "true") -}}
+{{- if or (eq .Values.type "StatefulSet") (eq (include "homelab-application.hasHostPort" .) "true") -}}
 true
 {{- else -}}
 false
