@@ -1,6 +1,6 @@
 name: uptime
 image: louislam/uptime-kuma
-tag: 2
+tag: 2.5.0
 port: 3001
 domains:
   - uptime.immaleix.casa
