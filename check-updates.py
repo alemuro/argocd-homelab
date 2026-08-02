@@ -23,40 +23,49 @@ def main():
     header = f"{'FITXER':<45} | {'IMATGE':<38} | {'TAG ACTUAL':<12} | {'ESTAT / ACTUALITZACIÓ'}"
     rows = []
     
+    seen = set()
     for line in proc.stdout:
         try:
             data = json.loads(line)
-            if 'config' in data and 'regex' in data['config']:
-                regex_files = data['config']['regex']
-                for pf in regex_files:
-                    pname = pf.get('packageFile', '')
-                    for dep in pf.get('deps', []):
-                        depName = dep.get('depName')
-                        curr = str(dep.get('currentValue'))
-                        updates = dep.get('updates', [])
-                        
-                        version_updates = [
-                            f"{u.get('updateType')}: {u.get('newValue')}"
-                            for u in updates
-                            if u.get('newValue') and u.get('newValue') != curr and u.get('updateType') != 'pinDigest'
-                        ]
-                        has_digest_update = any(u.get('updateType') == 'pinDigest' for u in updates)
-                        
-                        if curr == 'latest':
-                            if not show_all:
-                                continue
-                            status_symbol = "ℹ️ "
-                            up_str = "latest (nova digestió disponible)" if has_digest_update else "latest (al dia)"
-                        elif version_updates:
-                            status_symbol = "⚡"
-                            up_str = ', '.join(version_updates)
-                        else:
-                            if not show_all:
-                                continue
-                            status_symbol = "🟢"
-                            up_str = "Al dia"
-                            
-                        rows.append(f"{status_symbol} {pname:<43} | {depName:<38} | {curr:<12} | {up_str}")
+            if 'config' in data and isinstance(data['config'], dict):
+                for mgr_name, mgr_val in data['config'].items():
+                    if isinstance(mgr_val, list):
+                        for pf in mgr_val:
+                            if isinstance(pf, dict) and 'packageFile' in pf:
+                                pname = pf.get('packageFile', '')
+                                for dep in pf.get('deps', []):
+                                    if dep.get('skipReason'):
+                                        continue
+                                    depName = dep.get('depName')
+                                    curr = str(dep.get('currentValue'))
+                                    key = (pname, depName, curr)
+                                    if key in seen:
+                                        continue
+                                    seen.add(key)
+
+                                    updates = dep.get('updates', [])
+                                    version_updates = [
+                                        f"{u.get('updateType')}: {u.get('newValue')}"
+                                        for u in updates
+                                        if u.get('newValue') and u.get('newValue') != curr and u.get('updateType') != 'pinDigest'
+                                    ]
+                                    has_digest_update = any(u.get('updateType') == 'pinDigest' for u in updates)
+
+                                    if curr == 'latest':
+                                        if not show_all:
+                                            continue
+                                        status_symbol = "ℹ️ "
+                                        up_str = "latest (nova digestió disponible)" if has_digest_update else "latest (al dia)"
+                                    elif version_updates:
+                                        status_symbol = "⚡"
+                                        up_str = ', '.join(version_updates)
+                                    else:
+                                        if not show_all:
+                                            continue
+                                        status_symbol = "🟢"
+                                        up_str = "Al dia"
+
+                                    rows.append(f"{status_symbol} {pname:<43} | {depName:<38} | {curr:<12} | {up_str}")
         except Exception:
             pass
 
