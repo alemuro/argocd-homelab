@@ -1,6 +1,6 @@
 name: nubulus-tunnel
 image: code.as210469.net/nubulusnetworkopensource/tunnel
-tag: v3.0.0
+tag: v3.2.0
 port: 9990
 servicePort: 9990
 serviceAnnotations:
