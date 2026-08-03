@@ -9,7 +9,7 @@ rules:
     for: "5m"
     from: 300
     to: 0
-    datasourceUid: "loki"
+    datasourceUid: "grafanacloud-logs"
     summary: "worker-0 Backup failed"
     description: "Backup for worker-0 failed"
     expr: '(sum(count_over_time({service_name="restic-worker-0"} |~ "snapshot .+ saved"[1d])) or vector(0)) < 1'
@@ -19,7 +19,7 @@ rules:
     for: "5m"
     from: 300
     to: 0
-    datasourceUid: "loki"
+    datasourceUid: "grafanacloud-logs"
     summary: "worker-1 Backup failed"
     description: "Backup for worker-1 failed"
     expr: '(sum(count_over_time({service_name="restic-worker-1"} |~ "snapshot .+ saved"[1d])) or vector(0)) < 1'
@@ -29,7 +29,7 @@ rules:
     for: "5m"
     from: 300
     to: 0
-    datasourceUid: "loki"
+    datasourceUid: "grafanacloud-logs"
     summary: "summer Backup failed"
     description: "Backup for summer failed"
     expr: '(sum(count_over_time({service_name="restic-summer"} |~ "snapshot .+ saved"[1d])) or vector(0)) < 1'

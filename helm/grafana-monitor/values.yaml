@@ -4,7 +4,7 @@ folderUid: "bds4wss5qivwgc"
 orgId: "1"
 intervalSeconds: 60
 providerConfigName: "default"
-prometheusDatasourceUid: "prometheus"
-lokiDatasourceUid: "loki"
+prometheusDatasourceUid: "grafanacloud-prom"
+lokiDatasourceUid: "grafanacloud-logs"
 
 rules: []

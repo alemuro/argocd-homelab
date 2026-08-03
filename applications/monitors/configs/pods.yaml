@@ -9,7 +9,7 @@ rules:
     for: "10m"
     from: 600
     to: 0
-    datasourceUid: "prometheus"
+    datasourceUid: "grafanacloud-prom"
     summary: "{{$labels.namespace}}/{{$labels.pod}} CPU above request"
     description: "Pod {{$labels.pod}} in {{$labels.namespace}} has been using more CPU than its request for 10+ minutes"
     expr: 'sum by (pod, namespace) (rate(container_cpu_usage_seconds_total{container!="",namespace=~"homeflix|homelab"}[5m])) / sum by (pod, namespace) (kube_pod_container_resource_requests{resource="cpu",namespace=~"homeflix|homelab"}) > 1'
@@ -19,7 +19,7 @@ rules:
     for: "10m"
     from: 600
     to: 0
-    datasourceUid: "prometheus"
+    datasourceUid: "grafanacloud-prom"
     summary: "{{$labels.namespace}}/{{$labels.pod}} Memory above request"
     description: "Pod {{$labels.pod}} in {{$labels.namespace}} has been using more memory than its request for 10+ minutes"
     expr: 'sum by (pod, namespace) (container_memory_working_set_bytes{container!="",namespace=~"homeflix|homelab"}) / sum by (pod, namespace) (kube_pod_container_resource_requests{resource="memory",namespace=~"homeflix|homelab"}) > 1'

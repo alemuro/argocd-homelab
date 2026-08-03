@@ -9,7 +9,7 @@ rules:
     for: "15m"
     from: 900
     to: 0
-    datasourceUid: "prometheus"
+    datasourceUid: "grafanacloud-prom"
     summary: "Synthetic test failed"
     description: "Synthetic test failed"
     expr: 'max(probe_success{job!~"prometheus.*"}) by(instance) < 1'
