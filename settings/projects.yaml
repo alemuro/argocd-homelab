@@ -21,6 +21,9 @@ spec:
   namespaceResourceWhitelist:
     - group: "*"
       kind: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
