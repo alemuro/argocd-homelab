@@ -1,0 +1,35 @@
+name: "nodes-monitors"
+title: "Nodes Monitors"
+folderUid: "bds4wss5qivwgc"
+intervalSeconds: 60
+
+rules:
+  - name: "Node disk available ({{$labels.instance}})"
+    condition: "A"
+    for: "15m"
+    from: 900
+    to: 0
+    datasourceUid: "prometheus"
+    summary: "{{$labels.cluster}}/{{$labels.instance}} Disk ({{$labels.mountpoint}}) out of space"
+    description: "Node {{$labels.instance}} mountpoint {{$labels.mountpoint}} is out of space, consider removing some files or adding more space"
+    expr: '(node_filesystem_avail_bytes{fstype="ext4"} / node_filesystem_size_bytes) < 0.2'
+
+  - name: "Node CPU usage ({{$labels.instance}})"
+    condition: "A"
+    for: "15m"
+    from: 900
+    to: 0
+    datasourceUid: "prometheus"
+    summary: "{{$labels.cluster}}/{{$labels.instance}} Node CPU usage"
+    description: "Node {{$labels.instance}} is using more than 80% of the CPU for the last 15 minutes"
+    expr: '(sum(node_cpu_seconds_total{mode="idle"}) by(cluster,instance) / sum(node_cpu_seconds_total{}) by(cluster,instance)) < 0.2'
+
+  - name: "Node Memory usage ({{$labels.instance}})"
+    condition: "A"
+    for: "15m"
+    from: 900
+    to: 0
+    datasourceUid: "prometheus"
+    summary: "{{$labels.cluster}}/{{$labels.instance}} Node Memory usage"
+    description: "Node {{$labels.instance}} is using more than 85% of the Memory for the last 15 minutes"
+    expr: '(1 - avg by(instance,cluster) ((node_memory_MemFree_bytes{} + (node_memory_Cached_bytes{} + node_memory_Buffers_bytes{} + node_memory_SReclaimable_bytes{})) / node_memory_MemTotal_bytes{})) > 0.85'

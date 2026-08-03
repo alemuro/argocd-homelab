@@ -1,0 +1,37 @@
+apiVersion: alerting.grafana.crossplane.io/v1alpha1
+kind: RuleGroup
+metadata:
+  name: {{ default .Release.Name .Values.name | quote }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  forProvider:
+    name: {{ default .Values.name .Values.title | quote }}
+    folderUid: {{ .Values.folderUid | quote }}
+    orgId: {{ default "1" .Values.orgId | quote }}
+    intervalSeconds: {{ default 60 .Values.intervalSeconds }}
+    rule:
+      {{- range .Values.rules }}
+      - name: {{ .name | quote }}
+        condition: {{ default "A" .condition | quote }}
+        for: {{ default "5m" .for | quote }}
+        annotations:
+          summary: {{ .summary | quote }}
+          description: {{ .description | quote }}
+        data:
+          - refId: "A"
+            relativeTimeRange:
+              - from: {{ default 300 .from }}
+                to: {{ default 0 .to }}
+            datasourceUid: {{ default $.Values.prometheusDatasourceUid .datasourceUid | quote }}
+            model: |
+              {
+                "expr": {{ .expr | toJson }},
+                "instant": true,
+                "intervalMs": 1000,
+                "maxDataPoints": 43200,
+                "refId": "A"
+              }
+      {{- end }}
+  providerConfigRef:
+    name: {{ default "default" .Values.providerConfigName | quote }}

@@ -1,0 +1,15 @@
+name: "synthetics-monitors"
+title: "Synthetics Monitors"
+folderUid: "bds4wss5qivwgc"
+intervalSeconds: 60
+
+rules:
+  - name: "Synthetic test failed ({{$labels.instance}})"
+    condition: "A"
+    for: "15m"
+    from: 900
+    to: 0
+    datasourceUid: "prometheus"
+    summary: "Synthetic test failed"
+    description: "Synthetic test failed"
+    expr: 'max(probe_success{job!~"prometheus.*"}) by(instance) < 1'

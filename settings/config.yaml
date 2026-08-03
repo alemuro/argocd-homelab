@@ -12,6 +12,7 @@ spec:
           - folder: applications/platform
           - folder: applications/homeflix
           - folder: applications/homelab
+          - folder: applications/monitors
           - folder: applications/ingress
           - folder: applications/other
   template:

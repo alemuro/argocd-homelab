@@ -1,0 +1,15 @@
+name: "homeflix-monitors"
+title: "Homeflix Monitors"
+folderUid: "bds4wss5qivwgc"
+intervalSeconds: 60
+
+rules:
+  - name: "Sonarr / Cannot import downloads"
+    condition: "A"
+    for: "5m"
+    from: 300
+    to: 0
+    datasourceUid: "prometheus"
+    summary: "Sonarr / Cannot import downloads"
+    description: "There downloads that cannot be imported. Go to https://sonarr.immaleix.casa/activity/queue and import them manually."
+    expr: 'max(sonarr_queue_total{download_state="importBlocked"} or vector(0)) > 0'

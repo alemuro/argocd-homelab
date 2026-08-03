@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-applications-monitors
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: ssh://git@github.com/alemuro/argocd-homelab.git
+        revision: HEAD
+        files:
+          - path: "applications/monitors/configs/*.yaml"
+  template:
+    metadata:
+      name: 'monitor-{{.name}}'
+    spec:
+      project: homelab
+      source:
+        repoURL: ssh://git@github.com/alemuro/argocd-homelab.git
+        targetRevision: HEAD
+        path: helm/grafana-monitor
+        helm:
+          valuesObject: '{{ . }}'
+      destination:
+        name: homelab
+        namespace: homelab
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
