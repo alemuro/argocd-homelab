@@ -24,7 +24,8 @@ spec:
         targetRevision: HEAD
         path: helm/grafana-monitor
         helm:
-          valuesObject: '{{ . }}'
+          values: |
+            {{- . | toYaml | nindent 12 }}
       destination:
         name: homelab
         namespace: homelab
