@@ -8,6 +8,7 @@ spec:
   forProvider:
     name: "Example Service Monitor"
     folderUid: "Homelab"
+    orgId: "1"
     intervalSeconds: 60
     rule:
       - name: "Service not reachable"
@@ -19,8 +20,8 @@ spec:
         data:
           - refId: "A"
             relativeTimeRange:
-              from: 300
-              to: 0
+              - from: 300
+                to: 0
             datasourceUid: "prometheus"
             model: |
               {
