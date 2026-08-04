@@ -2,8 +2,6 @@ name: seerr
 image: ghcr.io/seerr-team/seerr
 tag: v3.4.1
 port: 5055
-priorityClassName: homeflix-low
-startupDelaySeconds: 0
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:

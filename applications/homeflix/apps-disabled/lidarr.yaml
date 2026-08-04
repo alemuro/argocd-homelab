@@ -2,8 +2,6 @@ name: lidarr
 image: lscr.io/linuxserver/lidarr
 tag: 8.1.2135
 port: 8686
-priorityClassName: homeflix-low
-startupDelaySeconds: 60
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:

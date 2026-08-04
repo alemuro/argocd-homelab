@@ -1,0 +1,33 @@
+---
+# PriorityClass: homelab-high — critical infrastructure (DNS, ingress, core services)
+# Scheduled first, evicted last. Use for pods that must be running for the
+# cluster to function properly.
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: homelab-high
+value: 1000000
+globalDefault: false
+description: "Critical homelab infrastructure — scheduled before everything else"
+---
+# PriorityClass: homelab-default — standard applications
+# Used for most services that don't need special scheduling treatment.
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: homelab-default
+value: 10000
+globalDefault: false
+description: "Default priority for homelab applications"
+---
+# PriorityClass: homeflix-low — media stack (non-critical)
+# Scheduled last. These pods can afford to wait during node boot storms.
+# Lower priority means they yield CPU/disk to higher-priority workloads
+# during resource contention.
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: homeflix-low
+value: 100
+globalDefault: false
+description: "Low priority for non-critical media applications — delayed startup"

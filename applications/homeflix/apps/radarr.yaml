@@ -2,8 +2,6 @@ name: radarr
 image: lscr.io/linuxserver/radarr
 tag: 6.3.0
 port: 7878
-priorityClassName: homeflix-low
-startupDelaySeconds: 30
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:

@@ -2,8 +2,6 @@ name: m3ue
 image: sparkison/m3u-editor
 tag: 0.11.70
 port: 36400
-priorityClassName: homeflix-low
-startupDelaySeconds: 120
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:

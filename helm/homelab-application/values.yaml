@@ -13,13 +13,6 @@ mount: {}
 # configmaps in format: mountPath: content
 configmaps: {}
 resources: {}
-# PriorityClass assigned to the pod. Controls scheduling and eviction order
-# relative to other pods. Higher values = higher priority.
-# Set to "homeflix-low" for non-critical media apps to let core services start first.
-priorityClassName: ""
-# Delay pod startup by this many seconds (injects a sleep initContainer).
-# Use to stagger boot storms: 0 = immediate, 60 = 1min delay, etc.
-startupDelaySeconds: 0
 # Kubernetes probes (liveness, readiness, startup). Pass the full K8s probe spec.
 # If port is set and no readiness probe is configured, a default TCP readiness
 # probe on that port is added automatically (initialDelaySeconds: 10, periodSeconds: 10).

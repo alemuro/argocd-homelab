@@ -2,8 +2,6 @@ name: dns1
 image: adguard/adguardhome
 tag: v0.107.78
 port: 3000
-priorityClassName: homelab-high
-startupDelaySeconds: 0
 domains:
   - dns1.immaleix.casa
 node_selector:

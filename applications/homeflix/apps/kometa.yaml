@@ -1,8 +1,6 @@
 name: kometa
 image: lscr.io/linuxserver/kometa
-tag: latest
-priorityClassName: homeflix-low
-startupDelaySeconds: 120
+tag: 2.4.6
 node_selector:
   kubernetes.io/hostname: worker-0
 mount:

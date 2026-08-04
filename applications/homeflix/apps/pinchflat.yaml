@@ -2,8 +2,6 @@ name: pinchflat
 image: ghcr.io/kieraneglin/pinchflat
 tag: v2025.6.6
 port: 8945
-priorityClassName: homeflix-low
-startupDelaySeconds: 120
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:

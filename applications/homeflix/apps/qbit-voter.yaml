@@ -2,8 +2,8 @@ name: qbit-voter
 image: ghcr.io/gerardag/qbit-voter
 tag: v0.7.2
 port: 3000
-priorityClassName: homeflix-low
-startupDelaySeconds: 120
+# node_selector:
+  # kubernetes.io/hostname: worker-0
 domains:
   - qbit-voter.immaleix.casa
 # mount:

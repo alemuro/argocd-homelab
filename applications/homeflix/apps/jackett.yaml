@@ -2,8 +2,6 @@ name: jackett
 image: lscr.io/linuxserver/jackett
 tag: 0.21.696
 port: 9117
-priorityClassName: homeflix-low
-startupDelaySeconds: 60
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:
