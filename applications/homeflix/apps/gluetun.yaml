@@ -28,9 +28,11 @@ resources:
     ephemeral-storage: 2Gi
 probes:
   readiness:
-    httpGet:
-      path: /
-      port: 9999
+    exec:
+      command:
+        - wget
+        - -qO-
+        - http://127.0.0.1:9999/
     initialDelaySeconds: 10
     periodSeconds: 10
 env:
