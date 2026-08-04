@@ -2,6 +2,8 @@ name: qbittorrent
 image: lscr.io/linuxserver/qbittorrent
 tag: 20.04.1
 port: 8080
+priorityClassName: homeflix-low
+startupDelaySeconds: 60
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:

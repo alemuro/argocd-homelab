@@ -2,6 +2,8 @@ name: sonarr-exporter
 image: ghcr.io/onedr0p/exportarr
 tag: v2.3.0
 port: 9707
+priorityClassName: homeflix-low
+startupDelaySeconds: 180
 node_selector:
   kubernetes.io/hostname: worker-0
 image_updater:

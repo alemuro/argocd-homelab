@@ -2,6 +2,8 @@ name: sizeondisk-exporter
 image: ghcr.io/alemuro/arr-sizeondisk-exporter
 tag: v0.0.6
 port: 9101
+priorityClassName: homeflix-low
+startupDelaySeconds: 180
 node_selector:
   kubernetes.io/hostname: worker-0
 image_updater:

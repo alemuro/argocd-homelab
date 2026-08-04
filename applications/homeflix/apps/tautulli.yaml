@@ -2,6 +2,8 @@ name: tautulli
 image: lscr.io/linuxserver/tautulli
 tag: 2021.12.16
 port: 8181
+priorityClassName: homeflix-low
+startupDelaySeconds: 90
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:

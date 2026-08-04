@@ -2,6 +2,8 @@ name: plex
 image: lscr.io/linuxserver/plex
 tag: 1.43.3
 port: 32400
+priorityClassName: homeflix-low
+startupDelaySeconds: 0
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:

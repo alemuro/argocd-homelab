@@ -2,6 +2,8 @@ name: slskd
 image: ghcr.io/slskd/slskd
 tag: 0.26.0
 port: 5030
+priorityClassName: homeflix-low
+startupDelaySeconds: 120
 node_selector:
   kubernetes.io/hostname: worker-0
 domains:
