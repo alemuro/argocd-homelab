@@ -26,6 +26,13 @@ resources:
     ephemeral-storage: 2Gi
   limits:
     ephemeral-storage: 2Gi
+probes:
+  readiness:
+    httpGet:
+      path: /
+      port: 9999
+    initialDelaySeconds: 10
+    periodSeconds: 10
 env:
   VPN_SERVICE_PROVIDER: "surfshark"
   VPN_TYPE: "wireguard"
