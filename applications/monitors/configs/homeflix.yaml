@@ -11,7 +11,11 @@ rules:
     to: 0
     datasourceUid: "grafanacloud-prom"
     summary: "Sonarr / Cannot import downloads"
-    description: "There downloads that cannot be imported. Go to https://sonarr.immaleix.casa/activity/queue and import them manually."
+    description: |
+      Runbook:
+      1. Go to https://sonarr.immaleix.casa/activity/queue to inspect blocked downloads.
+      2. Verify destination permissions or disk space.
+      3. Import or remove blocked items manually.
     expr: 'max(sonarr_queue_total{download_state="importBlocked"} or vector(0)) > 0'
 
   - name: "qBittorrent down"
@@ -21,7 +25,11 @@ rules:
     to: 0
     datasourceUid: "grafanacloud-prom"
     summary: "qBittorrent service down"
-    description: "qBittorrent server is unreachable or returning errors"
+    description: |
+      Runbook:
+      1. Check pod status with 'kubectl get pod -n homeflix -l app=qbittorrent'.
+      2. Verify Web UI at https://qbittorrent.immaleix.casa.
+      3. Inspect logs with 'kubectl logs -n homeflix -l app=qbittorrent'.
     expr: 'qbittorrent_up == 0'
 
   - name: "qBittorrent disconnected from network"
@@ -31,7 +39,11 @@ rules:
     to: 0
     datasourceUid: "grafanacloud-prom"
     summary: "qBittorrent disconnected from BitTorrent network"
-    description: "qBittorrent lost connectivity to the P2P network (check VPN / Gluetun)"
+    description: |
+      Runbook:
+      1. Check VPN status with 'kubectl logs -n homeflix -l app=gluetun'.
+      2. Verify P2P port forwarding / outbound connectivity.
+      3. Restart gluetun or qbittorrent pod if VPN reconnection stalled.
     expr: 'qbittorrent_connected == 0'
 
   - name: "qBittorrent torrents in error state"
@@ -41,7 +53,11 @@ rules:
     to: 0
     datasourceUid: "grafanacloud-prom"
     summary: "qBittorrent has torrents with errors or missing files"
-    description: "One or more torrents in qBittorrent are reporting errors or missing files"
+    description: |
+      Runbook:
+      1. Access https://qbittorrent.immaleix.casa and filter torrents by 'Errored' or 'Missing Files'.
+      2. Perform 'Force Recheck'.
+      3. Check NFS mount status under /mnt/nfs/homeflix-v2/downloads.
     expr: 'sum(qbittorrent_torrents_count{status=~"error|missingFiles"}) > 0'
 
   - name: "qBittorrent too many torrents queued in upload"
@@ -51,5 +67,9 @@ rules:
     to: 0
     datasourceUid: "grafanacloud-prom"
     summary: "qBittorrent too many torrents queued in upload"
-    description: "More than 0 torrents are queued for upload in qBittorrent"
+    description: |
+      Runbook:
+      1. Access https://qbittorrent.immaleix.casa.
+      2. Check Queueing limits under Options -> BitTorrent -> Queueing.
+      3. Adjust max active uploads limit or force resume queued torrents if needed.
     expr: 'sum(qbittorrent_torrents_count{status="queuedUP"}) > 0'
