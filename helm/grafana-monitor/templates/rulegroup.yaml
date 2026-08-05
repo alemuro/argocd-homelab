@@ -22,8 +22,6 @@ spec:
       - name: {{ .name | quote }}
         condition: "threshold"
         for: {{ default "5m" .for | quote }}
-        noDataState: {{ default "OK" .noDataState | quote }}
-        execErrState: {{ default "Error" .execErrState | quote }}
         annotations:
           summary: {{ .summary | quote }}
           description: {{ .description | quote }}
