@@ -26,6 +26,10 @@ spec:
             datasourceUid: {{ default $.Values.prometheusDatasourceUid .datasourceUid | quote }}
             model: |
               {
+                "datasource": {
+                  "type": {{ if eq (default $.Values.prometheusDatasourceUid .datasourceUid) "grafanacloud-logs" }}"loki"{{ else }}"prometheus"{{ end }},
+                  "uid": {{ default $.Values.prometheusDatasourceUid .datasourceUid | quote }}
+                },
                 "expr": {{ .expr | toJson }},
                 "instant": true,
                 "intervalMs": 1000,
