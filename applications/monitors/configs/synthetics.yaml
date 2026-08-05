@@ -4,12 +4,12 @@ folderUid: "bds4wss5qivwgc"
 intervalSeconds: 60
 
 rules:
-  - name: "Synthetic test failed ({{$labels.instance}})"
+  - name: "Synthetic test failed"
     condition: "A"
     for: "15m"
     from: 900
     to: 0
     datasourceUid: "grafanacloud-prom"
-    summary: "Synthetic test failed"
-    description: "Synthetic test failed"
+    summary: "Synthetic test {{$labels.instance}} failed"
+    description: "Synthetic test {{$labels.instance}} failed"
     expr: 'max(probe_success{job!~"prometheus.*"}) by(instance) < 1'
