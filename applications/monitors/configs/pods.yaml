@@ -4,7 +4,7 @@ folderUid: "bds4wss5qivwgc"
 intervalSeconds: 60
 
 rules:
-  - name: "Pod CPU above request ({{$labels.pod}})"
+  - name: "Pod CPU above request ( {{ $labels.pod }} )"
     condition: "A"
     for: "10m"
     from: 600
