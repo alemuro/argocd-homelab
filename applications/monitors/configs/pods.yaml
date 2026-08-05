@@ -10,9 +10,11 @@ rules:
     from: 600
     to: 0
     datasourceUid: "grafanacloud-prom"
+    operator: "above"
+    threshold: 1
     summary: "Pod {{$labels.namespace}}/{{$labels.pod}} CPU above request"
     description: "Pod {{$labels.pod}} in {{$labels.namespace}} has been using more CPU than its request for 10+ minutes"
-    expr: 'sum by (pod, namespace) (rate(container_cpu_usage_seconds_total{container!="",namespace=~"homeflix|homelab"}[5m])) / sum by (pod, namespace) (kube_pod_container_resource_requests{resource="cpu",namespace=~"homeflix|homelab"}) > 1'
+    expr: 'sum by (pod, namespace) (rate(container_cpu_usage_seconds_total{container!="",namespace=~"homeflix|homelab"}[5m])) / sum by (pod, namespace) (kube_pod_container_resource_requests{resource="cpu",namespace=~"homeflix|homelab"})'
 
   - name: "Pod Memory above request"
     condition: "A"
@@ -20,6 +22,8 @@ rules:
     from: 600
     to: 0
     datasourceUid: "grafanacloud-prom"
+    operator: "above"
+    threshold: 1
     summary: "Pod {{$labels.namespace}}/{{$labels.pod}} Memory above request"
     description: "Pod {{$labels.pod}} in {{$labels.namespace}} has been using more memory than its request for 10+ minutes"
-    expr: 'sum by (pod, namespace) (container_memory_working_set_bytes{container!="",namespace=~"homeflix|homelab"}) / sum by (pod, namespace) (kube_pod_container_resource_requests{resource="memory",namespace=~"homeflix|homelab"}) > 1'
+    expr: 'sum by (pod, namespace) (container_memory_working_set_bytes{container!="",namespace=~"homeflix|homelab"}) / sum by (pod, namespace) (kube_pod_container_resource_requests{resource="memory",namespace=~"homeflix|homelab"})'

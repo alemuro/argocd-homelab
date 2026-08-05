@@ -10,9 +10,11 @@ rules:
     from: 300
     to: 0
     datasourceUid: "grafanacloud-logs"
+    operator: "below"
+    threshold: 1
     summary: "worker-0 Backup failed"
     description: "Backup for worker-0 failed"
-    expr: '(sum(count_over_time({service_name="restic-worker-0"} |~ "snapshot .+ saved"[1d])) or vector(0)) < 1'
+    expr: '(sum(count_over_time({service_name="restic-worker-0"} |~ "snapshot .+ saved"[1d])) or vector(0))'
 
   - name: "Backup failed (worker-1)"
     condition: "A"
@@ -20,9 +22,11 @@ rules:
     from: 300
     to: 0
     datasourceUid: "grafanacloud-logs"
+    operator: "below"
+    threshold: 1
     summary: "worker-1 Backup failed"
     description: "Backup for worker-1 failed"
-    expr: '(sum(count_over_time({service_name="restic-worker-1"} |~ "snapshot .+ saved"[1d])) or vector(0)) < 1'
+    expr: '(sum(count_over_time({service_name="restic-worker-1"} |~ "snapshot .+ saved"[1d])) or vector(0))'
 
   - name: "Backup failed (summer)"
     condition: "A"
@@ -30,6 +34,8 @@ rules:
     from: 300
     to: 0
     datasourceUid: "grafanacloud-logs"
+    operator: "below"
+    threshold: 1
     summary: "summer Backup failed"
     description: "Backup for summer failed"
-    expr: '(sum(count_over_time({service_name="restic-summer"} |~ "snapshot .+ saved"[1d])) or vector(0)) < 1'
+    expr: '(sum(count_over_time({service_name="restic-summer"} |~ "snapshot .+ saved"[1d])) or vector(0))'

@@ -17,8 +17,15 @@ spec:
       {{- if eq $dsUid "grafanacloud-logs" }}
       {{- $dsType = "loki" }}
       {{- end }}
-      {{- $op := default "lt" .operator }}
-      {{- $thresh := default 1 .threshold }}
+      {{- $opRaw := default "below" .operator }}
+      {{- $op := "lt" }}
+      {{- if or (eq $opRaw "above") (eq $opRaw "gt") (eq $opRaw ">") }}
+      {{- $op = "gt" }}
+      {{- end }}
+      {{- $thresh := 1 }}
+      {{- if hasKey . "threshold" }}
+      {{- $thresh = .threshold }}
+      {{- end }}
       - name: {{ .name | quote }}
         condition: "threshold"
         for: {{ default "5m" .for | quote }}

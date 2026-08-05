@@ -10,6 +10,8 @@ rules:
     from: 900
     to: 0
     datasourceUid: "grafanacloud-prom"
+    operator: "below"
+    threshold: 1
     summary: "Synthetic test {{$labels.instance}} failed"
     description: "Synthetic test {{$labels.instance}} failed"
-    expr: 'max(probe_success{job!~"prometheus.*"}) by(instance) < 1'
+    expr: 'max(probe_success{job!~"prometheus.*"}) by(instance)'

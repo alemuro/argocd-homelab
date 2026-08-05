@@ -10,6 +10,8 @@ rules:
     from: 300
     to: 0
     datasourceUid: "grafanacloud-prom"
+    operator: "below"
+    threshold: 1
     summary: "Service {{$labels.cluster}}/{{$labels.kubernetes_namespace}}/{{$labels.k8s_app}} not reachable"
     description: "Service {{$labels.service}} is not reachable"
-    expr: 'min(probe_success{job="prometheus.scrape.healthchecks",service=~"radarr|sonarr|plex|qbittorrent|bazarr|overseerr|prowlarr|tautulli|dns1|dns2|consul|openbao|uptime|vaultwarden|cloudweatherproxy|gloriarelats|jocdelsmunicipis-api"}) by(service, kubernetes_namespace, k8s_app, cluster) < 1'
+    expr: 'min(probe_success{job="prometheus.scrape.healthchecks",service=~"radarr|sonarr|plex|qbittorrent|bazarr|overseerr|prowlarr|tautulli|dns1|dns2|consul|openbao|uptime|vaultwarden|cloudweatherproxy|gloriarelats|jocdelsmunicipis-api"}) by(service, kubernetes_namespace, k8s_app, cluster)'
