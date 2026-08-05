@@ -12,29 +12,78 @@ spec:
     intervalSeconds: {{ default 60 .Values.intervalSeconds }}
     rule:
       {{- range .Values.rules }}
+      {{- $dsUid := default $.Values.prometheusDatasourceUid .datasourceUid }}
+      {{- $dsType := "prometheus" }}
+      {{- if eq $dsUid "grafanacloud-logs" }}
+      {{- $dsType = "loki" }}
+      {{- end }}
+      {{- $op := default "lt" .operator }}
+      {{- $thresh := default 1 .threshold }}
       - name: {{ .name | quote }}
-        condition: {{ default "A" .condition | quote }}
+        condition: "threshold"
         for: {{ default "5m" .for | quote }}
+        noDataState: {{ default "OK" .noDataState | quote }}
+        execErrState: {{ default "Error" .execErrState | quote }}
         annotations:
           summary: {{ .summary | quote }}
           description: {{ .description | quote }}
         data:
-          - refId: "A"
+          - refId: "query"
             relativeTimeRange:
-              - from: {{ default 300 .from }}
+              - from: {{ default 600 .from }}
                 to: {{ default 0 .to }}
-            datasourceUid: {{ default $.Values.prometheusDatasourceUid .datasourceUid | quote }}
+            datasourceUid: {{ $dsUid | quote }}
             model: |
               {
-                "datasource": {
-                  "type": {{ if eq (default $.Values.prometheusDatasourceUid .datasourceUid) "grafanacloud-logs" }}"loki"{{ else }}"prometheus"{{ end }},
-                  "uid": {{ default $.Values.prometheusDatasourceUid .datasourceUid | quote }}
-                },
+                "editorMode": "code",
                 "expr": {{ .expr | toJson }},
+                "hide": false,
                 "instant": true,
                 "intervalMs": 1000,
+                {{- if eq $dsType "prometheus" }}
+                "legendFormat": "__auto",
+                "range": false,
+                {{- else }}
+                "queryType": "instant",
+                {{- end }}
                 "maxDataPoints": 43200,
-                "refId": "A"
+                "refId": "query"
+              }
+          - refId: "threshold"
+            relativeTimeRange:
+              - from: {{ default 600 .from }}
+                to: {{ default 0 .to }}
+            datasourceUid: "__expr__"
+            model: |
+              {
+                "conditions": [
+                  {
+                    "evaluator": {
+                      "params": [{{ $thresh }}],
+                      "type": {{ $op | quote }}
+                    },
+                    "operator": {
+                      "type": "and"
+                    },
+                    "query": {
+                      "params": ["query"]
+                    },
+                    "reducer": {
+                      "params": [],
+                      "type": "last"
+                    },
+                    "type": "query"
+                  }
+                ],
+                "datasource": {
+                  "type": "__expr__",
+                  "uid": "__expr__"
+                },
+                "expression": "query",
+                "intervalMs": 1000,
+                "maxDataPoints": 43200,
+                "refId": "threshold",
+                "type": "threshold"
               }
       {{- end }}
   providerConfigRef:
