@@ -13,3 +13,43 @@ rules:
     summary: "Sonarr / Cannot import downloads"
     description: "There downloads that cannot be imported. Go to https://sonarr.immaleix.casa/activity/queue and import them manually."
     expr: 'max(sonarr_queue_total{download_state="importBlocked"} or vector(0)) > 0'
+
+  - name: "qBittorrent down"
+    condition: "A"
+    for: "5m"
+    from: 300
+    to: 0
+    datasourceUid: "grafanacloud-prom"
+    summary: "qBittorrent service down"
+    description: "qBittorrent server is unreachable or returning errors"
+    expr: 'qbittorrent_up == 0'
+
+  - name: "qBittorrent disconnected from network"
+    condition: "A"
+    for: "5m"
+    from: 300
+    to: 0
+    datasourceUid: "grafanacloud-prom"
+    summary: "qBittorrent disconnected from BitTorrent network"
+    description: "qBittorrent lost connectivity to the P2P network (check VPN / Gluetun)"
+    expr: 'qbittorrent_connected == 0'
+
+  - name: "qBittorrent torrents in error state"
+    condition: "A"
+    for: "5m"
+    from: 300
+    to: 0
+    datasourceUid: "grafanacloud-prom"
+    summary: "qBittorrent has torrents with errors or missing files"
+    description: "One or more torrents in qBittorrent are reporting errors or missing files"
+    expr: 'sum(qbittorrent_torrents_count{status=~"error|missingFiles"}) > 0'
+
+  - name: "qBittorrent too many torrents queued in upload"
+    condition: "A"
+    for: "15m"
+    from: 900
+    to: 0
+    datasourceUid: "grafanacloud-prom"
+    summary: "qBittorrent too many torrents queued in upload"
+    description: "More than 0 torrents are queued for upload in qBittorrent"
+    expr: 'sum(qbittorrent_torrents_count{status="queuedUP"}) > 0'
