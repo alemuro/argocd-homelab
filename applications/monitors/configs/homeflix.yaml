@@ -83,3 +83,19 @@ rules:
       2. Check Queueing limits under Options -> BitTorrent -> Queueing.
       3. Adjust max active uploads limit or force resume queued torrents if needed.
     expr: 'sum(qbittorrent_torrents_count{status="queuedUP"})'
+
+  - name: "qbit-voter too many pending validations"
+    condition: "A"
+    for: "15m"
+    from: 900
+    to: 0
+    datasourceUid: "grafanacloud-prom"
+    operator: "above"
+    threshold: 20
+    summary: "qbit-voter has too many torrents pending validation"
+    description: |
+      Runbook:
+      1. Access https://qbit-voter.immaleix.casa and review the pending torrents.
+      2. Validate and vote on torrents until the pending count is below 20.
+      3. If the count is stale, check the qbit-voter pod and the qBittorrent connection.
+    expr: 'qbit_voter_untagged_torrents'
