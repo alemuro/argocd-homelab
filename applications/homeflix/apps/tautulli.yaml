@@ -20,3 +20,4 @@ allow_from:
   - wrapperr
   - seerr
   - oracularr
+  - maintainerr
