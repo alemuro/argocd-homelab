@@ -1,0 +1,10 @@
+name: maintainerr
+image: ghcr.io/jorenn92/maintainerr
+tag: 2.2.0
+port: 6246
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - maintainerr.immaleix.casa
+mount:
+  /mnt/local/configs/maintainerr: /opt/data
