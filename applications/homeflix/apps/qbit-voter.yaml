@@ -6,6 +6,12 @@ port: 3000
   # kubernetes.io/hostname: worker-0
 domains:
   - qbit-voter.immaleix.casa
+serviceAnnotations:
+  k8s.grafana.com/scrape: "true"
+  k8s.grafana.com/metrics.portName: "http"
+  k8s.grafana.com/metrics.scheme: "http"
+  k8s.grafana.com/metrics.path: "/metrics"
+  k8s.grafana.com/metrics.scrapeInterval: "5m"
 # mount:
   # /mnt/local/configs/qbit-voter: /app/data
 env:
