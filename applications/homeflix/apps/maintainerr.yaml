@@ -1,6 +1,6 @@
 name: maintainerr
-image: ghcr.io/jorenn92/maintainerr
-tag: 2.2.0
+image: ghcr.io/maintainerr/maintainerr
+tag: 3.22.0
 port: 6246
 node_selector:
   kubernetes.io/hostname: worker-0
