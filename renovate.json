@@ -10,6 +10,9 @@
   "argocd": {
     "fileMatch": ["(^|/)applications/.+\\.yaml$"]
   },
+  "github-actions": {
+    "enabled": false
+  },
   "packageRules": [
     {
       "description": "Group all helm chart updates into a single PR",
