@@ -1,6 +1,6 @@
 name: m3ue
 image: sparkison/m3u-editor
-tag: 0.12.46
+tag: 0.12.47
 port: 36400
 node_selector:
   kubernetes.io/hostname: worker-0
