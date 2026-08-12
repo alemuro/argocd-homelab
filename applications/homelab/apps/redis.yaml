@@ -1,0 +1,16 @@
+name: redis
+type: StatefulSet
+image: redis
+tag: "7-alpine"
+port: 6379
+servicePort: 6379
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/redis: /data
+args:
+  - redis-server
+  - --appendonly
+  - "yes"
+allow_from:
+  - emailengine

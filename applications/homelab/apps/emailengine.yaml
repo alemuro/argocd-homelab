@@ -1,0 +1,16 @@
+name: emailengine
+image: postalsys/emailengine
+tag: v2
+port: 3000
+node_selector:
+  kubernetes.io/hostname: worker-1
+env:
+  EENGINE_REDIS: redis://redis:6379/2
+  EENGINE_SETTINGS: '{"serviceUrl":"http://emailengine:3000"}'
+  TZ: Europe/Madrid
+allow_from:
+  - n8n
+secretEnv:
+  EENGINE_SECRET:
+    secretName: emailengine-secrets
+    key: EENGINE_SECRET
