@@ -8,3 +8,5 @@ domains:
   - maintainerr.immaleix.casa
 mount:
   /mnt/local/configs/maintainerr: /opt/data
+allow_from:
+  - farewell
