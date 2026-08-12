@@ -4,6 +4,8 @@ tag: 0.1.0
 port: 3000
 node_selector:
   kubernetes.io/hostname: worker-0
+imagePullSecrets:
+  - name: github-credentials
 domains:
   - farewell.immaleix.casa
 env:
