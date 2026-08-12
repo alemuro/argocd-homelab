@@ -24,6 +24,7 @@ resources:
   limits: {}
 allow_from:
   - umami
+  - n8n
   - georeptes-api
   - phpmyadmin
   - nextcloud
