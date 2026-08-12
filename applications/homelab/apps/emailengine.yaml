@@ -2,11 +2,13 @@ name: emailengine
 image: postalsys/emailengine
 tag: v2
 port: 3000
+domains:
+  - emailengine.immaleix.casa
 node_selector:
   kubernetes.io/hostname: worker-1
 env:
   EENGINE_REDIS: redis://redis:6379/2
-  EENGINE_SETTINGS: '{"serviceUrl":"http://emailengine:3000"}'
+  EENGINE_SETTINGS: '{"serviceUrl":"https://emailengine.immaleix.casa"}'
   TZ: Europe/Madrid
 allow_from:
   - n8n
