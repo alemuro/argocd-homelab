@@ -10,8 +10,10 @@ node_selector:
 mount:
   /mnt/local/configs/n8n/data: /home/node/.n8n
 env:
+    N8N_PORT: "5678"
     DB_TYPE: sqlite
-    WEBHOOK_URL: https://n8n.aleix.cloud/
+    N8N_WEBHOOK_URL: https://n8n.aleix.cloud/
+    N8N_PROXY_HOPS: "1"
     N8N_AI_ASSISTANT_BASE_URL: https://ai-assistant.n8n.io
     N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
     N8N_INSTANCE_AI_MODEL: openai/gpt-5.6-luna
