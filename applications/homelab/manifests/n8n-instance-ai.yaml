@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: n8n-instance-ai
+  namespace: homelab
+spec:
+  encryptedData:
+    N8N_INSTANCE_AI_MODEL_API_KEY: AgBMbr6zbWlsTF2hNtOQcZGckLFa2+K/g3+nzIlWP6iJ0iRSHJhgowUr7t6ZlRqh9PUO7mRF+PWJ51WptIHtb3DHOYljfgoM8UnM6mo0z5bDOwRpU4ei5itRkBN/WT2gagxpie7ohfABMzlESTndPqCIbBOfJeB7ChnmPMTF7fVXsETAYzCpF73bniymJBjmiqaeGrQrz1stKJVT1XzxnnXeb/oeo2QzQnf9HgRBZ2WQ2Uh4rqgOnnrNXmUxN1V1fntqV9iO2vHFRWBTsu7hgBef1knhSG+UEra3lZLz8e6r3K92mTEALz31TLmSsyZ8qgyOQEGSutXDGjKk1fhoSG3dtsQFiTN0IAdlaiXDFUWverH/h8BwjM8PgLGvV7y6rl6O1lsVYykoNyyIYqiPxX9fkJ2VQtrqAKjLgokcOvvfgeKLSONkicbsoGXlGpQjQC2Y+Y0fFVs3xhscclnv+oLICHuCMMbGY82uo2619PBpDIPwOddQ5xSHy2Qe1Xx9gAGYIHKSD2i1qztS5gzA/RQrNgrKG2VH5TuqiGiKIawfsnSRoDTJOzr72YBkJNZq0LlBm4/ruePrPIRGZP9k4YZt1LYOsiLD9V6M//PPVS/7dg91zXP7Jttkc1tYVH/LhaHYKqEEF+QWTIiNQeaCALkCXK5tQKrcsi6q8DhVdTkLwcvFWPJJHriG6Lt515+n1d3/p++UfmHfbHftv4sbohm3rTGBNxsza3D2bj8lFR4Djzbg38JHmqkYHtHyetGcO00XUx4sfI7CplsC/jkUOwTFiA3WonvKJcVRf/Y3GtyoZ8Bp7yMwD1NsJt5K9tygQscNsnRnPKpTCppaJxE9oAx1h3VYiPfpjoImYhOiBnfPkKeDEyUS2cCRZJ7X3A7A2bTkwLxeWXD3gCIV/YFo6lfgdifX9Q==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: n8n-instance-ai
+      namespace: homelab

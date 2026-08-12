@@ -13,3 +13,8 @@ env:
     WEBHOOK_URL: https://n8n.aleix.cloud/
     N8N_AI_ASSISTANT_BASE_URL: https://ai-assistant.n8n.io
     N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+    N8N_INSTANCE_AI_MODEL: openai/gpt-5.6-luna
+secretEnv:
+    N8N_INSTANCE_AI_MODEL_API_KEY:
+      secretName: n8n-instance-ai
+      key: N8N_INSTANCE_AI_MODEL_API_KEY
