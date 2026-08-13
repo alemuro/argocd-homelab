@@ -1,6 +1,6 @@
 name: farewell
 image: ghcr.io/alemuro/homeflix-farewell
-tag: v0.1.2
+tag: v0.2.0
 port: 3000
 node_selector:
   kubernetes.io/hostname: worker-0
@@ -15,7 +15,12 @@ domains:
 env:
   MAINTAINTERR_URL: http://maintainerr:80
   PLEX_BASE_URL: https://plex.immaleix.casa
+  PLEX_OAUTH_CLIENT_ID: homeflix-farewell
   TZ: Europe/Madrid
+secretEnv:
+  SESSION_SECRET:
+    secretName: farewell-session
+    key: SESSION_SECRET
 probes:
   liveness:
     httpGet:
