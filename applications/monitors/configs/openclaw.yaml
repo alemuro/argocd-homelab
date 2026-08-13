@@ -1,0 +1,57 @@
+name: "openclaw-monitors"
+title: "OpenClaw Monitors"
+folderUid: "bds4wss5qivwgc"
+intervalSeconds: 60
+
+rules:
+  - name: "OpenClaw instance down"
+    condition: "A"
+    for: "5m"
+    from: 300
+    to: 0
+    datasourceUid: "grafanacloud-prom"
+    operator: "below"
+    threshold: 1
+    summary: "OpenClaw {{$labels.instance}} not reporting"
+    description: |
+      Runbook:
+      1. Check the VM openclaw-0 is running: 'qm status 120' on rick (192.168.1.3).
+      2. Verify node_exporter is still running on the VM: 'systemctl status node_exporter'.
+      3. Confirm the Grafana Cloud scrape target for openclaw-0 is healthy.
+    expr: 'up{instance=~"openclaw.*"}'
+
+  - name: "OpenClaw disk available"
+    condition: "A"
+    for: "15m"
+    from: 900
+    to: 0
+    datasourceUid: "grafanacloud-prom"
+    operator: "below"
+    threshold: 0.15
+    summary: "OpenClaw {{$labels.instance}} Disk ({{$labels.mountpoint}}) out of space"
+    description: "OpenClaw VM {{$labels.instance}} mountpoint {{$labels.mountpoint}} is below 15% free (40 GiB disk), consider removing files or growing the disk"
+    expr: '(node_filesystem_avail_bytes{fstype="ext4",instance=~"openclaw.*"} / node_filesystem_size_bytes{instance=~"openclaw.*"})'
+
+  - name: "OpenClaw CPU usage"
+    condition: "A"
+    for: "15m"
+    from: 900
+    to: 0
+    datasourceUid: "grafanacloud-prom"
+    operator: "below"
+    threshold: 0.2
+    summary: "OpenClaw {{$labels.instance}} CPU usage"
+    description: "OpenClaw VM {{$labels.instance}} is using more than 80% of the CPU for the last 15 minutes"
+    expr: '(sum(node_cpu_seconds_total{mode="idle",instance=~"openclaw.*"}) by(instance) / sum(node_cpu_seconds_total{instance=~"openclaw.*"}) by(instance))'
+
+  - name: "OpenClaw Memory usage"
+    condition: "A"
+    for: "15m"
+    from: 900
+    to: 0
+    datasourceUid: "grafanacloud-prom"
+    operator: "above"
+    threshold: 0.85
+    summary: "OpenClaw {{$labels.instance}} Memory usage"
+    description: "OpenClaw VM {{$labels.instance}} is using more than 85% of the Memory (2 GiB) for the last 15 minutes"
+    expr: '(1 - avg by(instance) ((node_memory_MemFree_bytes{instance=~"openclaw.*"} + (node_memory_Cached_bytes{instance=~"openclaw.*"} + node_memory_Buffers_bytes{instance=~"openclaw.*"} + node_memory_SReclaimable_bytes{instance=~"openclaw.*"})) / node_memory_MemTotal_bytes{instance=~"openclaw.*"}))'
