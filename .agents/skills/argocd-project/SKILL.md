@@ -182,7 +182,7 @@ spec:
         ...
 ```
 
-`ApplyOutOfSyncOnly=true` is the standard sync option for all apps. Use `prune: false` unless you have a specific reason to allow pruning.
+`ApplyOutOfSyncOnly=true` is the standard sync option for all apps. Use `prune: true` (the default) so resources removed from the repo are auto-cleaned. Only set `prune: false` for specific apps where accidental deletions are a concern (e.g., bootstrap/sealed-secrets).
 
 ---
 
@@ -217,7 +217,7 @@ To decommission an application:
      # - jellyfin    ← remove this
    ```
 
-4. **Commit and push**. ArgoCD will detect the app is no longer in the `apps/*.yaml` glob and will delete the Application (subject to `prune: false` policy — the K8s resources remain until manually cleaned up).
+4. **Commit and push**. ArgoCD will detect the app is no longer in the `apps/*.yaml` glob and will delete the Application (subject to `prune: true` policy — the K8s resources are auto-cleaned, which is the intended GitOps behavior).
 
 ### Why not just delete?
 
@@ -422,7 +422,7 @@ spec:
 - **2-space indentation** everywhere
 - **`apiVersion`** and **`kind`** at the top of every resource
 - For ArgoCD `Application` resources, ensure:
-  - `syncPolicy.automated.prune: false` (prevents accidental deletions)
+  - `syncPolicy.automated.prune: true` (auto-cleans resources removed from the repo)
   - `syncPolicy.automated.selfHeal: true` (auto-corrects drift)
   - `syncPolicy.syncOptions: [ApplyOutOfSyncOnly=true]` (efficient syncing)
 
@@ -430,12 +430,16 @@ spec:
 
 | Stack | prune | selfHeal | Notes |
 |-------|-------|----------|-------|
-| homeflix | `false` | `true` | Standard |
-| homelab | `false` | `true` | Standard |
-| devops | `true` | `true` | Exception — prune is enabled here |
-| platform | `false` | `true` | Standard (for raw Applications) |
-| ingress | `false` | `true` | Standard |
-| settings | `false` | `true` | Bootstrap config |
+| homeflix | `true` | `true` | Standard |
+| homelab | `true` | `true` | Standard |
+| devops | `true` | `true` | Standard |
+| monitors | `true` | `true` | Grafana monitors (Crossplane) |
+| platform | `true` | `true` | Standard (for raw Applications); exceptions: `sealed-secrets.yaml` uses `false` |
+| ingress | `true` | `true` | Standard |
+| settings | `true` | `true` | Bootstrap config |
+| other | `false` | `true` | Exception — `github-apps.yaml` uses `false` |
+
+Exceptions where `prune: false` is intentional (apps that should never auto-delete resources): `applications/homelab/argocd.yaml`, `applications/platform/sealed-secrets.yaml`, `applications/other/github-apps.yaml`.
 
 ### AppProject conventions
 

@@ -20,7 +20,7 @@ Guidelines for AI Agents and developers working on this repository.
 ### 2. YAML Conventions
 - Use 2-space indentation.
 - Ensure `apiVersion` and `kind` are at the top.
-- For Argo CD `Application` resources, ensure `syncPolicy` has `prune: false` (to prevent accidental deletions) and `selfHeal: true`.
+- For Argo CD `Application` resources, ensure `syncPolicy` has `prune: true` (auto-cleans resources removed from the repo) and `selfHeal: true`.
 
 ### 3. Helm Chart: `homelab-application`
 - This chart is the source of truth for deployments. If a new feature (like a specific annotation) is needed for all apps, add it to the chart templates rather than individual config files.
