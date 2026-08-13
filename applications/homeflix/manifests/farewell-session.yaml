@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: farewell-session
+  namespace: homeflix
+spec:
+  encryptedData:
+    SESSION_SECRET: AgBVTJSEXtKzH8fciz9R7D5w7ghQNrcBHWv79gn/st3hM5dbvJbC9sYgX0AsSmsyK+wVWPQnVZU6b1gCFzeMzzjGL43OOFmieCEdhXHGFbHSwlf7N47nb9vFGEFPsbZnXxjBgayyVp7yToY0apgZhRimxiO04IX0K4NCr5+oTz+9lYIj3kKVYiftJ0fKCOEnUNc2/4DfRPQUZh/O+Y/yhVH0UcEP5NNs73swmEclAzhi72IxpGO8W5WgSiTtCNXr3Dt/4fotdILTqQrwDC5L/KTEd7gLtvKb1aoL6I33Z/pegcpFFfHSt8bMoAKUJuwHRxVqp3axIFJSEqeePCh6h3hin/24VWLmGSXTqza2pH6LBgiPSesn+nK0A9owHahDYxD7tlUFykN3y05xN6DdPDN8iLdrmtDxtKFQj5NW1iBIrVf32A9dDi1M5dWtfBEYrPnGyUii2EfqgZg99F+7OZBuvw+QzSiLXsNDAfzu4WmhFzWmHO3IYOZG+iX1TbSWfCyxzLt3tgNzGFLrvnJzJYHeoB1met+N/KIifkGCrUQyRZ27OriNCnodIRWBrtIrzeEmCRrsg9Y8Po8pzUv4b3g7uJAkMldqRaIXqYVZSvb7sW+4DnGioqLNvh0/aFm/zhU21O525MW1bEQgBs+gkxP2M1LOXQhmOGa52aS0wEOWGHXaYniDlG9qkdQBdx7VzHKbYJ2pbQgCJU+wtay54JSE0HyXiZaevGkT9YGBgM5aydZo4FyG9ibvED7UTQJvY5gPLw4Yhx74yxyO7sv8V3GB
+  template:
+    metadata:
+      creationTimestamp: null
+      name: farewell-session
+      namespace: homeflix
