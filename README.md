@@ -5,7 +5,7 @@ This repository manages the infrastructure and applications of my homelab using 
 ## 📂 Repository Structure
 
 - **/applications**: Argo CD Application and ApplicationSet definitions.
-  - **/platform**: Core system components (Sealed Secrets, Argo CD Image Updater).
+  - **/platform**: Core system components (Sealed Secrets, Crossplane).
   - **/homeflix**: Media stack applications.
     - `stack.yaml`: ApplicationSet that dynamically deploys apps from the `configs/` folder.
     - `/configs`: YAML files containing values for each application (e.g., `radarr.yaml`, `sonarr.yaml`).
@@ -37,6 +37,6 @@ The Homeflix stack uses the **Git File Generator** pattern. To deploy a new app:
 
 ## 🛠 Features
 
-- **Automated Image Updates**: Managed by `argocd-image-updater` for platform components.
+- **Pinned Image Tags**: Image tags are pinned in each app's YAML and updated manually (via `check-updates.py` / Renovate). No automated image updater is deployed.
 - **Simplified Networking**: `homelab-application` chart automatically handles Ingress and NetworkPolicies.
 - **Sealed Secrets**: Secrets are encrypted and safe to store in Git.

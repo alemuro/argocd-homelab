@@ -10,10 +10,6 @@ mount:
   /mnt/local/configs/bazarr/config: /config
   /mnt/nfs/homeflix-v2: /media
   /mnt/gdrive/tv: /media/gdrive-tv
-image_updater:
-  enabled: true
-  strategy: semver
-  allow_tags: "v*"
 env:
   PUID: "1000"
   PGID: "1000"

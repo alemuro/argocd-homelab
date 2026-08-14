@@ -29,7 +29,7 @@ argocd-homelab/
 │   │   └── argocd.yaml     # Raw Application for ArgoCD itself (not in apps/)
 │   ├── devops/             # DevOps tools (forgejo, etc.)
 │   │   └── stack.yaml
-│   ├── platform/           # System components (sealed-secrets, image-updater)
+│   ├── platform/           # System components (sealed-secrets, crossplane)
 │   ├── ingress/            # Cloudflare tunnels
 │   │   └── tunnels/
 │   └── other/              # Miscellaneous
@@ -85,7 +85,7 @@ Key details:
 
 Some apps are deployed as standalone `kind: Application` resources instead of going through an ApplicationSet:
 - **ArgoCD itself**: `applications/homelab/argocd.yaml` — a raw `Application` using the `argo-cd` Helm chart
-- **Platform components**: `applications/platform/sealed-secrets.yaml`, `argocd-image-updater.yaml` — raw `Application` resources using third-party charts
+- **Platform components**: `applications/platform/sealed-secrets.yaml`, `crossplane.yaml` — raw `Application` resources using third-party charts
 - **Tunnels**: `applications/ingress/tunnels/` — raw K8s manifests deployed directly (not through the homelab-application chart)
 
 Use a raw `Application` resource when the app needs an external Helm chart or custom K8s manifests. Use the ApplicationSet + `apps/*.yaml` pattern when the app fits the `homelab-application` chart schema.
@@ -232,7 +232,6 @@ Chart location: `helm/homelab-application/` (local chart, `apiVersion: v2`, vers
 Generates these resources (conditionally):
 - **ConfigMap** — if `configmaps` is set
 - **Deployment** — always (creates the pod with env, volumes, args, resources)
-- **ImageUpdater** — if `image_updater.enabled` is true
 - **Ingress** (×2–3) — if `port` + at least one of `domains`/`cloudflare_domains`
 - **Middleware** (HTTP→HTTPS redirect) — if `port` + `domains` and `disableHttpRedirect` is not set
 - **NetworkPolicy** — if any of `allow_from`, `allow_from_cidrs`, `allow_from_namespaces` is set
@@ -264,7 +263,8 @@ Generates these resources (conditionally):
 | `nodeSelector` | map | `{}` | Alternate node selector (kept for backward compat) |
 | `imagePullSecrets` | array | `[]` | Image pull secret references |
 | `pod_additional_ports` | object[] | — | Extra container ports. Each has: `name`, `container_port`, optional `host_port`, optional `protocol` (default TCP) |
-| `image_updater` | object | — | Auto-update config. Format: `{ enabled: bool, strategy: "semver", allow_tags: "v*" }` |
+
+> **Note**: Image tags are pinned in each app's YAML. Updates are done manually with `check-updates.py` / Renovate — see the `update-container-images` skill. The `image_updater` key is no longer supported (argocd-image-updater was decommissioned).
 
 ### Environment variables note
 

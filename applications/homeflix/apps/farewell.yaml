@@ -6,10 +6,6 @@ node_selector:
   kubernetes.io/hostname: worker-0
 imagePullSecrets:
   - name: github-credentials
-image_updater:
-  enabled: true
-  strategy: semver
-  allow_tags: "v*"
 domains:
   - farewell.immaleix.casa
 env:

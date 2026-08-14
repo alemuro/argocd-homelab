@@ -21,7 +21,3 @@ allow_from:
   - seerr
   - bazarr
   - soularr
-image_updater:
-  enabled: true
-  strategy: semver
-  allow_tags: "v*"
