@@ -1,7 +1,7 @@
 name: nextcloud
 type: StatefulSet
 image: nextcloud
-tag: 34.0.2
+tag: 34.0.3
 port: 80
 domains:
   - nextcloud.immaleix.casa
