@@ -13,5 +13,15 @@ rules:
     operator: "below"
     threshold: 1
     summary: "Service {{$labels.cluster}}/{{$labels.kubernetes_namespace}}/{{$labels.k8s_app}} not reachable"
-    description: "Service {{$labels.service}} is not reachable"
+    description: |
+      [AUTONOMY: AGENT-AUTO / AGENT-SUPERVISED]
+      1. DIAGNOSIS:
+         - Check pod status: `kubectl get pods -n {{$labels.kubernetes_namespace}} -l app={{$labels.k8s_app}}` (or `-l k8s-app={{$labels.k8s_app}}`).
+         - Check container logs: `kubectl logs -n {{$labels.kubernetes_namespace}} -l app={{$labels.k8s_app}} --tail=50`.
+         - Check service endpoints: `kubectl get endpoints {{$labels.k8s_app}} -n {{$labels.kubernetes_namespace}}`.
+      2. REMEDIATION:
+         - If pod is CrashLooping or unresponsive, attempt one restart: `kubectl rollout restart deployment/{{$labels.k8s_app}} -n {{$labels.kubernetes_namespace}}`.
+         - If service depends on a database (e.g. homedb/mysql/redis), verify the database pod is healthy.
+      3. ESCALATION:
+         - If pod fails to become Ready within 5m after restart, or errors indicate persistent DB corruption / secret failure, alert human immediately with diagnostic logs.
     expr: 'min(probe_success{job="prometheus.scrape.healthchecks",service=~"radarr|sonarr|plex|qbittorrent|bazarr|overseerr|prowlarr|tautulli|dns1|dns2|consul|openbao|uptime|vaultwarden|cloudweatherproxy|gloriarelats|jocdelsmunicipis-api"}) by(service, kubernetes_namespace, k8s_app, cluster)'

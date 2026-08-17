@@ -13,7 +13,16 @@ rules:
     operator: "below"
     threshold: 0.2
     summary: "Node {{$labels.cluster}}/{{$labels.instance}} Disk ({{$labels.mountpoint}}) out of space"
-    description: "Node {{$labels.instance}} mountpoint {{$labels.mountpoint}} is out of space, consider removing some files or adding more space"
+    description: |
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS:
+         - Check disk usage breakdown on node {{$labels.instance}} for mountpoint {{$labels.mountpoint}}.
+         - Identify heavy directories (e.g. `/var/log`, `/var/lib/containerd`, `/tmp`).
+      2. REMEDIATION:
+         - Safely prune unused containerd images or clean rotated system logs if system partition is filling up.
+         - NEVER delete user data, application databases, or persistent volume directories (`/mnt/local`, `/mnt/nfs`).
+      3. ESCALATION:
+         - If disk pressure is on persistent volumes or requires volume expansion, notify human with directory breakdown.
     expr: '(node_filesystem_avail_bytes{fstype="ext4"} / node_filesystem_size_bytes)'
 
   - name: "Node CPU usage"
@@ -25,7 +34,15 @@ rules:
     operator: "below"
     threshold: 0.2
     summary: "Node {{$labels.cluster}}/{{$labels.instance}} CPU usage"
-    description: "Node {{$labels.instance}} is using more than 80% of the CPU for the last 15 minutes"
+    description: |
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS:
+         - Check top pods consuming CPU on {{$labels.instance}}: `kubectl top pods -A --field-selector spec.nodeName={{$labels.instance}}`.
+         - Determine if high CPU is a transient legitimate job (e.g. transcoding/backup) or runaway loop.
+      2. REMEDIATION:
+         - If a non-critical pod is runaway/stuck, attempt pod restart.
+      3. ESCALATION:
+         - If sustained CPU saturation threatens node stability, notify human to rebalance workloads or resize Proxmox VM.
     expr: '(sum(node_cpu_seconds_total{mode="idle"}) by(cluster,instance) / sum(node_cpu_seconds_total{}) by(cluster,instance))'
 
   - name: "Node Memory usage"
@@ -37,5 +54,13 @@ rules:
     operator: "above"
     threshold: 0.85
     summary: "Node {{$labels.cluster}}/{{$labels.instance}} Memory usage"
-    description: "Node {{$labels.instance}} is using more than 85% of the Memory for the last 15 minutes"
+    description: |
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS:
+         - Identify top memory-consuming pods on {{$labels.instance}}: `kubectl top pods -A --field-selector spec.nodeName={{$labels.instance}}`.
+         - Check kernel buffer/cache vs working set memory.
+      2. REMEDIATION:
+         - If a single pod has leaked memory, restart that pod.
+      3. ESCALATION:
+         - If high memory is sustained due to overall workload density, notify human to adjust VM memory allocations in Proxmox.
     expr: '(1 - avg by(instance,cluster) ((node_memory_MemFree_bytes{} + (node_memory_Cached_bytes{} + node_memory_Buffers_bytes{} + node_memory_SReclaimable_bytes{})) / node_memory_MemTotal_bytes{}))'

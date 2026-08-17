@@ -14,10 +14,11 @@ rules:
     threshold: 0
     summary: "Sonarr / Cannot import downloads"
     description: |
-      Runbook:
-      1. Go to https://sonarr.immaleix.casa/activity/queue to inspect blocked downloads.
-      2. Verify destination permissions or disk space.
-      3. Import or remove blocked items manually.
+      [AUTONOMY: HUMAN-ONLY] (Agent provides context only)
+      1. DIAGNOSIS: Query Sonarr API `GET /api/v3/queue` to inspect blocked downloads or check UI https://sonarr.immaleix.casa/activity/queue. Verify destination permissions on `/media/tv` and disk space.
+      2. AGENT BOUNDARY: DO NOT force import or delete torrent/media files automatically.
+      3. ACTION: Notify human with series name, release title, and failure reason (e.g. disk space, permissions, sample file, or mismatch).
+      4. HUMAN RESOLUTION: Resolve blocking issue in Sonarr UI or import manually via Wanted -> Manual Import.
     expr: 'max(sonarr_queue_total{download_state="importBlocked"} or vector(0))'
 
   - name: "qBittorrent down"
@@ -30,10 +31,10 @@ rules:
     threshold: 1
     summary: "qBittorrent service down"
     description: |
-      Runbook:
-      1. Check pod status with 'kubectl get pod -n homeflix -l app=qbittorrent'.
-      2. Verify Web UI at https://qbittorrent.immaleix.casa.
-      3. Inspect logs with 'kubectl logs -n homeflix -l app=qbittorrent'.
+      [AUTONOMY: AGENT-AUTO]
+      1. DIAGNOSIS: Run `kubectl get pod -n homeflix -l app=qbittorrent` and check logs `kubectl logs -n homeflix -l app=qbittorrent --tail=50`. Verify UI at https://qbittorrent.immaleix.casa.
+      2. REMEDIATION: If pod is CrashLooping, hanging or probe failing, execute `kubectl rollout restart deployment/qbittorrent -n homeflix`.
+      3. ESCALATION: If qBittorrent remains down 5m after restart or persistent storage fails, alert human.
     expr: 'qbittorrent_up'
 
   - name: "qBittorrent disconnected from network"
@@ -46,10 +47,10 @@ rules:
     threshold: 1
     summary: "qBittorrent disconnected from BitTorrent network"
     description: |
-      Runbook:
-      1. Check VPN status with 'kubectl logs -n homeflix -l app=gluetun'.
-      2. Verify P2P port forwarding / outbound connectivity.
-      3. Restart gluetun or qbittorrent pod if VPN reconnection stalled.
+      [AUTONOMY: AGENT-AUTO]
+      1. DIAGNOSIS: Check gluetun VPN logs `kubectl logs -n homeflix -l app=gluetun --tail=50` and verify outbound connectivity / port forwarding.
+      2. REMEDIATION: Restart gluetun or qbittorrent pod (`kubectl rollout restart deployment/gluetun -n homeflix` or `kubectl rollout restart deployment/qbittorrent -n homeflix`).
+      3. ESCALATION: If VPN tunnel reconnection fails repeatedly or credentials have expired, notify human.
     expr: 'qbittorrent_connected'
 
   - name: "qBittorrent torrents in error state"
@@ -62,10 +63,10 @@ rules:
     threshold: 0
     summary: "qBittorrent has torrents with errors or missing files"
     description: |
-      Runbook:
-      1. Access https://qbittorrent.immaleix.casa and filter torrents by 'Errored' or 'Missing Files'.
-      2. Perform 'Force Recheck'.
-      3. Check NFS mount status under /mnt/nfs/homeflix-v2/downloads.
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS: Access qBittorrent API/UI at https://qbittorrent.immaleix.casa, filter torrents by 'Errored' or 'Missing Files', and verify NFS mount under `/mnt/nfs/homeflix-v2/downloads`.
+      2. REMEDIATION: Trigger 'Force Recheck' via qBittorrent API on affected torrents.
+      3. ESCALATION: If files are permanently missing or recheck fails, DO NOT delete files; notify human with the list of affected torrents.
     expr: 'sum(qbittorrent_torrents_count{status=~"error|missingFiles"})'
 
   - name: "qBittorrent too many torrents queued in upload"
@@ -78,10 +79,10 @@ rules:
     threshold: 0
     summary: "qBittorrent too many torrents queued in upload"
     description: |
-      Runbook:
-      1. Access https://qbittorrent.immaleix.casa.
-      2. Check Queueing limits under Options -> BitTorrent -> Queueing.
-      3. Adjust max active uploads limit or force resume queued torrents if needed.
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS: Check queue limits in qBittorrent (Options -> BitTorrent -> Queueing) and verify current upload/seeding torrent counts.
+      2. REMEDIATION: Force resume queued torrents if upload bandwidth is available, or verify Maintainerr/qbit-voter cleanup jobs.
+      3. ESCALATION: If queue congestion persists or upload limits need permanent tuning, request human review.
     expr: 'sum(qbittorrent_torrents_count{status="queuedUP"})'
 
   - name: "qbit-voter too many pending validations"
@@ -94,8 +95,8 @@ rules:
     threshold: 20
     summary: "qbit-voter has too many torrents pending validation"
     description: |
-      Runbook:
-      1. Access https://qbit-voter.immaleix.casa and review the pending torrents.
-      2. Validate and vote on torrents until the pending count is below 20.
-      3. If the count is stale, check the qbit-voter pod and the qBittorrent connection.
+      [AUTONOMY: HUMAN-ONLY] (Agent checks health only)
+      1. DIAGNOSIS: Check qbit-voter pod status (`kubectl get pods -n homeflix -l app=qbit-voter`) and API connectivity to qBittorrent.
+      2. AGENT BOUNDARY: DO NOT auto-vote or auto-delete pending torrents.
+      3. ACTION: Check https://qbit-voter.immaleix.casa and notify human to review and vote on pending torrents.
     expr: 'qbit_voter_untagged_torrents'

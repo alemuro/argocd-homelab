@@ -13,5 +13,14 @@ rules:
     operator: "below"
     threshold: 1
     summary: "Synthetic test {{$labels.instance}} failed"
-    description: "Synthetic test {{$labels.instance}} failed"
+    description: |
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS:
+         - Check reachability and HTTP response code for {{$labels.instance}}.
+         - Verify Cloudflare Tunnel pod status: `kubectl get pods -n ingress`.
+         - Test local vs public DNS resolution for the endpoint.
+      2. REMEDIATION:
+         - If Cloudflare Tunnel pod is stalled or disconnected, restart it: `kubectl rollout restart deployment -n ingress`.
+      3. ESCALATION:
+         - If failure is caused by upstream ISP outage, external domain registration, or Cloudflare edge issue, notify human.
     expr: 'max(probe_success{job!~"prometheus.*"}) by(instance)'

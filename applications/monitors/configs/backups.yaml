@@ -13,7 +13,15 @@ rules:
     operator: "below"
     threshold: 1
     summary: "worker-0 Backup failed"
-    description: "Backup for worker-0 failed"
+    description: |
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS:
+         - Query Loki logs for `{service_name="restic-worker-0"}` to identify failure cause (e.g. stale lock, network error, auth issue).
+         - Check backup job / systemd service status on worker-0.
+      2. REMEDIATION:
+         - If failure is due to a stale lock and no restic process is active, run `restic unlock` and retry backup run.
+      3. ESCALATION:
+         - If repository integrity check fails (`restic check` errors) or destination storage is full, alert human immediately.
     expr: '(sum(count_over_time({service_name="restic-worker-0"} |~ "snapshot .+ saved"[1d])) or vector(0))'
 
   - name: "Backup failed (worker-1)"
@@ -25,7 +33,15 @@ rules:
     operator: "below"
     threshold: 1
     summary: "worker-1 Backup failed"
-    description: "Backup for worker-1 failed"
+    description: |
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS:
+         - Query Loki logs for `{service_name="restic-worker-1"}` to identify failure cause (e.g. stale lock, network error, auth issue).
+         - Check backup job / systemd service status on worker-1.
+      2. REMEDIATION:
+         - If failure is due to a stale lock and no restic process is active, run `restic unlock` and retry backup run.
+      3. ESCALATION:
+         - If repository integrity check fails (`restic check` errors) or destination storage is full, alert human immediately.
     expr: '(sum(count_over_time({service_name="restic-worker-1"} |~ "snapshot .+ saved"[1d])) or vector(0))'
 
   - name: "Backup failed (summer)"
@@ -37,5 +53,13 @@ rules:
     operator: "below"
     threshold: 1
     summary: "summer Backup failed"
-    description: "Backup for summer failed"
+    description: |
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS:
+         - Query Loki logs for `{service_name="restic-summer"}` to identify failure cause (e.g. stale lock, network error, auth issue).
+         - Check backup job / systemd service status on summer.
+      2. REMEDIATION:
+         - If failure is due to a stale lock and no restic process is active, run `restic unlock` and retry backup run.
+      3. ESCALATION:
+         - If repository integrity check fails (`restic check` errors) or destination storage is full, alert human immediately.
     expr: '(sum(count_over_time({service_name="restic-summer"} |~ "snapshot .+ saved"[1d])) or vector(0))'

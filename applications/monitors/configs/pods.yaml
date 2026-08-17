@@ -13,7 +13,15 @@ rules:
     operator: "above"
     threshold: 1
     summary: "Pod {{$labels.namespace}}/{{$labels.pod}} CPU above request"
-    description: "Pod {{$labels.pod}} in {{$labels.namespace}} has been using more CPU than its request for 10+ minutes"
+    description: |
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS:
+         - Check live CPU usage: `kubectl top pod {{$labels.pod}} -n {{$labels.namespace}}`.
+         - Inspect pod logs for runaway loops or heavy background processes.
+      2. REMEDIATION:
+         - If load is legitimate and sustained, draft a GitOps PR adjusting `resources.requests.cpu` in `applications/{{$labels.namespace}}/apps/<app>.yaml`.
+      3. ESCALATION:
+         - If CPU saturation causes service latency or node contention, notify human with usage trend.
     expr: 'sum by (pod, namespace) (rate(container_cpu_usage_seconds_total{container!="",namespace=~"homeflix|homelab"}[5m])) / sum by (pod, namespace) (kube_pod_container_resource_requests{resource="cpu",namespace=~"homeflix|homelab"})'
 
   - name: "Pod Memory above request"
@@ -25,5 +33,14 @@ rules:
     operator: "above"
     threshold: 1
     summary: "Pod {{$labels.namespace}}/{{$labels.pod}} Memory above request"
-    description: "Pod {{$labels.pod}} in {{$labels.namespace}} has been using more memory than its request for 10+ minutes"
+    description: |
+      [AUTONOMY: AGENT-SUPERVISED]
+      1. DIAGNOSIS:
+         - Check live memory usage: `kubectl top pod {{$labels.pod}} -n {{$labels.namespace}}`.
+         - Check if memory is steadily leaking or nearing limit/OOMKill risk (`kubectl describe pod {{$labels.pod}} -n {{$labels.namespace}}`).
+      2. REMEDIATION:
+         - If usage is normal growth, draft a GitOps PR adjusting `resources.requests.memory` in `applications/{{$labels.namespace}}/apps/<app>.yaml`.
+         - If memory leak is confirmed and approaching OOM, restart pod: `kubectl rollout restart deployment/<app> -n {{$labels.namespace}}`.
+      3. ESCALATION:
+         - If node experiences memory pressure, alert human immediately.
     expr: 'sum by (pod, namespace) (container_memory_working_set_bytes{container!="",namespace=~"homeflix|homelab"}) / sum by (pod, namespace) (kube_pod_container_resource_requests{resource="memory",namespace=~"homeflix|homelab"})'
