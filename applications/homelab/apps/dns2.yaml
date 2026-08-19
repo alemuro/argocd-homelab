@@ -1,6 +1,6 @@
 name: dns2
 image: adguard/adguardhome
-tag: v0.107.78
+tag: v0.107.79
 port: 3000
 domains:
   - dns2.immaleix.casa
