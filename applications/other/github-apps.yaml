@@ -10,6 +10,8 @@ spec:
         elements:
           - repo: georeptes
             folder: k8s/
+          - repo: gloriarelats.cat
+            folder: k8s/
   template:
     metadata:
       finalizers: []
