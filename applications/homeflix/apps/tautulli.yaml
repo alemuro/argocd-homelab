@@ -1,6 +1,6 @@
 name: tautulli
 image: lscr.io/linuxserver/tautulli
-tag: 2.18.0
+tag: 2.18.1
 port: 8181
 node_selector:
   kubernetes.io/hostname: worker-0
