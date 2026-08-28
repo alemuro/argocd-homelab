@@ -25,7 +25,7 @@ mount:
 resources:
   requests:
     cpu: 200m
-    memory: 768Mi
+    memory: 1536Mi
   limits:
     gpu.intel.com/i915: 1
 env:
