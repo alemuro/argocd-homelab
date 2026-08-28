@@ -6,7 +6,6 @@
   "assignees": ["alemuro"],
   "prConcurrentLimit": 0,
   "prHourlyLimit": 0,
-  "gitAuthor": "Aleix Murtra <alemurbcn+renovate@gmail.com>",
   "argocd": {
     "fileMatch": ["(^|/)applications/.+\\.yaml$"]
   },
