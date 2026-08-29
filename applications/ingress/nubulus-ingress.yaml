@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nubulus-ingress-controller
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: ingress
+  sources:
+    - chart: nubulus-ingress
+      repoURL: ghcr.io/alemuro/charts
+      targetRevision: 0.1.2
+      helm:
+        releaseName: nubulus-ingress
+        values: |
+          nubulus:
+            existingSecret: nubulus-ingress-credentials
+          controller:
+            ingressClass:
+              name: nubulus
+              create: true
+  destination:
+    name: homelab
+    namespace: ingress
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
