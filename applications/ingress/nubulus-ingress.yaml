@@ -10,12 +10,12 @@ spec:
   sources:
     - chart: nubulus-ingress
       repoURL: ghcr.io/alemuro/charts
-      targetRevision: 0.1.2
+      targetRevision: 0.2.0
       helm:
         releaseName: nubulus-ingress
         values: |
           image:
-            tag: "0.1.2"
+            tag: "0.2.0"
           imagePullSecrets:
             - name: github-credentials
           nubulus:
