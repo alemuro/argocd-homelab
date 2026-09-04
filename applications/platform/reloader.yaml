@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: reloader
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: platform
+  sources:
+  - chart: reloader
+    repoURL: https://stakater.github.io/stakater-charts
+    targetRevision: 2.2.16
+    helm:
+      releaseName: reloader
+      values: |
+        reloader:
+          autoReloadAll: true
+          watchGlobally: true
+
+  destination:
+    name: homelab
+    namespace: reloader
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
