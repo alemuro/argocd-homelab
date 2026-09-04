@@ -1,0 +1,129 @@
+name: glance
+image: glanceapp/glance
+tag: latest
+port: 8080
+domains:
+  - glance.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 128Mi
+env:
+  TZ: Europe/Madrid
+configmaps:
+  /app/config/glance.yml: |
+    theme:
+      background-color: 232 23 18
+      contrast-multiplier: 1.2
+      primary-color: 220 83 75
+      positive-color: 105 48 72
+      negative-color: 351 74 73
+
+    branding:
+      app-name: "Homelab Glance"
+
+    pages:
+      - name: Home
+        columns:
+          - size: small
+            widgets:
+              - type: clock
+                hour-format: 24h
+                timezones:
+                  - timezone: Europe/Madrid
+                    label: Barcelona
+              - type: weather
+                location: Barcelona, Spain
+                units: metric
+                hour-format: 24h
+              - type: monitor
+                title: DevOps & Infra
+                cache: 1m
+                sites:
+                  - title: ArgoCD
+                    url: https://argocd.immaleix.casa
+                    icon: di:argocd
+                  - title: Forgejo Git
+                    url: https://git.immaleix.casa
+                    icon: di:forgejo
+                  - title: DNS 1 (AdGuard)
+                    url: https://dns1.immaleix.casa
+                    icon: di:adguard-home
+                  - title: DNS 2 (AdGuard)
+                    url: https://dns2.immaleix.casa
+                    icon: di:adguard-home
+                  - title: OpenBao
+                    url: https://openbao.immaleix.casa
+                    icon: mdi:safe
+
+          - size: full
+            widgets:
+              - type: monitor
+                title: Media & Streaming
+                cache: 1m
+                sites:
+                  - title: Plex
+                    url: https://plex.immaleix.casa
+                    icon: di:plex
+                  - title: Seerr
+                    url: https://seerr.immaleix.casa
+                    icon: di:overseerr
+                  - title: Sonarr
+                    url: https://sonarr.immaleix.casa
+                    icon: di:sonarr
+                  - title: Radarr
+                    url: https://radarr.immaleix.casa
+                    icon: di:radarr
+                  - title: Bazarr
+                    url: https://bazarr.immaleix.casa
+                    icon: di:bazarr
+                  - title: Prowlarr
+                    url: https://prowlarr.immaleix.casa
+                    icon: di:prowlarr
+                  - title: qBittorrent
+                    url: https://qbittorrent.immaleix.casa
+                    icon: di:qbittorrent
+                  - title: Tautulli
+                    url: https://tautulli.immaleix.casa
+                    icon: di:tautulli
+                  - title: Maintainerr
+                    url: https://maintainerr.immaleix.casa
+                    icon: di:maintainerr
+                  - title: Pinchflat
+                    url: https://pinchflat.immaleix.casa
+                    icon: mdi:youtube
+                  - title: Miniserve
+                    url: https://miniserve.immaleix.casa
+                    icon: mdi:server
+
+          - size: small
+            widgets:
+              - type: monitor
+                title: Serveis Homelab
+                cache: 1m
+                sites:
+                  - title: Nextcloud
+                    url: https://nextcloud.immaleix.casa
+                    icon: di:nextcloud
+                  - title: Vaultwarden
+                    url: https://vaultwarden.immaleix.casa
+                    icon: di:vaultwarden
+                  - title: Pairdrop
+                    url: https://airdrop.immaleix.casa
+                    icon: mdi:wifi
+                  - title: n8n
+                    url: https://n8n.immaleix.casa
+                    icon: di:n8n
+                  - title: Uptime Kuma
+                    url: https://uptime.immaleix.casa
+                    icon: di:uptime-kuma
+                  - title: Umami
+                    url: https://umami.immaleix.casa
+                    icon: di:umami
+                  - title: phpMyAdmin
+                    url: https://phpmyadmin.immaleix.casa
+                    icon: di:phpmyadmin
