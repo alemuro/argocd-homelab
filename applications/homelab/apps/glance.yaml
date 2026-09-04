@@ -91,6 +91,7 @@ configmaps:
                     icon: mdi:vote
                   - title: Jackett
                     url: https://jackett.immaleix.casa
+                    check-url: https://jackett.immaleix.casa/UI/Login
                     icon: di:jackett
 
               - type: monitor
