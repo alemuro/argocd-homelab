@@ -97,7 +97,7 @@ configmaps:
                     icon: di:vaultwarden
                   - title: Pairdrop
                     url: https://airdrop.immaleix.casa
-                    icon: mdi:wifi
+                    icon: sh:pairdrop
                   - title: n8n
                     url: https://n8n.immaleix.casa
                     icon: di:n8n
@@ -117,7 +117,7 @@ configmaps:
                 sites:
                   - title: ArgoCD
                     url: https://argocd.immaleix.casa
-                    icon: di:argocd
+                    icon: di:argo-cd
                   - title: Forgejo Git
                     url: https://git.immaleix.casa
                     icon: di:forgejo
@@ -129,4 +129,4 @@ configmaps:
                     icon: di:adguard-home
                   - title: OpenBao
                     url: https://openbao.immaleix.casa
-                    icon: mdi:safe
+                    icon: di:openbao
