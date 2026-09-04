@@ -28,28 +28,6 @@ configmaps:
 
     pages:
       - name: Home
-        head-widgets:
-          - type: search
-            autofocus: true
-            new-tab: true
-            search-engine: google
-            bangs:
-              - title: Google
-                shortcut: "!g"
-                url: https://www.google.com/search?q={QUERY}
-              - title: YouTube
-                shortcut: "!yt"
-                url: https://www.youtube.com/results?search_query={QUERY}
-              - title: Reddit
-                shortcut: "!r"
-                url: https://www.reddit.com/search/?q={QUERY}
-              - title: GitHub
-                shortcut: "!gh"
-                url: https://github.com/search?q={QUERY}
-              - title: Wikipedia
-                shortcut: "!w"
-                url: https://en.wikipedia.org/wiki/Special:Search?search={QUERY}
-
         columns:
           - size: small
             widgets:
@@ -72,6 +50,27 @@ configmaps:
 
           - size: full
             widgets:
+              - type: search
+                autofocus: true
+                new-tab: true
+                search-engine: google
+                bangs:
+                  - title: Google
+                    shortcut: "!g"
+                    url: https://www.google.com/search?q={QUERY}
+                  - title: YouTube
+                    shortcut: "!yt"
+                    url: https://www.youtube.com/results?search_query={QUERY}
+                  - title: Reddit
+                    shortcut: "!r"
+                    url: https://www.reddit.com/search/?q={QUERY}
+                  - title: GitHub
+                    shortcut: "!gh"
+                    url: https://github.com/search?q={QUERY}
+                  - title: Wikipedia
+                    shortcut: "!w"
+                    url: https://en.wikipedia.org/wiki/Special:Search?search={QUERY}
+
               - type: videos
                 title: YouTube
                 channels:
