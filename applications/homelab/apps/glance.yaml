@@ -83,6 +83,15 @@ configmaps:
                     icon: mdi:server
                     alt-status-codes:
                       - 401
+                  - title: Farewell
+                    url: https://farewell.immaleix.casa
+                    icon: mdi:delete-sweep
+                  - title: qBit-Voter
+                    url: https://qbit-voter.immaleix.casa
+                    icon: mdi:vote
+                  - title: Jackett
+                    url: https://jackett.immaleix.casa
+                    icon: di:jackett
 
               - type: monitor
                 title: Serveis Homelab
@@ -130,3 +139,6 @@ configmaps:
                   - title: OpenBao
                     url: https://openbao.immaleix.casa
                     icon: di:openbao
+                  - title: Consul
+                    url: https://consul.immaleix.casa
+                    icon: di:consul
