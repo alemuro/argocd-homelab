@@ -48,6 +48,33 @@ configmaps:
 
           - size: full
             widgets:
+              - type: videos
+                title: NetworkChuck
+                channels:
+                  - UC9x0AN7BWHpCDHSm9NiJFJQ
+                limit: 6
+                collapse-after: 3
+
+              - type: group
+                widgets:
+                  - type: hacker-news
+                    limit: 15
+                    collapse-after: 5
+                  - type: reddit
+                    subreddit: homelab
+                    show-thumbnails: true
+                    limit: 15
+                    collapse-after: 5
+                  - type: reddit
+                    subreddit: antigravity
+                    show-thumbnails: true
+                    limit: 15
+                    collapse-after: 5
+
+      - name: Apps
+        columns:
+          - size: full
+            widgets:
               - type: monitor
                 title: Media & Streaming
                 cache: 1m
@@ -148,26 +175,3 @@ configmaps:
                   - title: Consul
                     url: https://consul.immaleix.casa
                     icon: di:consul
-
-              - type: videos
-                title: NetworkChuck
-                channels:
-                  - UC9x0AN7BWHpCDHSm9NiJFJQ
-                limit: 6
-                collapse-after: 3
-
-              - type: group
-                widgets:
-                  - type: hacker-news
-                    limit: 15
-                    collapse-after: 5
-                  - type: reddit
-                    subreddit: homelab
-                    show-thumbnails: true
-                    limit: 15
-                    collapse-after: 5
-                  - type: reddit
-                    subreddit: antigravity
-                    show-thumbnails: true
-                    limit: 15
-                    collapse-after: 5
