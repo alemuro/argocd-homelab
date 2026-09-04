@@ -45,6 +45,13 @@ configmaps:
                 location: Barcelona, Spain
                 units: metric
                 hour-format: 24h
+              - type: calendar
+                first-day-of-week: monday
+              - type: twitch-channels
+                channels:
+                  - outconsumer
+                  - rubius
+                  - gerardromero
 
           - size: full
             widgets:
