@@ -40,25 +40,6 @@ configmaps:
                 location: Barcelona, Spain
                 units: metric
                 hour-format: 24h
-              - type: monitor
-                title: DevOps & Infra
-                cache: 1m
-                sites:
-                  - title: ArgoCD
-                    url: https://argocd.immaleix.casa
-                    icon: di:argocd
-                  - title: Forgejo Git
-                    url: https://git.immaleix.casa
-                    icon: di:forgejo
-                  - title: DNS 1 (AdGuard)
-                    url: https://dns1.immaleix.casa
-                    icon: di:adguard-home
-                  - title: DNS 2 (AdGuard)
-                    url: https://dns2.immaleix.casa
-                    icon: di:adguard-home
-                  - title: OpenBao
-                    url: https://openbao.immaleix.casa
-                    icon: mdi:safe
 
           - size: full
             widgets:
@@ -100,8 +81,6 @@ configmaps:
                     url: https://miniserve.immaleix.casa
                     icon: mdi:server
 
-          - size: small
-            widgets:
               - type: monitor
                 title: Serveis Homelab
                 cache: 1m
@@ -127,3 +106,23 @@ configmaps:
                   - title: phpMyAdmin
                     url: https://phpmyadmin.immaleix.casa
                     icon: di:phpmyadmin
+
+              - type: monitor
+                title: DevOps & Infra
+                cache: 1m
+                sites:
+                  - title: ArgoCD
+                    url: https://argocd.immaleix.casa
+                    icon: di:argocd
+                  - title: Forgejo Git
+                    url: https://git.immaleix.casa
+                    icon: di:forgejo
+                  - title: DNS 1 (AdGuard)
+                    url: https://dns1.immaleix.casa
+                    icon: di:adguard-home
+                  - title: DNS 2 (AdGuard)
+                    url: https://dns2.immaleix.casa
+                    icon: di:adguard-home
+                  - title: OpenBao
+                    url: https://openbao.immaleix.casa
+                    icon: mdi:safe
