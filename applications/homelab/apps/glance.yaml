@@ -48,7 +48,8 @@ configmaps:
                 cache: 1m
                 sites:
                   - title: Plex
-                    url: https://plex.immaleix.casa
+                    url: https://plex.immaleix.casa/web
+                    check-url: https://plex.immaleix.casa/identity
                     icon: di:plex
                   - title: Seerr
                     url: https://seerr.immaleix.casa
@@ -80,6 +81,8 @@ configmaps:
                   - title: Miniserve
                     url: https://miniserve.immaleix.casa
                     icon: mdi:server
+                    alt-status-codes:
+                      - 401
 
               - type: monitor
                 title: Serveis Homelab
@@ -87,6 +90,7 @@ configmaps:
                 sites:
                   - title: Nextcloud
                     url: https://nextcloud.immaleix.casa
+                    check-url: https://nextcloud.immaleix.casa/status.php
                     icon: di:nextcloud
                   - title: Vaultwarden
                     url: https://vaultwarden.immaleix.casa
