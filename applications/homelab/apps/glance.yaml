@@ -49,15 +49,36 @@ configmaps:
           - size: full
             widgets:
               - type: videos
-                title: NetworkChuck
+                title: YouTube
                 channels:
-                  - UC9x0AN7BWHpCDHSm9NiJFJQ
-                limit: 6
+                  - UC9x0AN7BWHpCDHSm9NiJFJQ # NetworkChuck
+                  - UCOk-gHyjcWZNj3Br4oxwh0A # Techno Tim
+                  - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
+                limit: 9
                 collapse-after: 3
 
               - type: group
                 widgets:
+                  - type: rss
+                    title: Xataka
+                    limit: 10
+                    collapse-after: 5
+                    cache: 1h
+                    feeds:
+                      - url: https://www.xataka.com/feedburner.xml
+                        title: Xataka
+                      - url: https://www.xatakamovil.com/feedburner.xml
+                        title: Xataka Móvil
                   - type: hacker-news
+                    title: Hacker News
+                    limit: 15
+                    collapse-after: 5
+
+              - type: group
+                widgets:
+                  - type: reddit
+                    subreddit: selfhosted
+                    show-thumbnails: true
                     limit: 15
                     collapse-after: 5
                   - type: reddit
