@@ -12,6 +12,8 @@ rules:
     datasourceUid: "grafanacloud-prom"
     operator: "below"
     threshold: 0.2
+    labels:
+      resolver: agent
     summary: "Node {{$labels.cluster}}/{{$labels.instance}} Disk ({{$labels.mountpoint}}) out of space"
     description: |
       [AUTONOMY: AGENT-SUPERVISED]
@@ -33,6 +35,8 @@ rules:
     datasourceUid: "grafanacloud-prom"
     operator: "below"
     threshold: 0.2
+    labels:
+      resolver: agent
     summary: "Node {{$labels.cluster}}/{{$labels.instance}} CPU usage"
     description: |
       [AUTONOMY: AGENT-SUPERVISED]
@@ -53,6 +57,8 @@ rules:
     datasourceUid: "grafanacloud-prom"
     operator: "above"
     threshold: 0.85
+    labels:
+      resolver: agent
     summary: "Node {{$labels.cluster}}/{{$labels.instance}} Memory usage"
     description: |
       [AUTONOMY: AGENT-SUPERVISED]
@@ -60,7 +66,8 @@ rules:
          - Identify top memory-consuming pods on {{$labels.instance}}: `kubectl top pods -A --field-selector spec.nodeName={{$labels.instance}}`.
          - Check kernel buffer/cache vs working set memory.
       2. REMEDIATION:
-         - If a single pod has leaked memory, restart that pod.
+         - If a pod has leaked memory, restart that pod (`kubectl rollout restart deployment/<app> -n <ns>`).
+         - Do not increase resource requests for pods unless memory leaks/growth are proven recurrent.
       3. ESCALATION:
          - If high memory is sustained due to overall workload density, notify human to adjust VM memory allocations in Proxmox.
     expr: '(1 - avg by(instance,cluster) ((node_memory_MemFree_bytes{} + (node_memory_Cached_bytes{} + node_memory_Buffers_bytes{} + node_memory_SReclaimable_bytes{})) / node_memory_MemTotal_bytes{}))'

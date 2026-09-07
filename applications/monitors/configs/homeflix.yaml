@@ -12,6 +12,8 @@ rules:
     datasourceUid: "grafanacloud-prom"
     operator: "above"
     threshold: 0
+    labels:
+      resolver: human
     summary: "Sonarr / Cannot import downloads"
     description: |
       [AUTONOMY: HUMAN-ONLY] (Agent provides context only)
@@ -29,6 +31,8 @@ rules:
     datasourceUid: "grafanacloud-prom"
     operator: "below"
     threshold: 1
+    labels:
+      resolver: agent
     summary: "qBittorrent service down"
     description: |
       [AUTONOMY: AGENT-AUTO]
@@ -45,6 +49,8 @@ rules:
     datasourceUid: "grafanacloud-prom"
     operator: "below"
     threshold: 1
+    labels:
+      resolver: agent
     summary: "qBittorrent disconnected from BitTorrent network"
     description: |
       [AUTONOMY: AGENT-AUTO]
@@ -61,6 +67,8 @@ rules:
     datasourceUid: "grafanacloud-prom"
     operator: "above"
     threshold: 0
+    labels:
+      resolver: agent
     summary: "qBittorrent has torrents with errors or missing files"
     description: |
       [AUTONOMY: AGENT-SUPERVISED]
@@ -77,6 +85,8 @@ rules:
     datasourceUid: "grafanacloud-prom"
     operator: "above"
     threshold: 0
+    labels:
+      resolver: agent
     summary: "qBittorrent too many torrents queued in upload"
     description: |
       [AUTONOMY: AGENT-SUPERVISED]
@@ -93,6 +103,8 @@ rules:
     datasourceUid: "grafanacloud-prom"
     operator: "above"
     threshold: 20
+    labels:
+      resolver: human
     summary: "qbit-voter has too many torrents pending validation"
     description: |
       [AUTONOMY: HUMAN-ONLY] (Agent checks health only)

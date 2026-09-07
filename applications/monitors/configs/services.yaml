@@ -12,6 +12,8 @@ rules:
     datasourceUid: "grafanacloud-prom"
     operator: "below"
     threshold: 1
+    labels:
+      resolver: agent
     summary: "Service {{$labels.cluster}}/{{$labels.kubernetes_namespace}}/{{$labels.k8s_app}} not reachable"
     description: |
       [AUTONOMY: AGENT-AUTO / AGENT-SUPERVISED]

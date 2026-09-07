@@ -32,6 +32,15 @@ spec:
         annotations:
           summary: {{ .summary | quote }}
           description: {{ .description | quote }}
+        {{- if .labels }}
+        labels:
+          {{- range $k, $v := .labels }}
+          {{ $k }}: {{ $v | quote }}
+          {{- end }}
+        {{- else if .resolver }}
+        labels:
+          resolver: {{ .resolver | quote }}
+        {{- end }}
         data:
           - refId: "query"
             relativeTimeRange:

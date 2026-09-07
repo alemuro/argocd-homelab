@@ -25,6 +25,16 @@ Guidelines for AI Agents and developers working on this repository.
 ### 3. Helm Chart: `homelab-application`
 - This chart is the source of truth for deployments. If a new feature (like a specific annotation) is needed for all apps, add it to the chart templates rather than individual config files.
 
+### 4. Alert Handling & Remediation Policy
+- **Memory Alerts**:
+  - By default, do NOT increase `resources.requests.memory` or limits in application YAMLs when an alert fires.
+  - The standard procedure is to restart the pod (`kubectl rollout restart deployment/<app> -n <namespace>`) to release leaked or cached memory.
+  - Only consider increasing requests/limits via GitOps if the issue is highly recurrent (i.e. repeated restarts fail to stabilize memory and it immediately breaches again).
+- **Grafana Alert Labels**:
+  - All Crossplane alert rules (`applications/monitors/configs/*.yaml`) must include `labels.resolver`:
+    - `resolver: agent`: Alerts that can and should be remediated automatically by an agent following standard diagnostics and commands.
+    - `resolver: human`: Alerts requiring manual review, subjective decisions, or physical intervention.
+
 ## 🤖 AI Instructions
 - When adding a new app, check if it fits the `homelab-application` schema.
 - Always prefer `ApplicationSet` generators for scaling similar deployments.
