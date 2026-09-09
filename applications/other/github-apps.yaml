@@ -26,7 +26,7 @@ spec:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true
       source:
-        repoURL: ssh://git@github.com/alemuro/{{ .repo }}.git
+        repoURL: 'ssh://git@github.com/{{ default "alemuro" .owner }}/{{ .repo }}.git'
         targetRevision: HEAD
         path: "{{ .folder }}"
         directory:
