@@ -12,6 +12,9 @@ spec:
             folder: k8s/
           - repo: gloriarelats.cat
             folder: k8s/
+          - repo: calendari-dinars
+            owner: kenga11
+            folder: k8s/
   template:
     metadata:
       finalizers: []
