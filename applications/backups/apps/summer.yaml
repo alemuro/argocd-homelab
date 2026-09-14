@@ -1,5 +1,5 @@
 nodeName: summer
-path: /mnt/local/configs
+backupPath: /mnt/local/configs
 backup:
   schedule: "4 3 * * *"
 cleanup:

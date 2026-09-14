@@ -43,7 +43,7 @@ spec:
                 - --tag
                 - {{ .Values.backup.tag | default "daily" | quote }}
                 - backup
-                - {{ .Values.path | default "/mnt/local/configs" | quote }}
+                - {{ .Values.backupPath | default "/mnt/local/configs" | quote }}
               env:
                 - name: RESTIC_PASSWORD
                   valueFrom:
@@ -57,10 +57,10 @@ spec:
                       key: {{ include "restic-backup.repositoryKey" . }}
               volumeMounts:
                 - name: configs
-                  mountPath: {{ .Values.path | default "/mnt/local/configs" }}
+                  mountPath: {{ .Values.backupPath | default "/mnt/local/configs" }}
           volumes:
             - name: configs
               hostPath:
-                path: {{ .Values.path | default "/mnt/local/configs" }}
+                path: {{ .Values.backupPath | default "/mnt/local/configs" }}
                 type: ""
 {{- end }}

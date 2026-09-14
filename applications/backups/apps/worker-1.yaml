@@ -1,5 +1,5 @@
 nodeName: worker-1
-path: /mnt/local/configs
+backupPath: /mnt/local/configs
 backup:
   schedule: "2 3 * * *"
 cleanup:

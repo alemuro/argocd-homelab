@@ -1,6 +1,6 @@
 nodeName: ""
 namespace: default
-path: /mnt/local/configs
+backupPath: /mnt/local/configs
 
 # Retry policy: 1 retry after initial failure = 2 attempts in total
 backoffLimit: 1

@@ -63,10 +63,10 @@ spec:
                       key: {{ include "restic-backup.repositoryKey" . }}
               volumeMounts:
                 - name: configs
-                  mountPath: {{ .Values.path | default "/mnt/local/configs" }}
+                  mountPath: {{ .Values.backupPath | default "/mnt/local/configs" }}
           volumes:
             - name: configs
               hostPath:
-                path: {{ .Values.path | default "/mnt/local/configs" }}
+                path: {{ .Values.backupPath | default "/mnt/local/configs" }}
                 type: ""
 {{- end }}
