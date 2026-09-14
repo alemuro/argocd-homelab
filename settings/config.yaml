@@ -15,6 +15,7 @@ spec:
           - folder: applications/monitors
           - folder: applications/ingress
           - folder: applications/other
+          - folder: applications/backups
   template:
     metadata:
       finalizers: []

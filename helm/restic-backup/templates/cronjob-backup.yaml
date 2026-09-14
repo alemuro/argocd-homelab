@@ -1,0 +1,66 @@
+{{- if .Values.backup.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: restic-{{ .Values.nodeName }}
+  namespace: {{ .Values.namespace | default "default" }}
+  labels:
+    app.kubernetes.io/name: restic
+    app.kubernetes.io/instance: restic-{{ .Values.nodeName }}
+    app.kubernetes.io/component: backup
+spec:
+  schedule: {{ .Values.backup.schedule | quote }}
+  timeZone: Europe/Madrid
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit | default 1 }}
+  successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit | default 1 }}
+  jobTemplate:
+    metadata:
+      labels:
+        service_name: restic-{{ .Values.nodeName }}
+        app.kubernetes.io/name: restic
+        app.kubernetes.io/instance: restic-{{ .Values.nodeName }}
+    spec:
+      backoffLimit: {{ .Values.backoffLimit | default 1 }}
+      template:
+        metadata:
+          labels:
+            service_name: restic-{{ .Values.nodeName }}
+            app.kubernetes.io/name: restic
+            app.kubernetes.io/instance: restic-{{ .Values.nodeName }}
+        spec:
+          nodeSelector:
+            kubernetes.io/hostname: {{ .Values.nodeName }}
+          restartPolicy: Never
+          containers:
+            - name: restic-{{ .Values.nodeName }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+              args:
+                - -v
+                - --host
+                - {{ .Values.nodeName | quote }}
+                - --tag
+                - {{ .Values.backup.tag | default "daily" | quote }}
+                - backup
+                - {{ .Values.path | default "/mnt/local/configs" | quote }}
+              env:
+                - name: RESTIC_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ .Values.secret.name | default "restic-credentials" }}
+                      key: {{ .Values.secret.passwordKey | default "password" }}
+                - name: RESTIC_REPOSITORY
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ .Values.secret.name | default "restic-credentials" }}
+                      key: {{ include "restic-backup.repositoryKey" . }}
+              volumeMounts:
+                - name: configs
+                  mountPath: {{ .Values.path | default "/mnt/local/configs" }}
+          volumes:
+            - name: configs
+              hostPath:
+                path: {{ .Values.path | default "/mnt/local/configs" }}
+                type: ""
+{{- end }}

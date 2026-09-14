@@ -1,0 +1,6 @@
+nodeName: worker-0
+path: /mnt/local/configs
+backup:
+  schedule: "0 3 * * *"
+cleanup:
+  schedule: "0 4 * * 0"

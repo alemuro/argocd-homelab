@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: backup-apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - git:
+        repoURL: ssh://git@github.com/alemuro/argocd-homelab.git
+        revision: HEAD
+        files:
+          - path: "applications/backups/apps/*.yaml"
+  template:
+    metadata:
+      name: "backup-{{.nodeName}}"
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: backups
+      source:
+        path: helm/restic-backup
+        repoURL: ssh://git@github.com/alemuro/argocd-homelab.git
+        targetRevision: HEAD
+        helm:
+          values: |
+            {{- toYaml . | nindent 12 }}
+      destination:
+        name: homelab
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true

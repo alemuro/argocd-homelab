@@ -1,0 +1,6 @@
+apiVersion: v2
+name: restic-backup
+description: Helm chart for deploying node-level Restic backup and cleanup CronJobs.
+type: application
+version: 0.1.0
+appVersion: "0.18.0"

@@ -1,0 +1,32 @@
+nodeName: ""
+namespace: default
+path: /mnt/local/configs
+
+# Retry policy: 1 retry after initial failure = 2 attempts in total
+backoffLimit: 1
+
+failedJobsHistoryLimit: 1
+successfulJobsHistoryLimit: 1
+
+image:
+  repository: restic/restic
+  tag: "0.18.0"
+  pullPolicy: IfNotPresent
+
+backup:
+  enabled: true
+  schedule: "0 3 * * *"
+  tag: daily
+
+cleanup:
+  enabled: true
+  schedule: "0 4 * * 0"
+  tag: daily
+  keepDaily: "7"
+  keepWeekly: "5"
+  keepMonthly: "6"
+
+secret:
+  name: restic-credentials
+  passwordKey: password
+  repositoryKey: "" # Defaults to "{{ .Values.nodeName }}-repository"
