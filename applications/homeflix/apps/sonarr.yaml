@@ -1,6 +1,6 @@
 name: sonarr
 image: lscr.io/linuxserver/sonarr
-tag: 4.0.19
+tag: 4.0.20
 port: 8989
 node_selector:
   kubernetes.io/hostname: worker-0
