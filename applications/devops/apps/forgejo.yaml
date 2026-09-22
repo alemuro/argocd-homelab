@@ -16,6 +16,8 @@ env:
   USER_UID: "1200"
   USER_GID: "1200"
   TZ: Europe/Madrid
+  FORGEJO__service__DISABLE_REGISTRATION: "true"
+  FORGEJO__service__SHOW_REGISTRATION_BUTTON: "false"
 pod_additional_ports:
   - name: "ssh"
     container_port: 22
