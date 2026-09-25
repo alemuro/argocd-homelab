@@ -1,6 +1,6 @@
 name: openbao
 image: ghcr.io/openbao/openbao
-tag: 2.6.2
+tag: 2.7.0
 port: 8200
 domains:
   - openbao.immaleix.casa
@@ -10,13 +10,13 @@ mount:
   /mnt/local/configs/openbao: /openbao/data
 configmaps:
   /openbao/config.hcl: |
-    ui                  = true
-    cluster_addr        = "https://0.0.0.0:8201"
-    api_addr            = "https://0.0.0.0:8200"
-    disable_clustering  = true
+    ui           = true
+    cluster_addr = "http://127.0.0.1:8201"
+    api_addr     = "http://127.0.0.1:8200"
 
-    storage "file" {
-      path = "/openbao/data/openbao.db"
+    storage "raft" {
+      path    = "/openbao/data/raft"
+      node_id = "openbao-0"
     }
 
     listener "tcp" {
