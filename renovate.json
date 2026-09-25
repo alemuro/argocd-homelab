@@ -29,6 +29,11 @@
       "enabled": false
     },
     {
+      "description": "Ignore updates for OpenBao until storage migration to raft",
+      "matchPackageNames": ["ghcr.io/openbao/openbao"],
+      "enabled": false
+    },
+    {
       "description": "Auto-push minor and patch container image updates directly to main in a single commit",
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "minor-and-patch-updates",
