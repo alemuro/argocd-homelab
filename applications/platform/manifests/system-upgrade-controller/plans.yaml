@@ -9,7 +9,7 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   concurrency: 1
-  version: v1.32.13+k3s1
+  version: v1.33.13+k3s2
   nodeSelector:
     matchExpressions:
       - key: node-role.kubernetes.io/control-plane
@@ -45,7 +45,7 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   concurrency: 1
-  version: v1.32.13+k3s1
+  version: v1.33.13+k3s2
   nodeSelector:
     matchExpressions:
       - key: node-role.kubernetes.io/control-plane
