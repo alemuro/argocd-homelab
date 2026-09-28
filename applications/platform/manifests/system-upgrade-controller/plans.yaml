@@ -29,8 +29,8 @@ spec:
   cordon: true
   drain:
     force: true
-    skipWaitForDeleteTimeout: 60
-    deleteEmptyDirData: true
+    disableEviction: true
+    deleteEmptydirData: true
     ignoreDaemonSets: true
   upgrade:
     image: rancher/k3s-upgrade
@@ -59,8 +59,8 @@ spec:
   cordon: true
   drain:
     force: true
-    skipWaitForDeleteTimeout: 60
-    deleteEmptyDirData: true
+    disableEviction: true
+    deleteEmptydirData: true
     ignoreDaemonSets: true
   upgrade:
     image: rancher/k3s-upgrade
