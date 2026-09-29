@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: platform
+  sources:
+    - chart: traefik
+      repoURL: https://helm.traefik.io/traefik
+      targetRevision: 26.1.0
+      helm:
+        releaseName: traefik
+        apiVersions:
+          - monitoring.coreos.com/v1
+          - monitoring.coreos.com/v1/ServiceMonitor
+        values: |
+          logLevel: warn
+          deployment:
+            kind: DaemonSet
+          logs:
+            access:
+              enabled: true
+              filters:
+                statuscodes: 400-410,500-504
+          providers:
+            kubernetesIngress:
+              publishedService:
+                enabled: true
+          metrics:
+            prometheus:
+              serviceMonitor:
+                interval: 60s
+                metricRelabelings:
+                  - sourceLabels: ["__name__"]
+                    regex: "go_.*|proces_.*|traefik_config_.*|traefik_entrypoint_.*|traefik_tls_certs_not_after|traefik_service_requests_tls_total|traefik_service_requests_bytes_total|traefik_service_open_connections|traefik_service_request_duration_seconds_bucket"
+                    action: drop
+                  - sourceLabels: ["exported_service"]
+                    targetLabel: service
+                    action: replace
+  destination:
+    name: homelab
+    namespace: ingress
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true

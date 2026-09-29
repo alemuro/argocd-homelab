@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: intel-device-plugins-operator
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: platform
+  sources:
+    - chart: intel-device-plugins-operator
+      repoURL: https://intel.github.io/helm-charts
+      targetRevision: 0.29.0
+      helm:
+        releaseName: igpu
+        values: |
+          nodeSelector:
+            kubernetes.io/hostname: worker-1
+  destination:
+    name: homelab
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
