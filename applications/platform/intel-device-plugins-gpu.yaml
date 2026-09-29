@@ -17,6 +17,7 @@ spec:
         releaseName: intel-device-plugins-gpu
         values: |
           sharedDevNum: 5
+          nodeFeatureRule: false
   destination:
     name: homelab
     namespace: default
