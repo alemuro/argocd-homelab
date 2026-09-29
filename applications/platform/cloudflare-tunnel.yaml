@@ -10,7 +10,7 @@ spec:
   sources:
     - chart: cloudflare-tunnel-ingress-controller
       repoURL: https://helm.strrl.dev
-      targetRevision: 0.0.13
+      targetRevision: 0.1.0
       helm:
         releaseName: cloudflare-tunnel
         values: |
