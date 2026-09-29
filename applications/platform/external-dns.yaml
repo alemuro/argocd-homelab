@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: platform
+  sources:
+    - chart: external-dns
+      repoURL: https://kubernetes-sigs.github.io/external-dns
+      targetRevision: 1.15.0
+      helm:
+        releaseName: external-dns
+        values: |
+          provider: cloudflare
+          env:
+            - name: CF_API_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: external-dns-cloudflare
+                  key: CF_API_EMAIL
+            - name: CF_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: external-dns-cloudflare
+                  key: CF_API_TOKEN
+          txtOwnerId: rick
+          logLevel: warning
+          domainFilters:
+            - immaleix.casa
+          nodeSelector:
+            kubernetes.io/hostname: master-0
+          tolerations:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+              effect: NoSchedule
+            - key: node-role.kubernetes.io/master
+              operator: Exists
+              effect: NoSchedule
+  destination:
+    name: homelab
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
