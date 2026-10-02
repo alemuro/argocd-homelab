@@ -1,0 +1,28 @@
+name: claqueta
+image: ghcr.io/gerardag/claqueta
+tag: 0.10.1
+port: 3000
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - claqueta.immaleix.casa
+mount:
+  /mnt/local/configs/claqueta: /app/data
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+  DATA_DIR: "/app/data"
+  ALLOW_REGISTRATION: "true"
+secretEnv:
+  AUTH_SECRET:
+    secretName: claqueta-secrets
+    key: AUTH_SECRET
+  TMDB_API_KEY:
+    secretName: claqueta-secrets
+    key: TMDB_API_KEY
+resources:
+  requests:
+    cpu: 50m
+    memory: 256Mi
+  limits: {}
