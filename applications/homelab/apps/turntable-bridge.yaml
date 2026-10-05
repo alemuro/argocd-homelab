@@ -1,6 +1,6 @@
 name: turntable-bridge
 image: ghcr.io/alemuro/turntable-bridge
-tag: latest
+tag: v1.1.0
 port: 8080
 domains:
   - phonos.immaleix.casa
@@ -27,10 +27,17 @@ resources:
   limits:
     cpu: 500m
     memory: 512Mi
+secretEnv:
+  HASS_TOKEN:
+    secretName: turntable-bridge-secrets
+    key: HASS_TOKEN
 env:
   PORT: "8080"
   TURNTABLE_MAC: "AD:60:17:9B:D5:AC"
   ICECAST_HOST: "192.168.1.14"
+  HASS_URL: "https://local.immaleix.casa"
+  SONOS_ENTITY_ID: "media_player.menjador_sonos_2"
+  SONOS_STREAM_URL: "https://phonos.immaleix.casa/sonos.mp3"
 allow_from_cidrs:
   - 192.168.1.0/24
 allow_from_namespaces:
