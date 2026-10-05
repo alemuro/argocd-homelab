@@ -3,7 +3,7 @@ image: ghcr.io/alemuro/turntable-bridge
 tag: latest
 port: 8080
 domains:
-  - turntable.immaleix.casa
+  - phonos.immaleix.casa
 node_selector:
   kubernetes.io/hostname: summer
 securityContext:
