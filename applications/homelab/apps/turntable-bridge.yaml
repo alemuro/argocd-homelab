@@ -31,3 +31,7 @@ env:
   PORT: "8080"
   TURNTABLE_MAC: "AD:60:17:9B:D5:AC"
   ICECAST_HOST: "192.168.1.14"
+allow_from_cidrs:
+  - 192.168.1.0/24
+allow_from_namespaces:
+  - ingress
