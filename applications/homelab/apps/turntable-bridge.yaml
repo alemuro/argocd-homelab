@@ -1,0 +1,33 @@
+name: turntable-bridge
+image: ghcr.io/alemuro/turntable-bridge
+tag: latest
+port: 8080
+domains:
+  - turntable.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: summer
+securityContext:
+  privileged: true
+mount:
+  /var/run/dbus/system_bus_socket: /var/run/dbus/system_bus_socket
+  /dev: /dev
+pod_additional_ports:
+  - name: stream
+    container_port: 8000
+    host_port: 8000
+    protocol: TCP
+  - name: web-host
+    container_port: 8080
+    host_port: 8080
+    protocol: TCP
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+env:
+  PORT: "8080"
+  TURNTABLE_MAC: "AD:60:17:9B:D5:AC"
+  ICECAST_HOST: "192.168.1.14"
