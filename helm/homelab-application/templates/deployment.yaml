@@ -106,7 +106,7 @@ spec:
           {{- end }}
           volumeMounts:
             {{- range $hostPath, $mountPath := .Values.mount }}
-            - name: {{ $mountPath | replace "/" "" | replace "." "-" | lower | trunc 63 | trimSuffix "-" }}
+            - name: {{ $mountPath | replace "/" "" | replace "." "-" | replace "_" "-" | lower | trunc 63 | trimSuffix "-" }}
               mountPath: {{ $mountPath }}
             {{- end }}
             {{- range $path, $content := .Values.configmaps }}
@@ -116,7 +116,7 @@ spec:
             {{- end }}
       volumes:
         {{- range $hostPath, $mountPath := .Values.mount }}
-        - name: {{ $mountPath | replace "/" "" | replace "." "-" | lower | trunc 63 | trimSuffix "-" }}
+        - name: {{ $mountPath | replace "/" "" | replace "." "-" | replace "_" "-" | lower | trunc 63 | trimSuffix "-" }}
           hostPath:
             path: {{ $hostPath }}
         {{- end }}
