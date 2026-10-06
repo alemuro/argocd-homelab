@@ -1,6 +1,6 @@
 name: cloudweatherproxy
 image: caddy
-tag: 2.11.6
+tag: 2.11.7
 port: 8080
 disableHttpRedirect: true
 domains:
