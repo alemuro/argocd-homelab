@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kured
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: platform
+  sources:
+    - chart: kured
+      repoURL: https://kubereboot.github.io/charts
+      targetRevision: 6.1.0
+      helm:
+        releaseName: kured
+        values: |
+          configuration:
+            startTime: "03:00"
+            endTime: "06:00"
+            timeZone: "Europe/Madrid"
+            rebootDays:
+              - mo
+              - tu
+              - we
+              - th
+              - fr
+              - sa
+              - su
+            period: "1h"
+            drainTimeout: "10m"
+            drainGracePeriod: 300
+            concurrency: 1
+            annotateNodes: true
+
+          tolerations:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+              effect: NoSchedule
+            - key: node-role.kubernetes.io/master
+              operator: Exists
+              effect: NoSchedule
+
+  destination:
+    name: homelab
+    namespace: kured
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
