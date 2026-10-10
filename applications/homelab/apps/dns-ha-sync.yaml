@@ -1,6 +1,6 @@
 name: dns-ha-sync
 image: lscr.io/linuxserver/adguardhome-sync
-tag: 0.9.3
+tag: 0.9.4
 node_selector:
   kubernetes.io/hostname: worker-1
 mount:
