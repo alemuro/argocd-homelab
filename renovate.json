@@ -1,7 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "Renovate configuration for argocd-homelab GitOps repository",
-  "extends": ["config:recommended"],
+  "extends": [
+    "config:recommended",
+    "workarounds:k3sKubernetesVersioning"
+  ],
   "labels": ["dependencies", "renovate"],
   "assignees": ["alemuro"],
   "prConcurrentLimit": 0,
@@ -31,10 +34,20 @@
     {
       "description": "Auto-push minor and patch container image updates directly to main in a single commit",
       "matchUpdateTypes": ["minor", "patch"],
+      "excludePackageNames": ["k3s-io/k3s"],
       "groupName": "minor-and-patch-updates",
       "automerge": true,
       "automergeType": "branch-push",
       "ignoreTests": true
+    },
+    {
+      "description": "K3s cluster upgrade via manual PR (1 minor/patch step at a time)",
+      "matchPackageNames": ["k3s-io/k3s"],
+      "groupName": "k3s-cluster-upgrade",
+      "separateMinorPatch": true,
+      "separateMultipleMinor": true,
+      "prConcurrentLimit": 1,
+      "automerge": false
     }
   ],
   "customManagers": [
@@ -47,6 +60,16 @@
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update k3s version in system-upgrade-controller plans",
+      "fileMatch": ["^applications/platform/manifests/system-upgrade-controller/plans\\.yaml$"],
+      "matchStrings": [
+        "version:\\s*['\"]?(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+(?:\\+k3s[0-9]+)?)['\"]?"
+      ],
+      "depNameTemplate": "k3s-io/k3s",
+      "datasourceTemplate": "github-releases"
     }
   ]
 }
