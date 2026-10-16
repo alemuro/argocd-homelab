@@ -46,7 +46,6 @@
       "groupName": "k3s-cluster-upgrade",
       "separateMinorPatch": true,
       "separateMultipleMinor": true,
-      "prConcurrentLimit": 1,
       "automerge": false
     }
   ],
