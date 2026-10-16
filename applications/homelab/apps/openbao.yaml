@@ -1,4 +1,5 @@
 name: openbao
+type: StatefulSet
 image: ghcr.io/openbao/openbao
 tag: 2.7.1
 port: 8200
