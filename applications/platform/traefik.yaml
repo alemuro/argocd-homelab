@@ -19,6 +19,10 @@ spec:
         values: |
           deployment:
             kind: DaemonSet
+          ports:
+            traefik:
+              port: 9000
+              exposedPort: 9000
           log:
             level: WARN
           accessLog:
