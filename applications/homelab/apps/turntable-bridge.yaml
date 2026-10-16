@@ -1,6 +1,6 @@
 name: turntable-bridge
 image: ghcr.io/alemuro/turntable-bridge
-tag: 1.2.0
+tag: 1.2.1
 port: 8080
 domains:
   - phonos.immaleix.casa
