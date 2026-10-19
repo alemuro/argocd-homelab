@@ -1,0 +1,49 @@
+name: o2cloud-gateway
+image: garanda21/o2cloud_gateway_webdav
+tag: latest
+port: 8080
+node_selector:
+  kubernetes.io/hostname: worker-0
+domains:
+  - o2cloud.immaleix.casa
+pod_additional_ports:
+  - name: novnc
+    container_port: 6080
+    host_port: 6080
+    protocol: TCP
+mount:
+  /mnt/local/configs/o2cloud-gateway/config: /config
+  /mnt/local/configs/o2cloud-gateway/data: /data
+  /mnt/local/configs/o2cloud-gateway/cache: /cache
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: "Europe/Madrid"
+  CLOUD_PROVIDER: "o2"
+  APP_HOST: "0.0.0.0"
+  APP_PORT: "8080"
+  APP_BASE_URL: "https://o2cloud.immaleix.casa"
+  O2_LOGIN_NOVNC_URL: "http://192.168.1.25:6080/vnc.html?autoconnect=true&resize=scale&reconnect=true"
+  WEBDAV_USERNAME: "homeflix"
+  ADMIN_USERNAME: "admin"
+  CONFIG_DIR: "/config"
+  DATA_DIR: "/data"
+  CACHE_DIR: "/cache"
+  SQLITE_PATH: "/data/o2cloud-gateway.db"
+  WEBDAV_PATH_BASE: "/dav"
+  ADMIN_PATH_BASE: "/admin"
+secretEnv:
+  ADMIN_PASSWORD:
+    secretName: o2cloud-gateway-secrets
+    key: ADMIN_PASSWORD
+  WEBDAV_PASSWORD:
+    secretName: o2cloud-gateway-secrets
+    key: WEBDAV_PASSWORD
+resources:
+  requests:
+    cpu: 100m
+    memory: 512Mi
+  limits:
+    memory: 2048Mi
+allow_from_cidrs:
+  - 0.0.0.0/0
