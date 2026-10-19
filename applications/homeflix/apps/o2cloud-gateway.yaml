@@ -11,6 +11,10 @@ pod_additional_ports:
     container_port: 6080
     host_port: 6080
     protocol: TCP
+  - name: webdav
+    container_port: 8080
+    host_port: 8088
+    protocol: TCP
 mount:
   /mnt/local/configs/o2cloud-gateway/config: /config
   /mnt/local/configs/o2cloud-gateway/data: /data
