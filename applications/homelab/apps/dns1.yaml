@@ -48,6 +48,8 @@ probes:
     periodSeconds: 10
 allow_from:
   - dns1-sync
+  - dns2-sync
+  - dns-ha-sync
   - dns-exporter
 allow_from_cidrs:
   - 0.0.0.0/0
