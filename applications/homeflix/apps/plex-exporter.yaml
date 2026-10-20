@@ -2,8 +2,9 @@ name: plex-exporter
 image: ghcr.io/axsuul/plex-media-server-exporter
 tag: latest
 port: 9594
+preferred_node: worker-0
 node_selector:
-  kubernetes.io/hostname: worker-0
+  kubernetes.io/arch: amd64
 env:
   PLEX_ADDR: "http://plex:80"
   PUID: "1000"

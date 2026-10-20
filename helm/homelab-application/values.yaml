@@ -1,5 +1,7 @@
 name: ""
 type: Deployment
+replicas: 1
+priorityClassName: ""
 image: ""
 tag: "latest"
 port: null
@@ -40,6 +42,7 @@ args: []
 serviceAnnotations: {}
 nodeSelector: {}
 node_selector: {}
+preferred_node: ""
 imagePullSecrets: []
 capabilities: []
 securityContext: {}

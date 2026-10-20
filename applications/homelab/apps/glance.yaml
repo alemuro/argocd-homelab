@@ -4,8 +4,7 @@ tag: latest
 port: 8080
 domains:
   - glance.immaleix.casa
-node_selector:
-  kubernetes.io/hostname: worker-1
+preferred_node: worker-1
 resources:
   requests:
     cpu: 50m

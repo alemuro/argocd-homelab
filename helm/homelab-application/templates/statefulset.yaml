@@ -12,7 +12,7 @@ metadata:
   {{- end }}
 spec:
   revisionHistoryLimit: 0
-  replicas: 1
+  replicas: {{ .Values.replicas | default 1 }}
   serviceName: {{ .Values.name }}
   podManagementPolicy: OrderedReady
   selector:
@@ -25,6 +25,21 @@ spec:
         app: {{ .Values.name }}
         k8s-app: {{ .Values.name }}
     spec:
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
+      {{- if .Values.preferred_node }}
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - {{ .Values.preferred_node }}
+      {{- end }}
       {{- if or .Values.node_selector .Values.nodeSelector }}
       nodeSelector:
         {{- if .Values.node_selector }}

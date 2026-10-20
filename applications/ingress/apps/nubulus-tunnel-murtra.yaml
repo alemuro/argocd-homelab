@@ -9,6 +9,7 @@ serviceAnnotations:
   k8s.grafana.com/metrics.path: /metrics
   k8s.grafana.com/metrics.scheme: http
   k8s.grafana.com/metrics.scrapeInterval: 5m
+preferred_node: worker-1
 node_selector:
   kubernetes.io/arch: amd64
 env:

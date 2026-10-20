@@ -12,7 +12,11 @@ metadata:
   {{- end }}
 spec:
   revisionHistoryLimit: 0
-  replicas: 1
+  replicas: {{ .Values.replicas | default 1 }}
+  {{- if .Values.mount }}
+  strategy:
+    type: Recreate
+  {{- end }}
   selector:
     matchLabels:
       app: {{ .Values.name }}
@@ -23,6 +27,33 @@ spec:
         app: {{ .Values.name }}
         k8s-app: {{ .Values.name }}
     spec:
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
+      {{- if or .Values.preferred_node (gt (int (.Values.replicas | default 1)) 1) }}
+      affinity:
+        {{- if .Values.preferred_node }}
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - {{ .Values.preferred_node }}
+        {{- end }}
+        {{- if gt (int (.Values.replicas | default 1)) 1 }}
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: {{ .Values.name }}
+                topologyKey: kubernetes.io/hostname
+        {{- end }}
+      {{- end }}
       {{- if or .Values.node_selector .Values.nodeSelector }}
       nodeSelector:
         {{- if .Values.node_selector }}

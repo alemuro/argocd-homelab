@@ -14,6 +14,10 @@ pod_additional_ports:
     container_port: 53
     host_port: 53
     protocol: "UDP"
+  - name: "dns-tcp"
+    container_port: 53
+    host_port: 53
+    protocol: "TCP"
 env:
   USER_UID: "1000"
   USER_GID: "1000"

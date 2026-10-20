@@ -4,8 +4,7 @@ tag: latest
 port: 4321
 domains:
   - oracularr.immaleix.casa
-node_selector:
-  kubernetes.io/hostname: worker-0
+preferred_node: worker-0
 imagePullSecrets:
   - name: github-credentials
 env:

@@ -6,8 +6,7 @@ disableHttpRedirect: true
 domains:
   - rtupdate.wunderground.com
   - api.weathercloud.net
-node_selector:
-  kubernetes.io/hostname: worker-1
+preferred_node: worker-1
 
 secretEnv:
   HA_ACCESS_TOKEN:

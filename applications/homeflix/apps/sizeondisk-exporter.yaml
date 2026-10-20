@@ -2,8 +2,7 @@ name: sizeondisk-exporter
 image: ghcr.io/alemuro/arr-sizeondisk-exporter
 tag: v0.0.6
 port: 9101
-node_selector:
-  kubernetes.io/hostname: worker-0
+preferred_node: worker-0
 env:
   RADARR_HOST: http://radarr:80
   SONARR_HOST: http://sonarr:80

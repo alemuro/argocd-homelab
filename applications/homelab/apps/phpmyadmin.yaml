@@ -4,6 +4,7 @@ tag: 5.2.3
 port: 80
 domains:
   - phpmyadmin.immaleix.casa
+preferred_node: summer
 env:
   PMA_HOST: homedb
   PMA_PORT: "3306"

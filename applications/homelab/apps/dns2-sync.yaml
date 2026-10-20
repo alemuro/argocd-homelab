@@ -9,8 +9,8 @@ env:
   USER_UID: "1000"
   USER_GID: "1000"
   TZ: Europe/Madrid
-  ORIGIN_URL: "https://dns1.immaleix.casa"
-  REPLICA1_URL: "https://dns2.immaleix.casa"
+  ORIGIN_URL: "http://dns1"
+  REPLICA1_URL: "http://dns2"
   CRON: "*/10 * * * *"
   LOG_LEVEL: "info"
 secretEnv:

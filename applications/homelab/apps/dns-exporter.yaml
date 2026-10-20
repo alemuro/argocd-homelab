@@ -1,8 +1,7 @@
 name: dns-exporter
 image: ghcr.io/henrywhitaker3/adguard-exporter
 tag: v1.2.1
-node_selector:
-  kubernetes.io/hostname: worker-1
+preferred_node: worker-1
 env:
   ADGUARD_SERVERS: http://dns1,http://dns2
 secretEnv:
