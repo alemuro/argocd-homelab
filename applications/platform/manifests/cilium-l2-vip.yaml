@@ -1,0 +1,21 @@
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: homelab-vip-pool
+spec:
+  cidrs:
+    - cidr: "192.168.1.200/32"
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: homelab-l2-policy
+spec:
+  nodeSelector:
+    matchExpressions:
+      - key: node-role.kubernetes.io/control-plane
+        operator: DoesNotExist
+  interfaces:
+    - ^eth0$
+  externalIPs: true
+  loadBalancerIPs: true

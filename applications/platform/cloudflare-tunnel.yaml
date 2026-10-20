@@ -21,6 +21,14 @@ spec:
               tunnelNameKey: cloudflare-tunnel-name
               apiTokenKey: api-token
           replicaCount: 2
+          leaderElection:
+            enabled: true
+          cloudflared:
+            replicaCount: 2
+            podAntiAffinity: true
+            pdb:
+              enabled: true
+              minAvailable: 1
   destination:
     name: homelab
     namespace: ingress
