@@ -19,6 +19,11 @@ spec:
         values: |
           deployment:
             kind: DaemonSet
+          service:
+            annotations:
+              svccontroller.k3s.cattle.io/enablelb: "false"
+            labels:
+              io.cilium/l2-announce: "true"
           ports:
             traefik:
               port: 9000
