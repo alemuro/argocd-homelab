@@ -1,6 +1,6 @@
 name: m3ue
 image: sparkison/m3u-editor
-tag: 0.12.48
+tag: 0.13.7
 port: 36400
 node_selector:
   kubernetes.io/hostname: worker-0
@@ -9,6 +9,11 @@ domains:
 mount:
   /mnt/local/configs/m3ue: /var/www/config
 env:
+  PUID: "1000"
+  PGID: "1000"
   TZ: Europe/Madrid
   APP_URL: https://m3ue.immaleix.casa
-  M3U_PROXY_ENABLED: "true"
+  M3U_PROXY_ENABLED: "false"
+  HTTP_PROXY: "http://gluetun:5555"
+  HTTPS_PROXY: "http://gluetun:5555"
+  NO_PROXY: "localhost,127.0.0.1,10.0.0.0/8,.local,.casa"
