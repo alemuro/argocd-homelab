@@ -1,149 +1,6 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: trivy-scan-node-master-0
-  namespace: trivy-system
-  labels:
-    app.kubernetes.io/name: trivy-node-scanner
-    app.kubernetes.io/part-of: trivy
-    node: master-0
-spec:
-  schedule: "0 4 * * *"
-  concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 1
-  failedJobsHistoryLimit: 1
-  jobTemplate:
-    spec:
-      activeDeadlineSeconds: 600
-      backoffLimit: 0
-      template:
-        metadata:
-          labels:
-            app.kubernetes.io/name: trivy-node-scanner
-            node: master-0
-        spec:
-          restartPolicy: Never
-          nodeSelector:
-            kubernetes.io/hostname: master-0
-          tolerations:
-            - key: node-role.kubernetes.io/control-plane
-              operator: Exists
-              effect: NoSchedule
-            - key: node-role.kubernetes.io/master
-              operator: Exists
-              effect: NoSchedule
-          containers:
-            - name: trivy
-              image: aquasec/trivy:latest
-              imagePullPolicy: IfNotPresent
-              command:
-                - trivy
-                - rootfs
-                - --pkg-types
-                - os
-                - --scanners
-                - vuln
-                - --severity
-                - HIGH,CRITICAL
-                - --ignore-unfixed
-                - --cache-dir
-                - /cache
-                - --skip-dirs
-                - /host/var/lib/kubelet,/host/var/lib/rancher,/host/run/k3s,/host/snap,/host/mnt,/host/proc,/host/sys,/host/dev
-                - /host
-              resources:
-                requests:
-                  cpu: 50m
-                  memory: 100Mi
-                limits:
-                  cpu: 400m
-                  memory: 400Mi
-              volumeMounts:
-                - name: host-root
-                  mountPath: /host
-                  readOnly: true
-                - name: trivy-cache
-                  mountPath: /cache
-          volumes:
-            - name: host-root
-              hostPath:
-                path: /
-            - name: trivy-cache
-              hostPath:
-                path: /var/cache/trivy
-                type: DirectoryOrCreate
----
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: trivy-scan-node-summer
-  namespace: trivy-system
-  labels:
-    app.kubernetes.io/name: trivy-node-scanner
-    app.kubernetes.io/part-of: trivy
-    node: summer
-spec:
-  schedule: "15 4 * * *"
-  concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 1
-  failedJobsHistoryLimit: 1
-  jobTemplate:
-    spec:
-      activeDeadlineSeconds: 600
-      backoffLimit: 0
-      template:
-        metadata:
-          labels:
-            app.kubernetes.io/name: trivy-node-scanner
-            node: summer
-        spec:
-          restartPolicy: Never
-          nodeSelector:
-            kubernetes.io/hostname: summer
-          containers:
-            - name: trivy
-              image: aquasec/trivy:latest
-              imagePullPolicy: IfNotPresent
-              command:
-                - trivy
-                - rootfs
-                - --pkg-types
-                - os
-                - --scanners
-                - vuln
-                - --severity
-                - HIGH,CRITICAL
-                - --ignore-unfixed
-                - --cache-dir
-                - /cache
-                - --skip-dirs
-                - /host/var/lib/kubelet,/host/var/lib/rancher,/host/run/k3s,/host/snap,/host/mnt,/host/proc,/host/sys,/host/dev
-                - /host
-              resources:
-                requests:
-                  cpu: 50m
-                  memory: 100Mi
-                limits:
-                  cpu: 400m
-                  memory: 400Mi
-              volumeMounts:
-                - name: host-root
-                  mountPath: /host
-                  readOnly: true
-                - name: trivy-cache
-                  mountPath: /cache
-          volumes:
-            - name: host-root
-              hostPath:
-                path: /
-            - name: trivy-cache
-              hostPath:
-                path: /var/cache/trivy
-                type: DirectoryOrCreate
----
-apiVersion: batch/v1
-kind: CronJob
-metadata:
   name: trivy-scan-node-worker-0
   namespace: trivy-system
   labels:
@@ -151,7 +8,7 @@ metadata:
     app.kubernetes.io/part-of: trivy
     node: worker-0
 spec:
-  schedule: "30 4 * * *"
+  schedule: "0 4 * * *"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
@@ -219,7 +76,7 @@ metadata:
     app.kubernetes.io/part-of: trivy
     node: worker-1
 spec:
-  schedule: "45 4 * * *"
+  schedule: "20 4 * * *"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
@@ -236,6 +93,74 @@ spec:
           restartPolicy: Never
           nodeSelector:
             kubernetes.io/hostname: worker-1
+          containers:
+            - name: trivy
+              image: aquasec/trivy:latest
+              imagePullPolicy: IfNotPresent
+              command:
+                - trivy
+                - rootfs
+                - --pkg-types
+                - os
+                - --scanners
+                - vuln
+                - --severity
+                - HIGH,CRITICAL
+                - --ignore-unfixed
+                - --cache-dir
+                - /cache
+                - --skip-dirs
+                - /host/var/lib/kubelet,/host/var/lib/rancher,/host/run/k3s,/host/snap,/host/mnt,/host/proc,/host/sys,/host/dev
+                - /host
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 100Mi
+                limits:
+                  cpu: 400m
+                  memory: 400Mi
+              volumeMounts:
+                - name: host-root
+                  mountPath: /host
+                  readOnly: true
+                - name: trivy-cache
+                  mountPath: /cache
+          volumes:
+            - name: host-root
+              hostPath:
+                path: /
+            - name: trivy-cache
+              hostPath:
+                path: /var/cache/trivy
+                type: DirectoryOrCreate
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trivy-scan-node-summer
+  namespace: trivy-system
+  labels:
+    app.kubernetes.io/name: trivy-node-scanner
+    app.kubernetes.io/part-of: trivy
+    node: summer
+spec:
+  schedule: "40 4 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 600
+      backoffLimit: 0
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: trivy-node-scanner
+            node: summer
+        spec:
+          restartPolicy: Never
+          nodeSelector:
+            kubernetes.io/hostname: summer
           containers:
             - name: trivy
               image: aquasec/trivy:latest
