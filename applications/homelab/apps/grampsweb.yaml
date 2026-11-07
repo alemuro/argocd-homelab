@@ -32,7 +32,16 @@ env:
   GRAMPSWEB_OIDC_ENABLED: "True"
   GRAMPSWEB_BASE_URL: "https://gramps.aleix.cloud"
   GRAMPSWEB_OIDC_GOOGLE_CLIENT_ID: "954824716156-vaobidkpld8re2ovgfdamfu9dqfu37rf.apps.googleusercontent.com"
+  GRAMPSWEB_EMAIL_HOST: "email-smtp.eu-west-1.amazonaws.com"
+  GRAMPSWEB_EMAIL_PORT: "587"
+  GRAMPSWEB_EMAIL_USE_STARTTLS: "True"
+  GRAMPSWEB_EMAIL_USE_SSL: "False"
+  GRAMPSWEB_EMAIL_HOST_USER: "AKIAWGMO3DUU4M7JN7UZ"
+  GRAMPSWEB_DEFAULT_FROM_EMAIL: "gramps@aleix.cloud"
 secretEnv:
   GRAMPSWEB_OIDC_GOOGLE_CLIENT_SECRET:
     secretName: grampsweb-secrets
     key: GOOGLE_CLIENT_SECRET
+  GRAMPSWEB_EMAIL_HOST_PASSWORD:
+    secretName: grampsweb-secrets
+    key: EMAIL_HOST_PASSWORD
