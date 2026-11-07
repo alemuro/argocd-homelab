@@ -1,4 +1,5 @@
 name: grampsweb
+type: StatefulSet
 image: ghcr.io/gramps-project/grampsweb
 tag: 26.11.0
 port: 5000
@@ -14,9 +15,16 @@ mount:
   /mnt/local/configs/gramps/secret: /app/secret
   /mnt/local/configs/gramps/grampdb: /root/.gramps/grampsdb
   /mnt/local/configs/gramps/media: /app/media
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 768Mi
 env:
   PUID: "1000"
   PGID: "1000"
   TZ: Europe/Madrid
   GRAMPSWEB_TREE: "Roger Murtra"
   GRAMPSWEB_REGISTRATION_DISABLED: "True"
+  GUNICORN_NUM_WORKERS: "2"
