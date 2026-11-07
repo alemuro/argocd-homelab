@@ -1,0 +1,24 @@
+name: grampsweb
+image: ghcr.io/gramps-project/grampsweb
+tag: 26.11.0
+port: 5000
+domains:
+  - gramps.immaleix.casa
+cloudflare_domains:
+  - gramps.aleix.cloud
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/gramps/users: /app/users
+  /mnt/local/configs/gramps/indexdir: /app/indexdir
+  /mnt/local/configs/gramps/thumbnail: /app/thumbnail_cache
+  /mnt/local/configs/gramps/cache: /app/cache
+  /mnt/local/configs/gramps/secret: /app/secret
+  /mnt/local/configs/gramps/grampdb: /root/.gramps/grampsdb
+  /mnt/local/configs/gramps/media: /app/media
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: Europe/Madrid
+  GRAMPSWEB_TREE: "Roger Murtra"
+  GRAMPSWEB_REGISTRATION_DISABLED: "True"
