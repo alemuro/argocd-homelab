@@ -5,6 +5,7 @@ tag: 26.11.0
 port: 5000
 domains:
   - gramps.immaleix.casa
+  - gramps.aleix.cloud
 node_selector:
   kubernetes.io/hostname: worker-1
 mount:
@@ -28,3 +29,9 @@ env:
   GRAMPSWEB_TREE: "Roger Murtra"
   GRAMPSWEB_REGISTRATION_DISABLED: "True"
   GUNICORN_NUM_WORKERS: "2"
+  GRAMPSWEB_BASE_URL: "https://gramps.aleix.cloud"
+  GRAMPSWEB_OIDC_GOOGLE_CLIENT_ID: "954824716156-vaobidkpld8re2ovgfdamfu9dqfu37rf.apps.googleusercontent.com"
+secretEnv:
+  GRAMPSWEB_OIDC_GOOGLE_CLIENT_SECRET:
+    secretName: grampsweb-secrets
+    key: GOOGLE_CLIENT_SECRET
