@@ -1,7 +1,7 @@
 name: grampsweb
 type: StatefulSet
 image: ghcr.io/gramps-project/grampsweb
-tag: 26.11.0
+tag: 26.11.1
 port: 5000
 domains:
   - gramps.immaleix.casa
