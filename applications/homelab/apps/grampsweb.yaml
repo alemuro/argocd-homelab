@@ -4,8 +4,6 @@ tag: 26.11.0
 port: 5000
 domains:
   - gramps.immaleix.casa
-cloudflare_domains:
-  - gramps.aleix.cloud
 node_selector:
   kubernetes.io/hostname: worker-1
 mount:
