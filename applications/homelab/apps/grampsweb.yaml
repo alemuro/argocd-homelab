@@ -29,6 +29,7 @@ env:
   GRAMPSWEB_TREE: "Roger Murtra"
   GRAMPSWEB_REGISTRATION_DISABLED: "True"
   GUNICORN_NUM_WORKERS: "2"
+  GRAMPSWEB_OIDC_ENABLED: "True"
   GRAMPSWEB_BASE_URL: "https://gramps.aleix.cloud"
   GRAMPSWEB_OIDC_GOOGLE_CLIENT_ID: "954824716156-vaobidkpld8re2ovgfdamfu9dqfu37rf.apps.googleusercontent.com"
 secretEnv:
