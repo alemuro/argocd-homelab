@@ -1,6 +1,6 @@
 name: kometa
 image: lscr.io/linuxserver/kometa
-tag: 2.5.4
+tag: 2.5.5
 node_selector:
   kubernetes.io/hostname: worker-0
 mount:
