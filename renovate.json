@@ -32,6 +32,11 @@
       "enabled": false
     },
     {
+      "description": "Use loose versioning for Plex to support 4-part versions and build tags",
+      "matchPackageNames": ["lscr.io/linuxserver/plex"],
+      "versioning": "loose"
+    },
+    {
       "description": "Auto-push minor and patch container image updates directly to main in a single commit",
       "matchUpdateTypes": ["minor", "patch"],
       "excludePackageNames": ["k3s-io/k3s"],
