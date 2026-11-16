@@ -1,6 +1,6 @@
 name: radarr
 image: lscr.io/linuxserver/radarr
-tag: 6.4.4
+tag: 7.0.3
 port: 7878
 node_selector:
   kubernetes.io/hostname: worker-0
