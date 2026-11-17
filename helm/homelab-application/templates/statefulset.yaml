@@ -12,7 +12,7 @@ metadata:
   {{- end }}
 spec:
   revisionHistoryLimit: 0
-  replicas: {{ .Values.replicas | default 1 }}
+  replicas: {{ include "homelab-application.replicas" . }}
   serviceName: {{ .Values.name }}
   podManagementPolicy: OrderedReady
   selector:

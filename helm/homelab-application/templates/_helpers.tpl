@@ -24,3 +24,14 @@ false
 {{- end -}}
 {{- end -}}
 
+{{/*
+Returns the desired replica count, preserving explicit 0 instead of falling back to 1.
+*/}}
+{{- define "homelab-application.replicas" -}}
+{{- if and (hasKey .Values "replicas") (not (kindIs "invalid" .Values.replicas)) -}}
+{{- int .Values.replicas -}}
+{{- else -}}
+1
+{{- end -}}
+{{- end -}}
+
