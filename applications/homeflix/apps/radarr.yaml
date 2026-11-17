@@ -1,4 +1,5 @@
 name: radarr
+replicas: 0
 image: lscr.io/linuxserver/radarr
 tag: 6.4.4
 port: 7878
