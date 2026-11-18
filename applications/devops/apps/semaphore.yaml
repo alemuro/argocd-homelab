@@ -1,0 +1,28 @@
+name: semaphore
+image: semaphoreui/semaphore
+tag: latest
+port: 3000
+domains:
+  - semaphore.immaleix.casa
+node_selector:
+  kubernetes.io/hostname: worker-1
+mount:
+  /mnt/local/configs/semaphore: /var/lib/semaphore
+securityContext:
+  runAsUser: 0
+env:
+  TZ: Europe/Madrid
+  SEMAPHORE_DB_DIALECT: sqlite
+  SEMAPHORE_DB_HOST: /var/lib/semaphore/database.sqlite
+  SEMAPHORE_TMP_PATH: /var/lib/semaphore/tmp
+  SEMAPHORE_ADMIN: admin
+  SEMAPHORE_ADMIN_NAME: Admin
+  SEMAPHORE_ADMIN_EMAIL: admin@immaleix.casa
+  ANSIBLE_HOST_KEY_CHECKING: "False"
+secretEnv:
+  SEMAPHORE_ACCESS_KEY_ENCRYPTION:
+    secretName: semaphore-secrets
+    key: SEMAPHORE_ACCESS_KEY_ENCRYPTION
+  SEMAPHORE_ADMIN_PASSWORD:
+    secretName: semaphore-secrets
+    key: SEMAPHORE_ADMIN_PASSWORD
