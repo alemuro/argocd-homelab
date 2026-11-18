@@ -12,6 +12,8 @@ securityContext:
   runAsUser: 0
 env:
   TZ: Europe/Madrid
+  SEMAPHORE_PORT: "3000"
+  SEMAPHORE_WEB_ROOT: https://semaphore.immaleix.casa
   SEMAPHORE_DB_DIALECT: sqlite
   SEMAPHORE_DB_HOST: /var/lib/semaphore/database.sqlite
   SEMAPHORE_TMP_PATH: /var/lib/semaphore/tmp
