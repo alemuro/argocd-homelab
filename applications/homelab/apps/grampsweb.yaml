@@ -43,3 +43,5 @@ secretEnv:
   GRAMPSWEB_EMAIL_HOST_PASSWORD:
     secretName: grampsweb-secrets
     key: EMAIL_HOST_PASSWORD
+allow_from:
+  - grampsweb-mcp
