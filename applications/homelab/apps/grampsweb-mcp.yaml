@@ -1,0 +1,35 @@
+name: grampsweb-mcp
+image: ghcr.io/scormave/gramps-web-mcp
+tag: 2.11.0
+port: 8080
+allow_from:
+  - n8n
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 384Mi
+env:
+  PUID: "1000"
+  PGID: "1000"
+  TZ: Europe/Madrid
+  GRAMPS_API_URL: http://grampsweb
+  GRAMPS_TREE_ID: 887898be-0b7f-4868-8ce8-7eaf6c3ff506
+  GRAMPS_READ_ONLY: "false"
+  GRAMPS_MUTATION_SERIALIZE: "true"
+  GRAMPS_MUTATION_MIN_INTERVAL_MS: "250"
+  MCP_TRANSPORT: http
+  ASPNETCORE_URLS: http://0.0.0.0:8080
+  MCP_PATH: /mcp
+  MCP_STATELESS: "true"
+secretEnv:
+  GRAMPS_USERNAME:
+    secretName: grampsweb-mcp-secrets
+    key: GRAMPS_USERNAME
+  GRAMPS_PASSWORD:
+    secretName: grampsweb-mcp-secrets
+    key: GRAMPS_PASSWORD
+  MCP_API_KEY:
+    secretName: grampsweb-mcp-secrets
+    key: MCP_API_KEY
