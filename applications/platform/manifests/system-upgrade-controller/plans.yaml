@@ -32,6 +32,7 @@ spec:
     disableEviction: true
     deleteEmptydirData: true
     ignoreDaemonSets: true
+    timeout: 5m
   upgrade:
     image: rancher/k3s-upgrade
 ---
@@ -62,5 +63,6 @@ spec:
     disableEviction: true
     deleteEmptydirData: true
     ignoreDaemonSets: true
+    timeout: 5m
   upgrade:
     image: rancher/k3s-upgrade
