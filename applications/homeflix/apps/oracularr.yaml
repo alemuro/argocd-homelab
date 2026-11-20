@@ -1,4 +1,5 @@
 name: oracularr
+replicas: 0
 image: ghcr.io/just-another-group/oracularr
 tag: latest
 port: 4321
