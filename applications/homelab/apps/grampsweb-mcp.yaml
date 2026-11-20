@@ -1,6 +1,6 @@
 name: grampsweb-mcp
 image: ghcr.io/scormave/gramps-web-mcp
-tag: 2.11.1
+tag: 2.11.2
 port: 8080
 allow_from:
   - n8n
