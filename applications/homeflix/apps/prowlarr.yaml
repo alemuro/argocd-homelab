@@ -1,6 +1,6 @@
 name: prowlarr
 image: lscr.io/linuxserver/prowlarr
-tag: 3.0.2
+tag: 3.1.0
 port: 9696
 node_selector:
   kubernetes.io/hostname: worker-0

@@ -1,7 +1,7 @@
 name: n8n
 type: StatefulSet
 image: n8nio/n8n
-tag: 3.3.0
+tag: 3.4.0
 port: 5678
 domains:
   - n8n.immaleix.casa
