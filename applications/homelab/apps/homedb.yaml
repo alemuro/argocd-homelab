@@ -1,6 +1,6 @@
 name: homedb
 image: mariadb
-tag: 13.0.2
+tag: 13.1.2
 port: 3306
 servicePort: 3306
 node_selector:
